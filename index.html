@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Precalc | Ch 1–3 Formula Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root, [data-theme="dark"] {
+    --bg: #0a100e; --surface: #121c18; --surface2: #1a2820; --border: #2a4234;
+    --p900: #e2ece6; --p800: #bcd0c4; --p700: #88aa96; --p600: #688a78;
+    --p500: #4a6a58; --p400: #3a5444; --p300: #2a4234;
+    --accent: #c86a7a; --accent2: #d4a84a; --accent-light: #1e1214;
+    --text: #e2ece6; --text-muted: #78a090;
+    --card-bg: #121c18; --formula-bg: #1a2820;
+    --hero-bg: #162420;
+  }
+  [data-theme="light"] {
+    --bg: #f2f5f3; --surface: #ffffff; --surface2: #e8ede9; --border: #c4d4ca;
+    --p900: #1a2e24; --p800: #24402e; --p700: #2a4234; --p600: #3a5444;
+    --p500: #4a6a58; --p400: #688a78; --p300: #88aa96;
+    --accent: #c86a7a; --accent2: #d4a84a; --accent-light: #fce8ec;
+    --text: #1a2e24; --text-muted: #4a6a58;
+    --card-bg: #ffffff; --formula-bg: #eef4f0;
+    --hero-bg: #1a2e24;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 15px; line-height: 1.7; padding: 0 0 80px;
+    transition: background 0.3s, color 0.3s;
+  }
+  .theme-toggle {
+    position: fixed; top: 16px; right: 16px; z-index: 999;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--surface); border: 1px solid var(--border);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .hero {
+    background: var(--hero-bg); padding: 48px 40px 40px;
+    text-align: center; border-bottom: 1px solid var(--border);
+  }
+  .hero-tag { font-family: 'Fira Code', monospace; font-size: 10px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+  .hero h1 { font-family: 'Abril Fatface', serif; font-size: 38px; font-weight: 400; color: var(--p900); margin-bottom: 8px; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub { color: var(--text-muted); font-size: 14px; font-style: italic; }
+
+  /* NAV */
+  .nav { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-inner { max-width: 900px; margin: 0 auto; display: flex; gap: 4px; padding: 10px 16px; }
+  .nav-tab { font-family: 'Fira Code', monospace; font-size: 11px; letter-spacing: 1px; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 6px; white-space: nowrap; transition: all 0.2s; flex-shrink: 0; }
+  .nav-tab:hover { background: var(--surface2); color: var(--accent); }
+
+  .content { max-width: 900px; margin: 0 auto; padding: 30px 24px; }
+
+  /* CATEGORY */
+  .category { margin-bottom: 32px; }
+  .cat-header {
+    font-family: 'Abril Fatface', serif; font-size: 24px; font-weight: 400;
+    color: var(--accent); margin-bottom: 16px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  /* FORMULA CARDS */
+  .formula-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 14px; }
+  .f-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px; transition: all 0.2s;
+  }
+  .f-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+  .f-label { font-family: 'Fira Code', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 8px; }
+  .f-name { font-family: 'Abril Fatface', serif; font-size: 18px; color: var(--p900); margin-bottom: 10px; }
+  .f-formula {
+    font-family: 'Fira Code', monospace; font-size: 15px;
+    background: var(--formula-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 16px; margin-bottom: 10px;
+    color: var(--accent); text-align: center; line-height: 1.6;
+  }
+  .f-note { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .f-note strong { color: var(--accent); }
+
+  /* RULES TABLE */
+  .rules-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .rules-table th { background: var(--hero-bg); color: var(--p900); font-family: 'Fira Code', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; padding: 10px 12px; text-align: left; }
+  .rules-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); background: var(--card-bg); }
+  .rules-table tr:last-child td { border-bottom: none; }
+
+  /* MNEMONIC STRIP */
+  .mnemonic {
+    background: var(--accent-light); border-left: 4px solid var(--accent);
+    border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 14px 0;
+    font-size: 14px; line-height: 1.6;
+  }
+  .mnemonic .label { font-family: 'Fira Code', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 32px 20px; }
+    .hero h1 { font-size: 28px; }
+    .content { padding: 20px 14px; }
+    .formula-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Toggle light/dark">🌙</button>
+
+<div class="hero">
+  <div class="hero-tag">Precalculus · Chapters 1–3</div>
+  <h1>Formula & <em>Memorization</em> Reference</h1>
+  <div class="hero-sub">Every formula, rule, and pattern you need to have cold before the exam.</div>
+</div>
+
+<div class="nav">
+  <div class="nav-inner">
+    <a href="#coord" class="nav-tab">Coordinate</a>
+    <a href="#lines" class="nav-tab">Lines</a>
+    <a href="#circles" class="nav-tab">Circles</a>
+    <a href="#functions" class="nav-tab">Functions</a>
+    <a href="#domain" class="nav-tab">Domain</a>
+    <a href="#symmetry" class="nav-tab">Symmetry</a>
+    <a href="#transforms" class="nav-tab">Transforms</a>
+    <a href="#quadratics" class="nav-tab">Quadratics</a>
+    <a href="#inequalities" class="nav-tab">Inequalities</a>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ═══ COORDINATE GEOMETRY ═══ -->
+<div id="coord" class="category">
+  <div class="cat-header">Coordinate Geometry</div>
+  <div class="formula-grid">
+    <div class="f-card">
+      <div class="f-label">Core Formula</div>
+      <div class="f-name">Distance Formula</div>
+      <div class="f-formula">d = √[(x₂ − x₁)² + (y₂ − y₁)²]</div>
+      <div class="f-note">Derived from the <strong>Pythagorean theorem</strong>. The horizontal difference and vertical difference form the legs; the distance is the hypotenuse.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Core Formula</div>
+      <div class="f-name">Midpoint Formula</div>
+      <div class="f-formula">M = ((x₁ + x₂)/2, (y₁ + y₂)/2)</div>
+      <div class="f-note">Average the x's, average the y's. To reverse-engineer a missing endpoint: <strong>x₂ = 2Mx − x₁</strong>.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Core Formula</div>
+      <div class="f-name">Slope</div>
+      <div class="f-formula">m = (y₂ − y₁) / (x₂ − x₁)</div>
+      <div class="f-note">Rise over run. <strong>Undefined</strong> for vertical lines (Δx = 0). <strong>Zero</strong> for horizontal lines (Δy = 0).</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LINES ═══ -->
+<div id="lines" class="category">
+  <div class="cat-header">Equations of Lines</div>
+  <div class="formula-grid">
+    <div class="f-card">
+      <div class="f-label">Form</div>
+      <div class="f-name">Slope-Intercept</div>
+      <div class="f-formula">y = mx + b</div>
+      <div class="f-note">m = slope, b = y-intercept. Best for graphing quickly.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Form</div>
+      <div class="f-name">Point-Slope</div>
+      <div class="f-formula">y − y₁ = m(x − x₁)</div>
+      <div class="f-note">Use when given a slope and any point. <strong>The workhorse form for exam problems.</strong></div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Form</div>
+      <div class="f-name">Standard Form</div>
+      <div class="f-formula">Ax + By = C &nbsp;(A > 0, integers)</div>
+      <div class="f-note">x-int: set y=0 → x = C/A. y-int: set x=0 → y = C/B.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Special Lines</div>
+      <div class="f-name">Vertical & Horizontal</div>
+      <div class="f-formula">Vertical: x = a &nbsp;|&nbsp; Horizontal: y = b</div>
+      <div class="f-note">Vertical through (−3, 7) → x = −3. Horizontal through (5, −2) → y = −2.</div>
+    </div>
+  </div>
+
+  <table class="rules-table" style="margin-top:16px;">
+    <tr><th>Relationship</th><th>Slope Rule</th><th>Quick Check</th></tr>
+    <tr><td><strong>Parallel</strong></td><td>m₁ = m₂</td><td>Same slope, different intercept</td></tr>
+    <tr><td><strong>Perpendicular</strong></td><td>m₁ · m₂ = −1</td><td>Flip fraction, negate sign</td></tr>
+    <tr><td><strong>Same line</strong></td><td>m₁ = m₂ AND b₁ = b₂</td><td>Identical when simplified</td></tr>
+  </table>
+
+  <div class="mnemonic">
+    <div class="label">🧠 Memorize</div>
+    Perpendicular slope of <strong>2/3</strong> → <strong>−3/2</strong>. Perpendicular slope of <strong>−5</strong> → <strong>1/5</strong>. Flip and negate, always.
+  </div>
+</div>
+
+<!-- ═══ CIRCLES ═══ -->
+<div id="circles" class="category">
+  <div class="cat-header">Circles</div>
+  <div class="formula-grid">
+    <div class="f-card">
+      <div class="f-label">Core Formula</div>
+      <div class="f-name">Standard Form</div>
+      <div class="f-formula">(x − h)² + (y − k)² = r²</div>
+      <div class="f-note">Center: (h, k). Radius: r. <strong>Signs inside parentheses are OPPOSITE</strong> the center coordinates.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Process</div>
+      <div class="f-name">Completing the Square</div>
+      <div class="f-formula">x² + bx → (x + b/2)² − (b/2)²</div>
+      <div class="f-note">Half the linear coefficient, square it, add to both sides. Works for both circle equations and quadratics.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Test</div>
+      <div class="f-name">Point vs Circle</div>
+      <div class="f-formula">Plug (x,y) into left side. Compare to r².</div>
+      <div class="f-note"><strong>= r²</strong> → on circle. <strong>< r²</strong> → inside. <strong>> r²</strong> → outside.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Shortcut</div>
+      <div class="f-name">Circle from Diameter</div>
+      <div class="f-formula">Center = midpoint of endpoints<br>r = ½ · distance between endpoints</div>
+      <div class="f-note">Two formulas you already know, combined.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FUNCTIONS ═══ -->
+<div id="functions" class="category">
+  <div class="cat-header">Functions & Operations</div>
+  <div class="formula-grid">
+    <div class="f-card">
+      <div class="f-label">Operations</div>
+      <div class="f-name">Arithmetic Combos</div>
+      <div class="f-formula">(f ± g)(x) = f(x) ± g(x)<br>(fg)(x) = f(x)·g(x)<br>(f/g)(x) = f(x)/g(x), g(x) ≠ 0</div>
+      <div class="f-note">For division, exclude values where g(x) = 0 from the domain.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Core Concept</div>
+      <div class="f-name">Composition</div>
+      <div class="f-formula">(f ∘ g)(x) = f(g(x))</div>
+      <div class="f-note"><strong>g runs first</strong> (inner function), then f (outer function). Order matters: f(g(x)) ≠ g(f(x)) in general.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Core Formula</div>
+      <div class="f-name">Difference Quotient</div>
+      <div class="f-formula">[f(x + h) − f(x)] / h</div>
+      <div class="f-note">Steps: (1) Compute f(x+h). (2) Subtract f(x). (3) Divide by h. (4) Simplify until h cancels. This is the precalculus preview of the derivative.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Core Formula</div>
+      <div class="f-name">Average Rate of Change</div>
+      <div class="f-formula">[f(b) − f(a)] / (b − a)</div>
+      <div class="f-note">Slope of the <strong>secant line</strong> between two points on the curve. Same structure as the difference quotient with specific values.</div>
+    </div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="label">🧠 Common Difference Quotients to Memorize</div>
+    f(x) = mx + b → DQ = <strong>m</strong> (constant)<br>
+    f(x) = x² → DQ = <strong>2x + h</strong><br>
+    f(x) = 1/x → DQ = <strong>−1/[x(x+h)]</strong><br>
+    f(x) = √x → DQ = <strong>1/[√(x+h) + √x]</strong> (rationalize the numerator)
+  </div>
+</div>
+
+<!-- ═══ DOMAIN ═══ -->
+<div id="domain" class="category">
+  <div class="cat-header">Domain Rules</div>
+  <table class="rules-table">
+    <tr><th>Expression</th><th>Restriction</th><th>Method</th></tr>
+    <tr><td>1/(something)</td><td>something ≠ 0</td><td>Set denominator = 0; exclude those x-values</td></tr>
+    <tr><td>√(something)</td><td>something ≥ 0</td><td>Solve the inequality radicand ≥ 0</td></tr>
+    <tr><td>√(something) in denominator</td><td>something > 0</td><td>Strictly positive (can't be zero OR negative)</td></tr>
+    <tr><td>Polynomial</td><td>None</td><td>Domain = (−∞, ∞) always</td></tr>
+    <tr><td>Combo (√ and fraction)</td><td>Apply ALL rules</td><td>Intersect the restrictions</td></tr>
+  </table>
+  <div class="mnemonic">
+    <div class="label">🧠 Memorize</div>
+    <strong>DZ-NR:</strong> Don't Zero the deNominator. No negatives under Roots. Two rules cover every domain problem on this exam.
+  </div>
+</div>
+
+<!-- ═══ SYMMETRY & EVEN/ODD ═══ -->
+<div id="symmetry" class="category">
+  <div class="cat-header">Symmetry & Even/Odd</div>
+  <table class="rules-table">
+    <tr><th>Test</th><th>Replacement</th><th>If unchanged</th><th>Function Type</th></tr>
+    <tr><td>Y-axis symmetry</td><td>x → −x</td><td>Same equation</td><td><strong>Even</strong></td></tr>
+    <tr><td>X-axis symmetry</td><td>y → −y</td><td>Same equation</td><td>(not a function)</td></tr>
+    <tr><td>Origin symmetry</td><td>x → −x, y → −y</td><td>Same equation</td><td><strong>Odd</strong></td></tr>
+  </table>
+
+  <div class="formula-grid" style="margin-top:14px;">
+    <div class="f-card">
+      <div class="f-label">Rule</div>
+      <div class="f-name">Even Function</div>
+      <div class="f-formula">f(−x) = f(x)</div>
+      <div class="f-note">Y-axis mirror. If (a, b) is on the graph, so is <strong>(−a, b)</strong>. All even-powered terms.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Rule</div>
+      <div class="f-name">Odd Function</div>
+      <div class="f-formula">f(−x) = −f(x)</div>
+      <div class="f-note">Origin rotation. If (a, b) is on the graph, so is <strong>(−a, −b)</strong>. All odd-powered terms.</div>
+    </div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="label">🧠 Quick Checks</div>
+    x⁴ − 2x² → all even powers → <strong>even</strong><br>
+    x³ − x → all odd powers → <strong>odd</strong><br>
+    x² + x → mixed powers → <strong>neither</strong><br>
+    |x³| → absolute value of odd = <strong>even</strong>
+  </div>
+</div>
+
+<!-- ═══ TRANSFORMATIONS ═══ -->
+<div id="transforms" class="category">
+  <div class="cat-header">Transformation Rules</div>
+  <table class="rules-table">
+    <tr><th>Notation</th><th>Transformation</th><th>Direction</th></tr>
+    <tr><td>f(x) + k</td><td>Vertical shift UP k</td><td>↑</td></tr>
+    <tr><td>f(x) − k</td><td>Vertical shift DOWN k</td><td>↓</td></tr>
+    <tr><td>f(x − h)</td><td>Horizontal shift RIGHT h</td><td>→ (opposite sign!)</td></tr>
+    <tr><td>f(x + h)</td><td>Horizontal shift LEFT h</td><td>← (opposite sign!)</td></tr>
+    <tr><td>−f(x)</td><td>Reflect over x-axis</td><td>Flip vertically</td></tr>
+    <tr><td>f(−x)</td><td>Reflect over y-axis</td><td>Flip horizontally</td></tr>
+    <tr><td>a·f(x), a > 1</td><td>Vertical stretch by a</td><td>Narrower</td></tr>
+    <tr><td>a·f(x), 0 < a < 1</td><td>Vertical compress by a</td><td>Wider</td></tr>
+  </table>
+
+  <div class="mnemonic">
+    <div class="label">🧠 Memorize This Order</div>
+    Apply transformations in this sequence: <strong>(1) Horizontal shifts → (2) Stretches/Compressions → (3) Reflections → (4) Vertical shifts</strong>.<br><br>
+    For y = −f(x − 1) + 2: Right 1 → reflect over x-axis → up 2.
+  </div>
+
+  <div class="formula-grid" style="margin-top:14px;">
+    <div class="f-card">
+      <div class="f-label">Piecewise</div>
+      <div class="f-name">Graphing Rules</div>
+      <div class="f-formula">Different formula per interval</div>
+      <div class="f-note">(1) Identify domain intervals. (2) Graph each piece on its interval only. (3) <strong>Closed circle ●</strong> = included. <strong>Open circle ○</strong> = excluded at boundaries.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Key Rule</div>
+      <div class="f-name">Horizontal Shift Trap</div>
+      <div class="f-formula">f(x − 3) shifts RIGHT<br>f(x + 3) shifts LEFT</div>
+      <div class="f-note">The sign inside is <strong>opposite</strong> the direction. "Inside is a lie."</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ QUADRATICS ═══ -->
+<div id="quadratics" class="category">
+  <div class="cat-header">Quadratic Functions</div>
+  <div class="formula-grid">
+    <div class="f-card">
+      <div class="f-label">Form</div>
+      <div class="f-name">Standard Form</div>
+      <div class="f-formula">f(x) = ax² + bx + c</div>
+      <div class="f-note">a determines direction. b and c determine position. Vertex: h = −b/(2a).</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Form</div>
+      <div class="f-name">Vertex Form</div>
+      <div class="f-formula">f(x) = a(x − h)² + k</div>
+      <div class="f-note">Vertex: <strong>(h, k)</strong>. Axis of symmetry: <strong>x = h</strong>. Obtained by completing the square.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Shortcut</div>
+      <div class="f-name">Vertex from Standard</div>
+      <div class="f-formula">h = −b/(2a)<br>k = f(h)</div>
+      <div class="f-note">Find h first, then plug h back into f to get k. Faster than completing the square.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Rule</div>
+      <div class="f-name">Max vs Min</div>
+      <div class="f-formula">a > 0 → minimum (opens up)<br>a < 0 → maximum (opens down)</div>
+      <div class="f-note">Positive a = happy face (min). Negative a = sad face (max). The vertex is always the extreme value.</div>
+    </div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="label">🧠 Completing the Square Process</div>
+    (1) Factor out a from x² and x terms → (2) Half the linear coefficient, square it → (3) Add/subtract inside parentheses → (4) Factor the perfect square, distribute the subtracted value out.<br><br>
+    <strong>Watch:</strong> When factoring out a negative, the sign of the value you "move out" flips. −2(x²+2x+1−1)+5 → the −1 becomes +2 (multiplied by −2).
+  </div>
+</div>
+
+<!-- ═══ INEQUALITIES ═══ -->
+<div id="inequalities" class="category">
+  <div class="cat-header">Quadratic Inequalities</div>
+  <div class="formula-grid">
+    <div class="f-card">
+      <div class="f-label">Process</div>
+      <div class="f-name">Sign Chart Method</div>
+      <div class="f-formula">(1) Solve = 0 for roots<br>(2) Plot on number line<br>(3) Test each interval<br>(4) Write interval notation</div>
+      <div class="f-note"><strong>≤ or ≥</strong> → use brackets [ ]. <strong>< or ></strong> → use parentheses ( ).</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Pattern</div>
+      <div class="f-name">Quick Solve (a > 0)</div>
+      <div class="f-formula">(x−a)(x−b) ≥ 0 → (−∞,a] ∪ [b,∞)<br>(x−a)(x−b) ≤ 0 → [a,b]</div>
+      <div class="f-note">Opens up: positive <strong>outside</strong> roots, negative <strong>between</strong> roots. Flip for a < 0.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Trick Question</div>
+      <div class="f-name">No Real Roots</div>
+      <div class="f-formula">b² − 4ac < 0</div>
+      <div class="f-note">If discriminant < 0 and a > 0 → always positive → <strong>> 0 is (−∞,∞)</strong> and <strong>< 0 is ∅</strong>.<br>If a < 0 → always negative → flip the answers.</div>
+    </div>
+    <div class="f-card">
+      <div class="f-label">Formula</div>
+      <div class="f-name">Discriminant</div>
+      <div class="f-formula">Δ = b² − 4ac</div>
+      <div class="f-note"><strong>Δ > 0:</strong> two real roots. <strong>Δ = 0:</strong> one repeated root. <strong>Δ < 0:</strong> no real roots (complex).</div>
+    </div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="label">🧠 Interval Notation Cheat</div>
+    <strong>Brackets [ ]</strong> = endpoint included (≤ or ≥). <strong>Parentheses ( )</strong> = endpoint excluded (< or >).<br>
+    <strong>∞ always gets parentheses.</strong> You can't "include" infinity.
+  </div>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(tab.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = '☀️';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '🌙';
+  }
+}
+</script>
+</body>
+</html>
