@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transform Drill</title>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<style>
+  :root, [data-theme="dark"] {
+    --bg: #1c1220; --surface: #271a2c; --surface2: #322238; --border: #4a3652;
+    --p900: #f0e6f2; --p800: #d8c4dc; --text: #f0e6f2; --text-muted: #b4a0ba;
+    --bronze: #c17817; --emerald: #1f9d6b; --teal: #2a9d8f; --brick: #b0402f;
+    --pos-bg: #17332a; --neg-bg: #3a1d1a;
+  }
+  [data-theme="light"] {
+    --bg: #f4eef6; --surface: #ffffff; --surface2: #ece0f0; --border: #d8c4dc;
+    --p900: #2a1830; --p800: #3a2440; --text: #2a1830; --text-muted: #6a4e72;
+    --bronze: #a8620f; --emerald: #157a52; --teal: #1f7a70; --brick: #a8402f;
+    --pos-bg: #d8f0e6; --neg-bg: #f8e0dc;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background:var(--bg); color:var(--text); font-family:'Libre Baskerville',Georgia,serif; min-height:100vh; transition:background .3s,color .3s; overflow-x:hidden; }
+  .katex { color:var(--bronze); }
+  .theme-toggle { position:fixed; top:14px; right:14px; z-index:999; width:40px; height:40px; border-radius:50%; background:var(--surface); border:1px solid var(--border); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; }
+
+  .wrap { max-width:640px; margin:0 auto; padding:20px 20px 60px; min-height:100vh; display:flex; flex-direction:column; }
+
+  .start-screen { flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; }
+  .start-tag { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:3px; color:var(--teal); text-transform:uppercase; margin-bottom:10px; }
+  .start-screen h1 { font-family:'Abril Fatface',serif; font-size:34px; font-weight:400; margin-bottom:10px; color:var(--p900); }
+  .start-screen h1 em { font-style:normal; color:var(--bronze); }
+  .start-sub { color:var(--text-muted); font-style:italic; font-size:14px; margin-bottom:28px; }
+  .goal-box { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:24px; font-size:14px; line-height:1.7; text-align:left; }
+  .goal-box .label { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--teal); margin-bottom:6px; }
+  .goal-box strong { color:var(--bronze); }
+  .order-note { font-family:'Fira Code',monospace; font-size:11px; color:var(--text-muted); background:var(--surface2); border-radius:8px; padding:10px 14px; margin-bottom:24px; }
+  .start-btn { font-family:'Fira Code',monospace; font-size:14px; letter-spacing:2px; text-transform:uppercase; background:var(--emerald); color:#fff; border:none; border-radius:12px; padding:18px 36px; cursor:pointer; font-weight:600; box-shadow:0 4px 16px rgba(31,157,107,.3); }
+  .keys-note { margin-top:18px; font-family:'Fira Code',monospace; font-size:11px; color:var(--text-muted); }
+  .keys-note kbd { background:var(--surface2); border:1px solid var(--border); border-radius:4px; padding:2px 7px; font-family:'Fira Code',monospace; }
+
+  .quiz-screen { flex:1; display:none; flex-direction:column; }
+  .quiz-screen.active { display:flex; }
+  .hud { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-family:'Fira Code',monospace; font-size:12px; }
+  .hud-item { color:var(--text-muted); }
+  .hud-timer { color:var(--bronze); font-weight:600; font-size:16px; }
+  .hud-timer.urgent { color:var(--brick); animation:pulse 1s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.5;} }
+  .progress-bar { height:6px; background:var(--surface2); border-radius:6px; overflow:hidden; margin-bottom:22px; }
+  .progress-fill { height:100%; background:var(--teal); width:0%; transition:width .2s; }
+
+  .question-card { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:6px 0 22px; }
+  .q-label { font-family:'Fira Code',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px; }
+  .q-parent { font-size:14px; color:var(--text-muted); margin-bottom:6px; }
+  .q-expr { font-size:26px; min-height:44px; display:flex; align-items:center; }
+
+  .options-col { display:flex; flex-direction:column; gap:10px; }
+  .opt-btn { font-family:'Fira Code',monospace; font-size:14px; text-align:left; border-radius:10px; padding:16px 18px; cursor:pointer; border:2px solid var(--border); background:var(--surface); color:var(--p900); transition:transform .1s; display:flex; gap:10px; align-items:center; }
+  .opt-btn .opt-key { font-weight:700; color:var(--teal); width:16px; flex-shrink:0; }
+  .opt-btn:active { transform:scale(.98); }
+  .opt-btn.correct-flash { background:var(--pos-bg); border-color:var(--emerald); }
+  .opt-btn.wrong-flash { background:var(--neg-bg); border-color:var(--brick); }
+
+  .results-screen { flex:1; display:none; flex-direction:column; justify-content:center; }
+  .results-screen.active { display:flex; }
+  .results-hero { text-align:center; margin-bottom:24px; }
+  .results-hero .big-score { font-family:'Abril Fatface',serif; font-size:52px; color:var(--bronze); }
+  .results-hero .score-sub { font-family:'Fira Code',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); margin-top:4px; }
+  .verdict { text-align:center; font-size:15px; margin-bottom:24px; padding:14px; border-radius:10px; }
+  .verdict.pass { background:var(--pos-bg); color:var(--emerald); border:1px solid var(--emerald); }
+  .verdict.fail { background:var(--neg-bg); color:var(--brick); border:1px solid var(--brick); }
+  .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px; }
+  .stat-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center; }
+  .stat-box .n { font-family:'Abril Fatface',serif; font-size:24px; color:var(--p900); }
+  .stat-box .l { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); margin-top:2px; }
+
+  .missed-section h3 { font-family:'Abril Fatface',serif; font-size:18px; color:var(--brick); margin-bottom:10px; font-weight:400; }
+  .missed-item { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--brick); border-radius:8px; padding:10px 14px; margin-bottom:6px; font-size:13px; }
+  .missed-item .m-fn { margin-bottom:4px; }
+  .missed-item .m-answer { font-family:'Fira Code',monospace; font-size:12px; color:var(--emerald); }
+  .no-missed { text-align:center; color:var(--emerald); font-size:14px; padding:16px; background:var(--pos-bg); border-radius:10px; }
+  .missed-section { margin-bottom:24px; }
+
+  .retry-btn { width:100%; font-family:'Fira Code',monospace; font-size:13px; letter-spacing:1px; text-transform:uppercase; border-radius:10px; padding:14px; cursor:pointer; border:1px solid var(--emerald); background:var(--emerald); color:#fff; font-weight:600; }
+
+  @media(max-width:480px) { .start-screen h1{font-size:26px;} .q-expr{font-size:21px;} .results-hero .big-score{font-size:38px;} }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+
+<div class="wrap">
+
+  <div class="start-screen" id="startScreen">
+    <div class="start-tag">Ch. 3 · Chokepoint Drill</div>
+    <h1>Name the <em>Transformation.</em></h1>
+    <div class="start-sub">24 curated problems. The step you keep pausing on before the exam becomes automatic.</div>
+    <div class="goal-box">
+      <div class="label">🎯 Approach</div>
+      Work <strong>outside in</strong>: horizontal shift first (inside the parentheses, sign flipped), then stretch/compress, then reflection, then vertical shift last. Match the full combo to one option.
+    </div>
+    <div class="order-note">Order convention used throughout: Horizontal shift → Stretch/Compress → Reflection → Vertical shift</div>
+    <button class="start-btn" onclick="startQuiz()">Start Drill</button>
+    <div class="keys-note">Keyboard: <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> to answer &nbsp; <kbd>Space</kbd> to start</div>
+  </div>
+
+  <div class="quiz-screen" id="quizScreen">
+    <div class="hud">
+      <div class="hud-item" id="hudProgress">Q 1 / 24</div>
+      <div class="hud-timer" id="hudTimer">5:00</div>
+      <div class="hud-item" id="hudCorrect">✓ 0</div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div class="question-card">
+      <div class="q-label">Transformations from</div>
+      <div class="q-parent" id="qParent"></div>
+      <div class="q-expr" id="qExpr"></div>
+    </div>
+
+    <div class="options-col" id="optionsCol"></div>
+  </div>
+
+  <div class="results-screen" id="resultsScreen">
+    <div class="results-hero">
+      <div class="big-score" id="finalScore">0/24</div>
+      <div class="score-sub" id="finalTime">in 0:00</div>
+    </div>
+    <div class="verdict" id="verdictBox"></div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="n" id="statAccuracy">0%</div><div class="l">Accuracy</div></div>
+      <div class="stat-box"><div class="n" id="statAvg">0.0s</div><div class="l">Avg / Question</div></div>
+    </div>
+    <div class="missed-section" id="missedSection">
+      <h3>Review Misses</h3>
+      <div id="missedList"></div>
+    </div>
+    <button class="retry-btn" onclick="startQuiz()">Retry Drill</button>
+  </div>
+
+</div>
+
+<script>
+// ══════════ CURATED QUESTION BANK ══════════
+const BANK = [
+  { parent:'f(x) = x^2', expr:'g(x) = (x-3)^2 + 1', correct:'Right 3, Up 1',
+    distractors:['Left 3, Down 1','Right 3, Down 1','Left 3, Up 1'] },
+  { parent:'f(x) = \\sqrt{x}', expr:'h(x) = -\\sqrt{x+2} - 4', correct:'Left 2, Reflect x-axis, Down 4',
+    distractors:['Right 2, Reflect x-axis, Down 4','Left 2, Reflect y-axis, Down 4','Left 2, Reflect x-axis, Up 4'] },
+  { parent:'f(x) = |x|', expr:'k(x) = 2|x-1|', correct:'Right 1, Vertical stretch ×2',
+    distractors:['Left 1, Vertical stretch ×2','Right 1, Vertical compress ×2','Right 2, Vertical stretch ×1'] },
+  { parent:'y = x^3', expr:'y = (x+1)^3 - 2', correct:'Left 1, Down 2',
+    distractors:['Right 1, Down 2','Left 1, Up 2','Right 1, Up 2'] },
+  { parent:'y = \\frac{1}{x}', expr:'y = -\\frac{1}{x} + 3', correct:'Reflect x-axis, Up 3',
+    distractors:['Reflect y-axis, Up 3','Reflect x-axis, Down 3','Right 3, Reflect x-axis'] },
+  { parent:'y = f(x)', expr:'y = -f(x-1) + 2', correct:'Right 1, Reflect x-axis, Up 2',
+    distractors:['Left 1, Reflect x-axis, Up 2','Right 1, Reflect y-axis, Up 2','Right 1, Reflect x-axis, Down 2'] },
+  { parent:'f(x) = x^2', expr:'f(x) = (x-2)^2 + 3', correct:'Right 2, Up 3',
+    distractors:['Left 2, Up 3','Right 2, Down 3','Left 2, Down 3'] },
+  { parent:'f(x) = x^2', expr:'g(x) = -(x+1)^2 - 2', correct:'Left 1, Reflect x-axis, Down 2',
+    distractors:['Right 1, Reflect x-axis, Down 2','Left 1, Reflect x-axis, Up 2','Left 1, Reflect y-axis, Down 2'] },
+  { parent:'f(x) = x^2', expr:'h(x) = 2(x-3)^2', correct:'Right 3, Vertical stretch ×2',
+    distractors:['Left 3, Vertical stretch ×2','Right 3, Vertical compress ×2','Right 2, Vertical stretch ×3'] },
+  { parent:'y = x^2', expr:'Vertex (4,-1), opens down, same shape', correct:'Right 4, Reflect x-axis, Down 1',
+    distractors:['Left 4, Reflect x-axis, Down 1','Right 4, Reflect x-axis, Up 1','Right 4, Reflect y-axis, Down 1'] },
+  { parent:'f(x) = \\sqrt{x}', expr:'f(x) = \\sqrt{x-4}', correct:'Right 4',
+    distractors:['Left 4','Down 4','Up 4'] },
+  { parent:'f(x) = \\sqrt{x}', expr:'f(x) = \\sqrt{-x}', correct:'Reflect y-axis',
+    distractors:['Reflect x-axis','Reflect over origin','Right shift, no reflection'] },
+  { parent:'f(x) = |x|', expr:'f(x) = 3|x|', correct:'Vertical stretch ×3',
+    distractors:['Vertical compress ×3','Horizontal stretch ×3','Vertical stretch ×\\frac{1}{3}'] },
+  { parent:'f(x) = |x|', expr:'f(x) = \\frac{1}{2}|x|', correct:'Vertical compress ×\\frac{1}{2}',
+    distractors:['Vertical stretch ×\\frac{1}{2}','Vertical compress ×2','Horizontal compress ×\\frac{1}{2}'] },
+  { parent:'f(x) = x^2', expr:'f(x) = x^2 + 3', correct:'Up 3',
+    distractors:['Down 3','Right 3','Left 3'] },
+  { parent:'f(x) = x^2', expr:'f(x) = x^2 - 5', correct:'Down 5',
+    distractors:['Up 5','Right 5','Left 5'] },
+  { parent:'f(x) = x^2', expr:'f(x) = (x+2)^2', correct:'Left 2',
+    distractors:['Right 2','Up 2','Down 2'] },
+  { parent:'f(x) = x^3', expr:'f(x) = -x^3', correct:'Reflect x-axis',
+    distractors:['Reflect y-axis','Vertical stretch ×-1 only conceptually different','Reflect over origin'] },
+  { parent:'f(x) = \\sqrt{x}', expr:'f(x) = \\sqrt{x+2} - 4', correct:'Left 2, Down 4',
+    distractors:['Right 2, Down 4','Left 2, Up 4','Right 2, Up 4'] },
+  { parent:'f(x)', expr:'\\text{Shift 3 left, 2 down}', correct:'f(x+3) - 2',
+    distractors:['f(x-3) - 2','f(x+3) + 2','f(x-3) + 2'] },
+  { parent:'f(x) = x^2', expr:'g(x) = (x-3)^2 - 4', correct:'Right 3, Down 4',
+    distractors:['Left 3, Down 4','Right 3, Up 4','Left 3, Up 4'] },
+  { parent:'f(x) = x^2', expr:'g(x) = -2(x+1)^2 + 3', correct:'Left 1, Vertical stretch ×2, Reflect x-axis, Up 3',
+    distractors:['Right 1, Vertical stretch ×2, Reflect x-axis, Up 3','Left 1, Vertical compress ×2, Reflect x-axis, Up 3','Left 1, Vertical stretch ×2, Reflect x-axis, Down 3'] },
+  { parent:'f(x) = |x|', expr:'f(x) = |x+5| - 3', correct:'Left 5, Down 3',
+    distractors:['Right 5, Down 3','Left 5, Up 3','Right 5, Up 3'] },
+  { parent:'f(x) = \\sqrt{x}', expr:'f(x) = -\\sqrt{x-1}', correct:'Right 1, Reflect x-axis',
+    distractors:['Left 1, Reflect x-axis','Right 1, Reflect y-axis','Right 1, no reflection'] },
+];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+let questions = [], current = 0, correctCount = 0, missed = [];
+let timerInterval = null, secondsLeft = 300, quizActive = false;
+const TOTAL_Q = BANK.length;
+
+function buildQuestionBank() {
+  const shuffled = shuffle(BANK.map(q => ({...q})));
+  shuffled.forEach(q => {
+    q.options = shuffle([q.correct, ...q.distractors]);
+  });
+  return shuffled;
+}
+
+function startQuiz() {
+  questions = buildQuestionBank();
+  current = 0; correctCount = 0; missed = []; secondsLeft = 300; quizActive = true;
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('resultsScreen').classList.remove('active');
+  document.getElementById('quizScreen').classList.add('active');
+  clearInterval(timerInterval);
+  timerInterval = setInterval(tickTimer, 1000);
+  updateTimerDisplay();
+  renderQuestion();
+}
+
+function tickTimer() {
+  secondsLeft--;
+  updateTimerDisplay();
+  if (secondsLeft <= 0) endQuiz();
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(secondsLeft / 60), s = secondsLeft % 60;
+  const el = document.getElementById('hudTimer');
+  el.textContent = `${m}:${s.toString().padStart(2,'0')}`;
+  el.classList.toggle('urgent', secondsLeft <= 20);
+}
+
+function renderQuestion() {
+  if (current >= questions.length) { endQuiz(); return; }
+  const q = questions[current];
+  document.getElementById('hudProgress').textContent = `Q ${current+1} / ${TOTAL_Q}`;
+  document.getElementById('hudCorrect').textContent = `✓ ${correctCount}`;
+  document.getElementById('progressFill').style.width = `${(current/TOTAL_Q)*100}%`;
+
+  const parentEl = document.getElementById('qParent');
+  parentEl.innerHTML = '';
+  try { katex.render(q.parent, parentEl, {throwOnError:false}); } catch(e) { parentEl.textContent = q.parent; }
+
+  const exprEl = document.getElementById('qExpr');
+  exprEl.innerHTML = '';
+  try { katex.render(q.expr, exprEl, {throwOnError:false}); } catch(e) { exprEl.textContent = q.expr; }
+
+  const col = document.getElementById('optionsCol');
+  col.innerHTML = '';
+  const keys = ['A','B','C','D'];
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = `<span class="opt-key">${keys[idx]}</span><span>${opt}</span>`;
+    btn.onclick = () => selectAnswer(opt, btn);
+    col.appendChild(btn);
+  });
+}
+
+function selectAnswer(chosen, btnEl) {
+  if (!quizActive) return;
+  const q = questions[current];
+  const correct = chosen === q.correct;
+  if (correct) {
+    correctCount++;
+    btnEl.classList.add('correct-flash');
+  } else {
+    missed.push(q);
+    btnEl.classList.add('wrong-flash');
+  }
+  setTimeout(() => {
+    current++;
+    renderQuestion();
+  }, 200);
+}
+
+document.addEventListener('keydown', (e) => {
+  if (quizActive && ['1','2','3','4'].includes(e.key)) {
+    const idx = parseInt(e.key) - 1;
+    const btns = document.querySelectorAll('#optionsCol .opt-btn');
+    if (btns[idx]) btns[idx].click();
+  } else if (!quizActive && document.getElementById('startScreen').style.display !== 'none' && e.code === 'Space') {
+    e.preventDefault();
+    startQuiz();
+  }
+});
+
+function endQuiz() {
+  quizActive = false;
+  clearInterval(timerInterval);
+  document.getElementById('quizScreen').classList.remove('active');
+  document.getElementById('resultsScreen').classList.add('active');
+
+  const answered = current;
+  const totalTimeUsed = 300 - secondsLeft;
+  const mins = Math.floor(totalTimeUsed / 60), secs = totalTimeUsed % 60;
+
+  document.getElementById('finalScore').textContent = `${correctCount}/${TOTAL_Q}`;
+  document.getElementById('finalTime').textContent = `in ${mins}:${secs.toString().padStart(2,'0')}`;
+
+  const accuracy = answered > 0 ? Math.round((correctCount/answered)*100) : 0;
+  document.getElementById('statAccuracy').textContent = `${accuracy}%`;
+  const avgPerQ = answered > 0 ? (totalTimeUsed/answered).toFixed(1) : '0.0';
+  document.getElementById('statAvg').textContent = `${avgPerQ}s`;
+
+  const verdictBox = document.getElementById('verdictBox');
+  const underTime = totalTimeUsed <= 300 && answered === TOTAL_Q;
+  if (correctCount === TOTAL_Q && underTime) {
+    verdictBox.className = 'verdict pass';
+    verdictBox.textContent = '🎯 Perfect run. Transformation reading is automatic now.';
+  } else if (correctCount >= TOTAL_Q - 3 && underTime) {
+    verdictBox.className = 'verdict pass';
+    verdictBox.textContent = `✓ Strong run. ${TOTAL_Q-correctCount} miss${TOTAL_Q-correctCount===1?'':'es'} to review below.`;
+  } else if (answered < TOTAL_Q) {
+    verdictBox.className = 'verdict fail';
+    verdictBox.textContent = `⏱ Time ran out at Q${answered}. This is the step you flagged as slow — keep drilling.`;
+  } else {
+    verdictBox.className = 'verdict fail';
+    verdictBox.textContent = `Retry needed — ${TOTAL_Q-correctCount} misses. Review below, then run it again.`;
+  }
+
+  const missedList = document.getElementById('missedList');
+  const missedSection = document.getElementById('missedSection');
+  if (missed.length === 0) {
+    missedSection.querySelector('h3').style.display = 'none';
+    missedList.innerHTML = '<div class="no-missed">No misses. Every transformation named correctly.</div>';
+  } else {
+    missedSection.querySelector('h3').style.display = 'block';
+    missedList.innerHTML = '';
+    missed.forEach(q => {
+      const row = document.createElement('div');
+      row.className = 'missed-item';
+      const fn = document.createElement('div');
+      fn.className = 'm-fn';
+      try { katex.render(q.expr, fn, {throwOnError:false}); } catch(e) { fn.textContent = q.expr; }
+      const ans = document.createElement('div');
+      ans.className = 'm-answer';
+      ans.textContent = q.correct;
+      row.appendChild(fn);
+      row.appendChild(ans);
+      missedList.appendChild(row);
+    });
+  }
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = '☀️';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '🌙';
+  }
+}
+</script>
+</body>
+</html>

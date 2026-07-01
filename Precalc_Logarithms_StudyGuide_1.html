@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Precalc | Logarithms Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+  :root, [data-theme="dark"] {
+    --bg: #160f16; --surface: #201521; --surface2: #2a1c2c; --border: #48304a;
+    --p900: #f0e6ee; --p800: #d8bcce; --p700: #b48aa8; --p600: #9a6e8e;
+    --p500: #7e5474; --p400: #623e58; --p300: #482c40; --p200: #321e2c;
+    --p100: #211420; --p50: #160f16;
+    --accent: #e07a52; --accent2: #d65a9a; --accent3: #46b0a4; --accent-light: #2a1815;
+    --text: #f0e6ee; --text-muted: #b48aa8;
+    --hero-bg: #241526; --hero-text: #f0e6ee; --hero-accent: #b48aa8; --hero-sub: #b48aa8;
+    --warning-bg: #2a1410; --warning-border: #cc4b3c;
+    --table-even: #1c121c; --table-odd: #201521; --table-header: #2a1c2c;
+    --card-bg: #201521; --formula-bg: #2a1c2c;
+  }
+  [data-theme="light"] {
+    --bg: #f7f2f5; --surface: #ffffff; --surface2: #f0e6ec; --border: #e0cdd8;
+    --p900: #2a142a; --p800: #3e2440; --p700: #5a3a58; --p600: #6e4a6a;
+    --p500: #8a6080; --p400: #a87e9c; --p300: #c4a0b8; --p200: #ddc4d4;
+    --p100: #ece0e8; --p50: #f5eef2;
+    --accent: #c25530; --accent2: #c14a86; --accent3: #2f8a80; --accent-light: #fbeae2;
+    --text: #2a142a; --text-muted: #5a3a58;
+    --hero-bg: #3a1f3a; --hero-text: #ffffff; --hero-accent: #d8b4c8; --hero-sub: #e8d4e0;
+    --warning-bg: #fdece6; --warning-border: #c0442a;
+    --table-even: #f5eef2; --table-odd: #ffffff; --table-header: #2a142a;
+    --card-bg: #ffffff; --formula-bg: #f5eef2;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Libre Baskerville',Georgia,serif; font-size:15px; line-height:1.75; padding:0; transition:background .3s,color .3s; }
+  .katex { color: var(--accent); }
+  .theme-toggle { position:fixed; top:16px; right:16px; z-index:999; width:44px; height:44px; border-radius:50%; background:var(--surface); border:1px solid var(--border); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:20px; transition:all .3s; box-shadow:0 2px 8px rgba(0,0,0,.3); }
+  .theme-toggle:hover { transform:scale(1.1); }
+
+  /* HERO */
+  .hero { background:var(--hero-bg); padding:56px 40px 48px; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 10% 50%,rgba(200,106,122,.08),transparent),radial-gradient(ellipse 50% 60% at 90% 30%,rgba(212,168,74,.06),transparent); }
+  .hero-inner { position:relative; max-width:860px; margin:0 auto; }
+  .hero-tag { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:3px; color:var(--hero-accent); text-transform:uppercase; margin-bottom:14px; }
+  .hero h1 { font-family:'Abril Fatface',serif; font-size:44px; font-weight:400; line-height:1.1; color:var(--hero-text); margin-bottom:12px; }
+  .hero h1 em { font-style:normal; color:var(--accent); }
+  .hero-sub { color:var(--hero-sub); font-style:italic; font-size:14px; margin-bottom:20px; }
+  .hero-stats { display:flex; gap:24px; flex-wrap:wrap; }
+  .stat { text-align:center; }
+  .stat-n { font-family:'Abril Fatface',serif; font-size:28px; color:var(--accent); }
+  .stat-l { font-family:'Fira Code',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--hero-accent); }
+
+  /* NAV */
+  .nav { background:var(--surface); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; overflow-x:auto; white-space:nowrap; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+  .nav::-webkit-scrollbar { display:none; }
+  .nav-inner { max-width:960px; margin:0 auto; display:flex; justify-content:center; gap:4px; padding:10px 16px; flex-wrap:nowrap; }
+  .nav-tab { font-family:'Fira Code',monospace; font-size:11px; letter-spacing:1px; color:var(--text-muted); padding:6px 14px; border-radius:6px; white-space:nowrap; transition:all .2s; flex-shrink:0; cursor:pointer; border:none; background:none; }
+  .nav-tab:hover { background:var(--surface2); color:var(--accent); }
+  .nav-tab.active { background:var(--accent); color:#fff; }
+
+  /* CONTENT */
+  .content { max-width:860px; margin:0 auto; padding:30px 24px 80px; }
+  .tab-panel { display:none; }
+  .tab-panel.active { display:block; }
+
+  /* SECTION */
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:32px 28px; margin-bottom:24px; transition:background .3s,border-color .3s; }
+  .section-tag { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:8px; }
+  .section h2 { font-family:'Abril Fatface',serif; font-size:26px; font-weight:400; color:var(--p900); margin-bottom:16px; line-height:1.2; }
+  .section h3 { font-family:'Abril Fatface',serif; font-size:19px; font-weight:400; color:var(--p800); margin:20px 0 10px; line-height:1.3; }
+  p { margin-bottom:12px; }
+  strong { color:var(--accent); }
+  .formula { font-family:'Fira Code',monospace; font-size:14px; background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:12px 16px; margin:12px 0; color:var(--p900); text-align:center; line-height:1.8; }
+
+  /* CALLOUTS */
+  .callout { border-radius:10px; padding:16px 20px; margin:16px 0; font-size:14px; line-height:1.65; }
+  .callout-memory { background:var(--accent-light); border-left:4px solid var(--accent); }
+  .callout-warning { background:var(--warning-bg); border-left:4px solid var(--warning-border); }
+  .callout-exam { background:var(--surface2); border:2px solid var(--accent2); }
+  .callout-key { background:var(--surface2); border-left:4px solid var(--accent3); }
+  .callout-label { font-family:'Fira Code',monospace; font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+  .callout-memory .callout-label { color:var(--accent); }
+  .callout-warning .callout-label { color:var(--warning-border); }
+  .callout-exam .callout-label { color:var(--accent2); }
+  .callout-key .callout-label { color:var(--accent3); }
+
+  /* COMPARE */
+  .compare-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:16px 0; }
+  .compare-card { background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:18px 16px; }
+  .compare-card h4 { font-family:'Fira Code',monospace; font-size:13px; color:var(--accent); margin-bottom:8px; text-transform:uppercase; letter-spacing:1px; }
+
+  /* STEPS */
+  .steps-box { background:var(--surface2); border-radius:12px; padding:24px; margin:16px 0; }
+  .step { display:flex; gap:16px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .step:last-child { border-bottom:none; }
+  .step-num { font-family:'Abril Fatface',serif; font-size:24px; color:var(--accent); flex-shrink:0; width:36px; text-align:center; }
+
+  /* TABLE */
+  .table-wrap { overflow-x:auto; margin:16px 0; border-radius:10px; border:1px solid var(--border); }
+  .study-table { width:100%; border-collapse:collapse; font-size:13px; }
+  .study-table th { background:var(--table-header); color:var(--hero-text); font-family:'Fira Code',monospace; font-size:11px; letter-spacing:1px; text-transform:uppercase; padding:10px 12px; text-align:left; }
+  .study-table td { padding:10px 12px; border-bottom:1px solid var(--border); }
+  .study-table tr:nth-child(even) { background:var(--table-even); }
+  .study-table tr:nth-child(odd) { background:var(--table-odd); }
+
+  /* QUIZ */
+  .quiz-q { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin:10px 0; cursor:pointer; transition:all .2s; }
+  .quiz-q:hover { border-color:var(--accent); }
+  .quiz-q .question { font-weight:700; font-size:15px; color:var(--p900); }
+  .quiz-q .answer { display:none; margin-top:12px; padding-top:12px; border-top:1px dashed var(--border); color:var(--text); font-size:14px; }
+  .quiz-q.open .answer { display:block; }
+  .quiz-q::after { content:'tap to reveal'; font-family:'Fira Code',monospace; font-size:10px; color:var(--accent); float:right; margin-top:2px; }
+  .quiz-q.open::after { content:''; }
+
+  /* GLOSSARY */
+  .glossary { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:8px 20px; }
+  .gloss-item { padding:8px 0; border-bottom:1px solid var(--border); font-size:14px; }
+  .gloss-term { font-weight:700; color:var(--accent); }
+
+  /* CHEAT SHEET */
+  .cheat-sheet { background:var(--hero-bg); color:var(--hero-text); border-radius:12px; padding:28px 24px; margin:24px 0; border:1px solid var(--border); }
+  .cheat-sheet h2 { font-family:'Abril Fatface',serif; color:var(--accent); font-size:22px; margin-bottom:16px; }
+  .cheat-sheet ul { list-style:none; padding:0; }
+  .cheat-sheet li { padding:6px 0; font-size:16px; border-bottom:1px solid rgba(255,255,255,.08); }
+  .cheat-sheet li::before { content:'→ '; color:var(--accent2); font-weight:700; }
+
+  /* CHECKLIST */
+  .checklist label { display:flex; align-items:flex-start; gap:10px; padding:8px 0; font-size:14px; cursor:pointer; }
+  .checklist input[type="checkbox"] { width:18px; height:18px; accent-color:var(--accent); margin-top:2px; flex-shrink:0; }
+  .checklist-tier { font-family:'Fira Code',monospace; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--accent); margin:16px 0 8px; }
+
+  /* FORMULA REF CARDS */
+  .formula-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(380px,1fr)); gap:14px; margin:16px 0; }
+  .f-card { background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:20px; transition:all .2s; }
+  .f-card:hover { border-color:var(--accent); transform:translateY(-2px); box-shadow:0 4px 16px rgba(0,0,0,.15); }
+  .f-label { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--accent2); margin-bottom:8px; }
+  .f-name { font-family:'Abril Fatface',serif; font-size:18px; color:var(--p900); margin-bottom:10px; }
+  .f-formula { font-family:'Fira Code',monospace; background:var(--formula-bg); border:1px solid var(--border); border-radius:8px; padding:14px 18px; margin-bottom:10px; text-align:center; line-height:2; }
+  .f-note { font-size:13px; color:var(--text-muted); line-height:1.5; }
+  .f-note strong { color:var(--accent); }
+  .rules-table { width:100%; border-collapse:collapse; font-size:13px; margin:12px 0; border-radius:10px; overflow:hidden; border:1px solid var(--border); }
+  .rules-table th { background:var(--hero-bg); color:var(--p900); font-family:'Fira Code',monospace; font-size:11px; letter-spacing:1px; text-transform:uppercase; padding:10px 12px; text-align:left; }
+  .rules-table td { padding:10px 12px; border-bottom:1px solid var(--border); background:var(--card-bg); }
+  .rules-table tr:last-child td { border-bottom:none; }
+  .mnemonic { background:var(--accent-light); border-left:4px solid var(--accent); border-radius:0 10px 10px 0; padding:14px 18px; margin:14px 0; font-size:14px; line-height:1.6; }
+  .mnemonic .label { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:4px; }
+  .cat-header { font-family:'Abril Fatface',serif; font-size:24px; font-weight:400; color:var(--accent); margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid var(--border); }
+  .category { margin-bottom:32px; }
+
+  .final-review { background:linear-gradient(135deg,var(--surface2),var(--hero-bg)); border:1px solid var(--border); border-radius:12px; padding:32px 28px; margin:24px 0; text-align:center; }
+  .final-review h2 { font-family:'Abril Fatface',serif; color:var(--accent); margin-bottom:16px; }
+  .final-review p { font-size:15px; line-height:1.8; max-width:680px; margin:0 auto; color:var(--text-muted); }
+  [data-theme="light"] .final-review { background:linear-gradient(135deg,var(--surface),var(--p50)); }
+  [data-theme="light"] .final-review p { color:var(--p900); }
+
+  @media(max-width:768px) { .hero{padding:36px 20px 32px;} .hero h1{font-size:32px;} .content{padding:20px 14px;} .section{padding:24px 18px;} .compare-grid{grid-template-columns:1fr;} .glossary{grid-template-columns:1fr;} .formula-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Toggle light/dark mode">🌙</button>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Precalculus · Logarithms · Unit Review</div>
+    <h1>The Inverse of <em>Exponentials</em></h1>
+    <div class="hero-sub">Definitions, the three rules, change of base, graphs, equations, and the applications that decode growth, decay, sound, and acidity.</div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n">9</div><div class="stat-l">Tabs</div></div>
+      <div class="stat"><div class="stat-n">28</div><div class="stat-l">Key Terms</div></div>
+      <div class="stat"><div class="stat-n">14</div><div class="stat-l">Worked Qs</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-inner">
+    <button class="nav-tab active" data-tab="foundations">Foundations</button>
+    <button class="nav-tab" data-tab="rules">The Rules</button>
+    <button class="nav-tab" data-tab="condense">Condense/Expand</button>
+    <button class="nav-tab" data-tab="changebase">Change of Base</button>
+    <button class="nav-tab" data-tab="special">e & ln</button>
+    <button class="nav-tab" data-tab="graphs">Graphs</button>
+    <button class="nav-tab" data-tab="equations">Equations</button>
+    <button class="nav-tab" data-tab="applications">Applications</button>
+    <button class="nav-tab" data-tab="formulas">📐 Formulas</button>
+    <button class="nav-tab" data-tab="review">📋 Review</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ═══ TAB: FOUNDATIONS ═══ -->
+<div class="tab-panel active" data-tab="foundations">
+<div class="section">
+  <div class="section-tag">Section 01</div>
+  <h2>What a Logarithm Actually Is</h2>
+  <p>A logarithm answers one question. <strong>To what power must I raise the base to land on this number?</strong> That is the entire concept. Everything downstream is bookkeeping.</p>
+  <div class="f-formula">$$\log_b x = y \quad\Longleftrightarrow\quad b^y = x \qquad (b>0,\; b\neq 1,\; x>0)$$</div>
+  <p>The two equations carry identical information. The exponential form hides the exponent inside; the logarithmic form drags it out into the open and names it $y$. A log <em>is</em> an exponent. Say that out loud before the exam.</p>
+
+  <div class="callout callout-memory">
+    <div class="callout-label">🧠 Memory Hook</div>
+    <strong>The spiral read.</strong> $\log_b x = y$. Start at the base, swing up to the answer, the exponent drops out. Read it as a loop: "$b$ raised to $y$ gives $x$." <br><br>
+    <strong>Visual image:</strong> Picture the base as a launchpad on the ground. The number $x$ is a target in the sky. The logarithm is the throttle setting (the exponent) that gets you exactly there. Big target, big throttle.
+  </div>
+
+  <h3>The Two Forms, Side by Side</h3>
+  <div class="table-wrap">
+    <table class="study-table">
+      <tr><th>Logarithmic Form</th><th>Exponential Form</th><th>Read As</th></tr>
+      <tr><td>$\log_2 8 = 3$</td><td>$2^3 = 8$</td><td>2 to the 3rd is 8</td></tr>
+      <tr><td>$\log_5 25 = 2$</td><td>$5^2 = 25$</td><td>5 to the 2nd is 25</td></tr>
+      <tr><td>$\log_{10} 1000 = 3$</td><td>$10^3 = 1000$</td><td>10 cubed is 1000</td></tr>
+      <tr><td>$\log_3 \tfrac{1}{9} = -2$</td><td>$3^{-2} = \tfrac{1}{9}$</td><td>negative exponent, reciprocal</td></tr>
+    </table>
+  </div>
+
+  <h3>Evaluating Without a Calculator</h3>
+  <p>Ask the conversion question. $\log_4 64 = ?$ becomes "$4$ to the what is $64$?" Since $4^3 = 64$, the answer is $3$. No calculator, just the inverse relationship working for you.</p>
+
+  <div class="callout callout-key">
+    <div class="callout-label">🔑 The Four Pillar Identities</div>
+    Memorize these cold; they collapse half of every problem.<br>
+    $\log_b 1 = 0$ &nbsp;(because $b^0 = 1$)<br>
+    $\log_b b = 1$ &nbsp;(because $b^1 = b$)<br>
+    $\log_b b^x = x$ &nbsp;(the log undoes the exponential)<br>
+    $b^{\log_b x} = x$ &nbsp;(the exponential undoes the log)
+  </div>
+
+  <div class="callout callout-warning">
+    <div class="callout-label">⚠️ Watch Out</div>
+    <strong>The argument must be positive.</strong> $\log_b(\text{negative})$ and $\log_b 0$ are undefined. There is no real exponent that turns a positive base into a negative number or into zero. This single fact generates every extraneous solution you will reject later.
+  </div>
+
+  <div class="callout callout-exam">
+    <div class="callout-label">⚡ Exam Hack</div>
+    Stuck on a log? Rewrite it as an exponential immediately. $\log_x 81 = 4$ looks intimidating until it becomes $x^4 = 81$, so $x = 3$. The exponential form is almost always the easier room to work in.
+  </div>
+</div>
+</div>
+
+<!-- ═══ TAB: THE RULES ═══ -->
+<div class="tab-panel" data-tab="rules">
+<div class="section">
+  <div class="section-tag">Section 02</div>
+  <h2>The Three Rules</h2>
+  <p>Logs convert one tier of operation down. Multiplication becomes addition. Division becomes subtraction. Exponentiation becomes multiplication. That downshift is the whole power of the tool; it is why slide rules and pre-calculator computation ran on logs for three centuries.</p>
+
+  <div class="table-wrap">
+    <table class="study-table">
+      <tr><th>Rule</th><th>Form</th><th>What Happens</th></tr>
+      <tr><td><strong>Product</strong></td><td>$\log_b(MN) = \log_b M + \log_b N$</td><td>Multiply inside → add outside</td></tr>
+      <tr><td><strong>Quotient</strong></td><td>$\log_b\!\left(\tfrac{M}{N}\right) = \log_b M - \log_b N$</td><td>Divide inside → subtract outside</td></tr>
+      <tr><td><strong>Power</strong></td><td>$\log_b(M^p) = p\log_b M$</td><td>Exponent inside → drops to the front</td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-memory">
+    <div class="callout-label">🧠 Memory Hook</div>
+    <strong>Rhyme:</strong> "Times turns to plus, divide turns to minus, the power comes down to the front of the line-up."<br><br>
+    <strong>The downshift acronym — PAD:</strong> <strong>P</strong>roduct → <strong>A</strong>dd, <strong>D</strong>ivide → subtract. And the Power rule is the diva; the exponent demands the spotlight, so it walks to the front.<br><br>
+    <strong>Absurd story:</strong> Picture two numbers getting married inside the log (multiplication). The log is the officiant who refuses to let them stay joined; it splits them into two separate logs holding hands with a plus sign. Divorce (division) splits them with a minus.
+  </div>
+
+  <h3>Why the Product Rule Works (one line)</h3>
+  <p>Let $\log_b M = x$ and $\log_b N = y$. Then $M = b^x$ and $N = b^y$, so $MN = b^x b^y = b^{x+y}$. Convert back: $\log_b(MN) = x + y = \log_b M + \log_b N$. The exponent law $b^x b^y = b^{x+y}$ <em>is</em> the product rule wearing a different hat.</p>
+
+  <div class="callout callout-warning">
+    <div class="callout-label">⚠️ The Errors That Sink People</div>
+    These are not real rules. Burn them as forbidden.<br><br>
+    <strong>1.</strong> $\log_b(M+N) \neq \log_b M + \log_b N$. The product rule needs a <em>product</em> inside, never a sum. There is no rule for the log of a sum. None.<br><br>
+    <strong>2.</strong> $\log_b\!\left(\tfrac{M}{N}\right) \neq \dfrac{\log_b M}{\log_b N}$. The quotient rule gives a <em>difference</em>. A quotient of two logs is change of base, a different animal entirely.<br><br>
+    <strong>3.</strong> $(\log_b M)^p \neq p\log_b M$. The power rule requires the exponent on the <em>argument</em> inside, not on the whole log. $(\log_b M)^2$ stays put.
+  </div>
+
+  <h3>Worked: Product Rule</h3>
+  <p>Expand $\log_2(8x)$. The inside is a product, so split it: $\log_2 8 + \log_2 x$. Then $\log_2 8 = 3$, giving $3 + \log_2 x$. Two moves: split, then evaluate the piece you can.</p>
+
+  <h3>Worked: Power Rule</h3>
+  <p>Evaluate $\log_5 25^3$. Drop the exponent: $3\log_5 25$. Then $\log_5 25 = 2$, so $3 \cdot 2 = 6$. Check against the definition: $25^3 = 5^6$, and indeed $\log_5(5^6) = 6$. Confirmed.</p>
+
+  <div class="callout callout-exam">
+    <div class="callout-label">⚡ Exam Hack</div>
+    A radical is a fractional exponent in disguise. $\log_b \sqrt{x} = \log_b x^{1/2} = \tfrac{1}{2}\log_b x$. The instant you see a root inside a log, rewrite it as a power so the power rule can act on it.
+  </div>
+</div>
+</div>
+
+<!-- ═══ TAB: CONDENSE/EXPAND ═══ -->
+<div class="tab-panel" data-tab="condense">
+<div class="section">
+  <div class="section-tag">Section 03</div>
+  <h2>Expanding & Condensing</h2>
+  <p>Two directions, same three rules. <strong>Expanding</strong> breaks one log into a sum and difference of simpler logs. <strong>Condensing</strong> collapses a string of logs back into one. Free-response problems love both; the partial credit lives in the intermediate steps.</p>
+
+  <h3>Expanding: Outside In</h3>
+  <div class="steps-box">
+    <div class="step"><div class="step-num">1</div><div>Handle the outermost operation first. If the whole inside is a fraction, apply the quotient rule before anything else.</div></div>
+    <div class="step"><div class="step-num">2</div><div>Apply the product rule to any products in the numerator or denominator.</div></div>
+    <div class="step"><div class="step-num">3</div><div>Apply the power rule to bring every exponent (including roots written as fractional powers) to the front.</div></div>
+    <div class="step"><div class="step-num">4</div><div>Evaluate any log that resolves to a clean number.</div></div>
+  </div>
+
+  <h3>Worked Expansion</h3>
+  <p>Expand $\log_b\!\dfrac{x^3\sqrt{y}}{z^2}$.</p>
+  <div class="f-formula">$$\log_b\frac{x^3\sqrt{y}}{z^2} = \log_b(x^3\sqrt{y}) - \log_b(z^2)$$$$= \log_b x^3 + \log_b y^{1/2} - \log_b z^2$$$$= 3\log_b x + \tfrac{1}{2}\log_b y - 2\log_b z$$</div>
+  <p>Notice the order: quotient first (the fraction bar is the outermost cut), then product on the numerator, then power on each piece. Reverse that order and the signs go feral.</p>
+
+  <div class="callout callout-warning">
+    <div class="callout-label">⚠️ Watch Out — The Sign Trap</div>
+    Everything in the denominator gets <strong>subtracted</strong>, and a power there still subtracts. $\log_b \dfrac{1}{x^4} = \log_b 1 - \log_b x^4 = 0 - 4\log_b x = -4\log_b x$. The negative sign and the coefficient both have to survive the trip.
+  </div>
+
+  <h3>Condensing: The Reverse Gear</h3>
+  <p>To condense, every log must first have a coefficient of $1$. Use the power rule <em>backwards</em> to push coefficients up as exponents, then merge with product and quotient rules.</p>
+
+  <h3>Worked Condensation</h3>
+  <p>Condense $2\log_b x + \tfrac{1}{2}\log_b y - 3\log_b z$ into a single logarithm.</p>
+  <div class="f-formula">$$2\log_b x + \tfrac{1}{2}\log_b y - 3\log_b z = \log_b x^2 + \log_b y^{1/2} - \log_b z^3$$$$= \log_b\!\left(x^2 y^{1/2}\right) - \log_b z^3 = \log_b\frac{x^2\sqrt{y}}{z^3}$$</div>
+
+  <div class="callout callout-exam">
+    <div class="callout-label">⚡ Exam Hack</div>
+    A leading coefficient on a log <strong>must</strong> become an exponent before you can merge. You cannot combine $2\log x + \log y$ as $\log(2xy)$. The $2$ is a power, not a multiplier: it is $\log(x^2 y)$. This is the single most common condensing error.
+  </div>
+
+  <div class="callout callout-key">
+    <div class="callout-label">🔑 Direction Check</div>
+    Plus signs between logs condense to multiplication. Minus signs condense to division. Coefficients become exponents. Run it the other way for expansion. Same machinery, opposite throttle.
+  </div>
+</div>
+</div>
+
+<!-- ═══ TAB: CHANGE OF BASE ═══ -->
+<div class="tab-panel" data-tab="changebase">
+<div class="section">
+  <div class="section-tag">Section 04</div>
+  <h2>Change of Base</h2>
+  <p>Your calculator speaks two log dialects: base 10 and base $e$. Everything else needs translation. The change-of-base formula is that translator.</p>
+  <div class="f-formula">$$\log_b x = \frac{\log_a x}{\log_a b}$$</div>
+  <p>Pick any new base $a$ you can actually compute. In practice $a = 10$ or $a = e$, so:</p>
+  <div class="f-formula">$$\log_b x = \frac{\log x}{\log b} = \frac{\ln x}{\ln b}$$</div>
+
+  <div class="callout callout-memory">
+    <div class="callout-label">🧠 Memory Hook</div>
+    <strong>"New base in the basement."</strong> The original base $b$ moves downstairs into the denominator. The argument $x$ stays up top. Whatever base you switch to, both new logs share it.<br><br>
+    <strong>Watch the trap:</strong> a quotient of two logs is change of base. It is NOT the quotient rule. The quotient rule produces a <em>difference of logs</em>; change of base produces a <em>fraction of logs</em>. Same words, opposite structures.
+  </div>
+
+  <h3>Worked: Evaluate a Strange Base</h3>
+  <p>Compute $\log_3 50$. Base 3 is not on the calculator, so switch to natural log.</p>
+  <div class="f-formula">$$\log_3 50 = \frac{\ln 50}{\ln 3} = \frac{3.912}{1.099} \approx 3.561$$</div>
+  <p>Sanity check: $3^3 = 27$ and $3^4 = 81$, so $\log_3 50$ should sit between $3$ and $4$, closer to $3.5$. The answer $3.561$ lands exactly where geometry says it should.</p>
+
+  <div class="callout callout-exam">
+    <div class="callout-label">⚡ Exam Hack</div>
+    Either base works and both give the same number. $\dfrac{\log 50}{\log 3} = \dfrac{1.699}{0.477} \approx 3.561$ matches the natural-log version. Use whichever button you trust. On a free-response, write the formula with the substituted values <em>before</em> you reach for the decimal; that line is worth points even if the arithmetic slips.
+  </div>
+
+  <div class="callout callout-key">
+    <div class="callout-label">🔑 Why It Holds</div>
+    Let $y = \log_b x$, so $b^y = x$. Take $\ln$ of both sides: $\ln(b^y) = \ln x$, then power rule gives $y\ln b = \ln x$, so $y = \dfrac{\ln x}{\ln b}$. The formula is just the power rule applied to the definition.
+  </div>
+</div>
+</div>
+
+<!-- ═══ TAB: SPECIAL LOGS ═══ -->
+<div class="tab-panel" data-tab="special">
+<div class="section">
+  <div class="section-tag">Section 05</div>
+  <h2>Common Log, Natural Log & the Number e</h2>
+  <div class="compare-grid">
+    <div class="compare-card"><h4>Common Log</h4><p>$\log x$ means $\log_{10} x$. The base 10 is silent. Built for scientific notation, decibels, pH, the Richter scale.</p></div>
+    <div class="compare-card"><h4>Natural Log</h4><p>$\ln x$ means $\log_e x$. The base is Euler's number $e \approx 2.71828$. The native language of continuous growth and calculus.</p></div>
+  </div>
+
+  <h3>The Number e</h3>
+  <p>$e$ is the limit of $\left(1 + \tfrac{1}{n}\right)^n$ as $n$ grows without bound. It is the base where the rate of growth equals the current amount; continuous, self-feeding, frictionless growth. That property is why $e$ runs every continuous-compounding and natural-decay model you will meet.</p>
+
+  <div class="callout callout-key">
+    <div class="callout-label">🔑 The Natural-Log Identities</div>
+    Same four pillars, base $e$.<br>
+    $\ln 1 = 0$ &nbsp;·&nbsp; $\ln e = 1$ &nbsp;·&nbsp; $\ln e^x = x$ &nbsp;·&nbsp; $e^{\ln x} = x$<br>
+    These cancellations are the engine of solving exponential equations. When you take $\ln$ of $e^{(\text{stuff})}$, the stuff falls straight out.
+  </div>
+
+  <div class="callout callout-memory">
+    <div class="callout-label">🧠 Memory Hook</div>
+    <strong>"$\ln$ and $e$ are undo buttons for each other."</strong> Whatever $e$ raises up, $\ln$ pulls back down. $\ln(e^7) = 7$. $e^{\ln 7} = 7$. They cancel like a sneeze and a tissue.<br><br>
+    <strong>Notation discipline:</strong> $\log$ with no base is 10. $\ln$ is always $e$. Mixing them is the silent error that ruins an otherwise perfect solve.
+  </div>
+
+  <h3>The Three Bases at a Glance</h3>
+  <div class="table-wrap">
+    <table class="study-table">
+      <tr><th>Notation</th><th>Base</th><th>Where It Lives</th></tr>
+      <tr><td>$\log_b x$</td><td>any $b$</td><td>General theory; needs change of base to compute</td></tr>
+      <tr><td>$\log x$</td><td>$10$</td><td>pH, decibels, Richter, orders of magnitude</td></tr>
+      <tr><td>$\ln x$</td><td>$e$</td><td>Continuous growth/decay, half-life, calculus</td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-warning">
+    <div class="callout-label">⚠️ Watch Out</div>
+    $\ln x$ is not $\dfrac{1}{\log x}$, and $\log x$ is not $\dfrac{\log_{10}}{x}$. They are different functions with different bases, related only through change of base: $\ln x = \dfrac{\log x}{\log e} \approx 2.303\log x$. The constant $2.303$ is $\ln 10$; it shows up everywhere that chemistry converts between the two.
+  </div>
+</div>
+</div>
+
+<!-- ═══ TAB: GRAPHS ═══ -->
+<div class="tab-panel" data-tab="graphs">
+<div class="section">
+  <div class="section-tag">Section 06</div>
+  <h2>Graphing Logarithmic Functions</h2>
+  <p>The log graph is the exponential graph viewed in a mirror. Reflect $y = b^x$ across the line $y = x$ and you get $y = \log_b x$. Every feature of one maps to a swapped feature of the other, because they are inverse functions.</p>
+
+  <div class="table-wrap">
+    <table class="study-table">
+      <tr><th>Feature</th><th>$y = b^x$ (exponential)</th><th>$y = \log_b x$ (logarithm)</th></tr>
+      <tr><td>Domain</td><td>$(-\infty, \infty)$</td><td>$(0, \infty)$</td></tr>
+      <tr><td>Range</td><td>$(0, \infty)$</td><td>$(-\infty, \infty)$</td></tr>
+      <tr><td>Asymptote</td><td>Horizontal: $y = 0$</td><td>Vertical: $x = 0$</td></tr>
+      <tr><td>Key point</td><td>$(0, 1)$</td><td>$(1, 0)$</td></tr>
+      <tr><td>Second point</td><td>$(1, b)$</td><td>$(b, 1)$</td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <div class="callout-label">🔑 The Parent Graph (b > 1)</div>
+    $y = \log_b x$ slides up the page slowly and forever. It crosses the x-axis at $(1, 0)$, climbs through $(b, 1)$, and hugs the y-axis on the left without ever touching it. Domain is strictly positive; range is all reals. If $0 < b < 1$, the curve flips to decreasing.
+  </div>
+
+  <div class="callout callout-memory">
+    <div class="callout-label">🧠 Memory Hook</div>
+    <strong>"Logs are shy on the left."</strong> The curve never crosses into negative $x$; the vertical asymptote at $x = 0$ is a wall. Picture the graph pressing against an invisible glass door at the y-axis, sliding up it but never through it.
+  </div>
+
+  <h3>Transformations (same table as Ch 1–3)</h3>
+  <p>Logs transform by the identical shift/stretch/reflect rules you already drilled. The one extra thing to track: <strong>horizontal shifts move the vertical asymptote</strong>, which redefines the domain.</p>
+  <div class="table-wrap">
+    <table class="study-table">
+      <tr><th>Function</th><th>Effect</th><th>Asymptote &amp; Domain</th></tr>
+      <tr><td>$\log_b(x-h)$</td><td>Right $h$</td><td>Asymptote $x=h$; domain $(h,\infty)$</td></tr>
+      <tr><td>$\log_b(x+h)$</td><td>Left $h$</td><td>Asymptote $x=-h$; domain $(-h,\infty)$</td></tr>
+      <tr><td>$\log_b(x)+k$</td><td>Up $k$</td><td>Asymptote stays $x=0$</td></tr>
+      <tr><td>$-\log_b(x)$</td><td>Reflect over x-axis</td><td>Asymptote stays $x=0$</td></tr>
+      <tr><td>$\log_b(-x)$</td><td>Reflect over y-axis</td><td>Asymptote $x=0$; domain $(-\infty,0)$</td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-exam">
+    <div class="callout-label">⚡ Exam Hack</div>
+    To find the domain of any log, set the <strong>argument greater than zero</strong> and solve. For $y = \log_2(x - 3)$: require $x - 3 > 0$, so $x > 3$, domain $(3, \infty)$, asymptote $x = 3$. The domain question and the asymptote question have the same answer.
+  </div>
+
+  <div class="callout callout-warning">
+    <div class="callout-label">⚠️ Watch Out</div>
+    The horizontal shift inside is still counterintuitive, exactly like in Chapter 3. $\log_b(x - 3)$ moves the graph and its asymptote to the <strong>right</strong>, not the left. Minus inside goes right.
+  </div>
+</div>
+</div>
+
+<!-- ═══ TAB: EQUATIONS ═══ -->
+<div class="tab-panel" data-tab="equations">
+<div class="section">
+  <div class="section-tag">Section 07</div>
+  <h2>Solving Logarithmic & Exponential Equations</h2>
+
+  <h3>Type A — Variable in the Exponent</h3>
+  <div class="steps-box">
+    <div class="step"><div class="step-num">1</div><div>Isolate the exponential expression on one side.</div></div>
+    <div class="step"><div class="step-num">2</div><div>Take a log of both sides (use $\ln$ if the base is $e$, otherwise any base).</div></div>
+    <div class="step"><div class="step-num">3</div><div>Use the power rule to bring the variable exponent down in front.</div></div>
+    <div class="step"><div class="step-num">4</div><div>Solve the resulting linear equation; evaluate with change of base if needed.</div></div>
+  </div>
+
+  <h3>Worked: $5^x = 17$</h3>
+  <div class="f-formula">$$5^x = 17 \;\Rightarrow\; \ln(5^x) = \ln 17 \;\Rightarrow\; x\ln 5 = \ln 17$$$$x = \frac{\ln 17}{\ln 5} = \frac{2.833}{1.609} \approx 1.760$$</div>
+  <p>Check: $5^{1.76} \approx 17$. And $5^1 = 5$, $5^2 = 25$, so $x$ between $1$ and $2$ is structurally correct.</p>
+
+  <h3>Worked: $e^{2x} = 40$ (base e shortcut)</h3>
+  <p>When the base is $e$, take $\ln$ and the left side collapses instantly: $\ln(e^{2x}) = 2x$.</p>
+  <div class="f-formula">$$e^{2x} = 40 \;\Rightarrow\; 2x = \ln 40 \;\Rightarrow\; x = \frac{\ln 40}{2} = \frac{3.689}{2} \approx 1.844$$</div>
+
+  <h3>Type B — Variable Inside a Log</h3>
+  <div class="steps-box">
+    <div class="step"><div class="step-num">1</div><div>Condense to a single logarithm if more than one log appears.</div></div>
+    <div class="step"><div class="step-num">2</div><div>Rewrite in exponential form (or, if both sides are single logs of the same base, set the arguments equal).</div></div>
+    <div class="step"><div class="step-num">3</div><div>Solve the resulting algebraic equation.</div></div>
+    <div class="step"><div class="step-num">4</div><div><strong>Check every solution against the domain.</strong> Reject any answer that makes an argument zero or negative.</div></div>
+  </div>
+
+  <h3>Worked: $\log_2 x + \log_2(x-2) = 3$</h3>
+  <div class="f-formula">$$\log_2\big(x(x-2)\big) = 3 \;\Rightarrow\; x(x-2) = 2^3 = 8$$$$x^2 - 2x - 8 = 0 \;\Rightarrow\; (x-4)(x+2) = 0$$$$x = 4 \quad\text{or}\quad x = -2$$</div>
+  <p><strong>Domain check.</strong> The equation needs $x > 0$ and $x - 2 > 0$, so $x > 2$. The candidate $x = 4$ survives. The candidate $x = -2$ is <strong>extraneous</strong>; it would feed a negative number into a log. Final answer: $x = 4$ only.</p>
+
+  <div class="callout callout-warning">
+    <div class="callout-label">⚠️ Watch Out — Extraneous Solutions</div>
+    Squaring and condensing can manufacture answers that the original equation forbids. A log equation is not finished when the algebra ends. It is finished when you have <strong>tested each root against the argument-positive requirement</strong> and crossed out the impostors. Skipping this step is the most penalized mistake in the unit.
+  </div>
+
+  <div class="callout callout-memory">
+    <div class="callout-label">🧠 Memory Hook</div>
+    <strong>Absurd story:</strong> Every log is a bouncer at a club, and the argument has to be positive to get past the door. You solve the equation and walk your answers up to the entrance. The bouncer checks IDs. Negative arguments get tossed onto the curb, no matter how charming the algebra was. Only the positives dance.
+  </div>
+
+  <div class="callout callout-exam">
+    <div class="callout-label">⚡ Exam Hack</div>
+    If the equation is $\log_b A = \log_b B$ (single log, same base, both sides), skip the exponential step and set $A = B$ directly. The function is one-to-one, so equal logs force equal arguments. Still domain-check the result.
+  </div>
+</div>
+</div>
+
+<!-- ═══ TAB: APPLICATIONS ═══ -->
+<div class="tab-panel" data-tab="applications">
+<div class="section">
+  <div class="section-tag">Section 08</div>
+  <h2>Applications</h2>
+  <p>Logs are the inverse key that unlocks any model where the unknown sits in an exponent. Money, populations, radioactive isotopes, sound, earthquakes, acidity. Same algebra, different costume.</p>
+
+  <h3>Compound & Continuous Interest</h3>
+  <div class="f-formula">$$A = P\left(1 + \frac{r}{n}\right)^{nt} \qquad\text{(compounded } n \text{ times/year)}$$$$A = Pe^{rt} \qquad\text{(compounded continuously)}$$</div>
+  <p><strong>Worked.</strong> How long to double \$1000 at 5% compounded continuously?</p>
+  <div class="f-formula">$$2000 = 1000\,e^{0.05t} \;\Rightarrow\; 2 = e^{0.05t} \;\Rightarrow\; \ln 2 = 0.05t$$$$t = \frac{\ln 2}{0.05} = \frac{0.693}{0.05} \approx 13.86 \text{ years}$$</div>
+  <p>The principal vanished from the equation. Doubling time never depends on how much you started with; it depends only on the rate. The "Rule of 70" is this exact formula approximated: $70/5 = 14$, within a rounding hair of $13.86$.</p>
+
+  <h3>Exponential Growth & Decay</h3>
+  <div class="f-formula">$$A = A_0 e^{kt} \qquad (k>0 \text{ growth},\; k<0 \text{ decay})$$</div>
+  <p><strong>Half-life worked.</strong> A sample with half-life $h$ decays by $A = A_0 e^{kt}$ where $k = -\dfrac{\ln 2}{h}$. The negative sign and the $\ln 2$ both come straight from solving $\tfrac{1}{2}A_0 = A_0 e^{kh}$ for $k$.</p>
+
+  <h3>Logarithmic Scales</h3>
+  <div class="table-wrap">
+    <table class="study-table">
+      <tr><th>Scale</th><th>Formula</th><th>What Moving "+1" Means</th></tr>
+      <tr><td>pH</td><td>$\text{pH} = -\log[\text{H}^+]$</td><td>10× less acidic per unit up</td></tr>
+      <tr><td>Decibels</td><td>$\beta = 10\log\!\frac{I}{I_0}$</td><td>10× more intense per +10 dB</td></tr>
+      <tr><td>Richter</td><td>$M = \log\!\frac{A}{A_0}$</td><td>10× larger amplitude per unit up</td></tr>
+    </table>
+  </div>
+  <p><strong>pH worked.</strong> A solution with $[\text{H}^+] = 10^{-4}$ has $\text{pH} = -\log(10^{-4}) = -(-4) = 4$. Acidic. The minus sign in the formula exists precisely so that small concentrations produce friendly positive pH numbers.</p>
+
+  <div class="callout callout-key">
+    <div class="callout-label">🔑 The Unifying Idea</div>
+    Every log scale compresses multiplicative jumps into additive steps. A Richter 7 is not "a bit worse" than a Richter 6; it is ten times the amplitude. Logs turn the runaway exponential reality into a number line humans can read. That compression is the entire reason these scales exist.
+  </div>
+
+  <div class="callout callout-exam">
+    <div class="callout-label">⚡ Exam Hack</div>
+    Application problems almost always reduce to: plug in knowns, isolate the exponential, take a log, solve. Spot the structure first. If the unknown is trapped in an exponent, the log is your crowbar. Write the model equation before touching numbers; that line earns setup credit independent of the final arithmetic.
+  </div>
+</div>
+</div>
+
+<!-- ═══ TAB: FORMULAS ═══ -->
+<div class="tab-panel" data-tab="formulas">
+
+<div class="category">
+  <div class="cat-header">Definition & Pillars</div>
+  <div class="formula-grid">
+    <div class="f-card"><div class="f-label">Core</div><div class="f-name">Definition</div><div class="f-formula">$$\log_b x = y \iff b^y = x$$</div><div class="f-note">Base $b>0,\,b\neq1$; argument $x>0$. A log <strong>is</strong> an exponent.</div></div>
+    <div class="f-card"><div class="f-label">Identities</div><div class="f-name">The Four Pillars</div><div class="f-formula">$$\log_b 1 = 0 \quad \log_b b = 1$$$$\log_b b^x = x \quad b^{\log_b x} = x$$</div><div class="f-note">Inverse cancellations. They collapse half of every problem.</div></div>
+  </div>
+</div>
+
+<div class="category">
+  <div class="cat-header">The Three Rules</div>
+  <div class="formula-grid">
+    <div class="f-card"><div class="f-label">Rule</div><div class="f-name">Product</div><div class="f-formula">$$\log_b(MN) = \log_b M + \log_b N$$</div><div class="f-note">Multiply inside → add outside.</div></div>
+    <div class="f-card"><div class="f-label">Rule</div><div class="f-name">Quotient</div><div class="f-formula">$$\log_b\frac{M}{N} = \log_b M - \log_b N$$</div><div class="f-note">Divide inside → subtract outside.</div></div>
+    <div class="f-card"><div class="f-label">Rule</div><div class="f-name">Power</div><div class="f-formula">$$\log_b(M^p) = p\log_b M$$</div><div class="f-note">Exponent inside → drops to the front. Roots count as fractional powers.</div></div>
+  </div>
+  <div class="mnemonic"><div class="label">🧠 Memorize</div>"Times turns to plus, divide turns to minus, the power comes down to the front of the line-up."</div>
+</div>
+
+<div class="category">
+  <div class="cat-header">Change of Base & Special Logs</div>
+  <div class="formula-grid">
+    <div class="f-card"><div class="f-label">Core</div><div class="f-name">Change of Base</div><div class="f-formula">$$\log_b x = \frac{\ln x}{\ln b} = \frac{\log x}{\log b}$$</div><div class="f-note">Original base goes in the <strong>basement</strong> (denominator).</div></div>
+    <div class="f-card"><div class="f-label">Notation</div><div class="f-name">Common & Natural</div><div class="f-formula">$$\log x = \log_{10} x \qquad \ln x = \log_e x$$</div><div class="f-note">$e \approx 2.71828$. $\ln 10 \approx 2.303$ bridges the two.</div></div>
+  </div>
+</div>
+
+<div class="category">
+  <div class="cat-header">Forbidden (NOT Rules)</div>
+  <table class="rules-table">
+    <tr><th>Tempting Error</th><th>Reality</th></tr>
+    <tr><td>$\log_b(M+N) = \log_b M + \log_b N$</td><td>FALSE — no rule for log of a sum</td></tr>
+    <tr><td>$\dfrac{\log_b M}{\log_b N} = \log_b M - \log_b N$</td><td>FALSE — left side is change of base</td></tr>
+    <tr><td>$(\log_b M)^p = p\log_b M$</td><td>FALSE — power must be on the argument</td></tr>
+  </table>
+</div>
+
+<div class="category">
+  <div class="cat-header">Graphs</div>
+  <table class="rules-table">
+    <tr><th>Feature</th><th>$y = \log_b x,\; b>1$</th></tr>
+    <tr><td>Domain</td><td>$(0,\infty)$</td></tr>
+    <tr><td>Range</td><td>$(-\infty,\infty)$</td></tr>
+    <tr><td>Vertical asymptote</td><td>$x = 0$ (moves with horizontal shifts)</td></tr>
+    <tr><td>Key points</td><td>$(1,0)$ and $(b,1)$</td></tr>
+    <tr><td>Inverse of</td><td>$y = b^x$ (reflection over $y=x$)</td></tr>
+  </table>
+  <div class="mnemonic"><div class="label">🧠 Domain Rule</div>Set the argument $>0$ and solve. That answer is both the domain and the location of the asymptote.</div>
+</div>
+
+<div class="category">
+  <div class="cat-header">Applications</div>
+  <div class="formula-grid">
+    <div class="f-card"><div class="f-label">Finance</div><div class="f-name">Interest</div><div class="f-formula">$$A = P\left(1+\tfrac{r}{n}\right)^{nt}$$$$A = Pe^{rt}$$</div><div class="f-note">Discrete vs continuous. Doubling time $=\frac{\ln 2}{r}$.</div></div>
+    <div class="f-card"><div class="f-label">Science</div><div class="f-name">Growth / Decay</div><div class="f-formula">$$A = A_0 e^{kt}$$</div><div class="f-note">$k>0$ grows, $k<0$ decays. Half-life: $k=-\frac{\ln 2}{h}$.</div></div>
+    <div class="f-card"><div class="f-label">Scales</div><div class="f-name">pH</div><div class="f-formula">$$\text{pH} = -\log[\text{H}^+]$$</div><div class="f-note">+1 unit = 10× less acidic.</div></div>
+  </div>
+</div>
+
+</div>
+
+<!-- ═══ TAB: REVIEW ═══ -->
+<div class="tab-panel" data-tab="review">
+
+<!-- GLOSSARY -->
+<div class="section">
+  <div class="section-tag">Reference</div>
+  <h2>Glossary</h2>
+  <div class="glossary">
+    <div class="gloss-item"><span class="gloss-term">Logarithm:</span> the exponent that turns a base into a number</div>
+    <div class="gloss-item"><span class="gloss-term">Base:</span> the $b$ in $\log_b x$; must be $>0,\neq 1$</div>
+    <div class="gloss-item"><span class="gloss-term">Argument:</span> the input $x$ in $\log_b x$; must be $>0$</div>
+    <div class="gloss-item"><span class="gloss-term">Exponential Form:</span> $b^y = x$, the partner of $\log_b x = y$</div>
+    <div class="gloss-item"><span class="gloss-term">Product Rule:</span> $\log_b(MN)=\log_b M+\log_b N$</div>
+    <div class="gloss-item"><span class="gloss-term">Quotient Rule:</span> $\log_b\frac{M}{N}=\log_b M-\log_b N$</div>
+    <div class="gloss-item"><span class="gloss-term">Power Rule:</span> $\log_b(M^p)=p\log_b M$</div>
+    <div class="gloss-item"><span class="gloss-term">Expanding:</span> splitting one log into a sum/difference</div>
+    <div class="gloss-item"><span class="gloss-term">Condensing:</span> merging logs into a single log</div>
+    <div class="gloss-item"><span class="gloss-term">Change of Base:</span> $\log_b x=\frac{\ln x}{\ln b}$</div>
+    <div class="gloss-item"><span class="gloss-term">Common Log:</span> $\log x=\log_{10}x$</div>
+    <div class="gloss-item"><span class="gloss-term">Natural Log:</span> $\ln x=\log_e x$</div>
+    <div class="gloss-item"><span class="gloss-term">e:</span> Euler's number, $\approx 2.71828$</div>
+    <div class="gloss-item"><span class="gloss-term">Vertical Asymptote:</span> the wall at $x=0$ for the parent log</div>
+    <div class="gloss-item"><span class="gloss-term">Extraneous Solution:</span> an algebraic root that violates the domain</div>
+    <div class="gloss-item"><span class="gloss-term">Continuous Compounding:</span> $A=Pe^{rt}$</div>
+    <div class="gloss-item"><span class="gloss-term">Half-Life:</span> time for a quantity to halve; $k=-\frac{\ln 2}{h}$</div>
+    <div class="gloss-item"><span class="gloss-term">pH:</span> $-\log[\text{H}^+]$; acidity on a log scale</div>
+  </div>
+</div>
+
+<!-- CHEAT SHEET -->
+<div class="cheat-sheet">
+  <h2>⏱ 60-Second Cheat Sheet</h2>
+  <ul>
+    <li>A log is an exponent. $\log_b x = y$ means $b^y = x$.</li>
+    <li>Pillars: $\log_b 1=0$, $\log_b b=1$, $\log_b b^x=x$, $b^{\log_b x}=x$.</li>
+    <li>Product → add. Quotient → subtract. Power → drops to front.</li>
+    <li>No rule for $\log$ of a sum. Ever.</li>
+    <li>Quotient of two logs = change of base, NOT the quotient rule.</li>
+    <li>Coefficient must become an exponent before condensing.</li>
+    <li>Change of base: original base goes in the basement. $\frac{\ln x}{\ln b}$.</li>
+    <li>$\log$ = base 10. $\ln$ = base $e$. Never mix them.</li>
+    <li>Log domain: set the argument $>0$ and solve.</li>
+    <li>Exponential equation: isolate, take a log, power-rule the exponent down.</li>
+    <li>Log equation: condense, go exponential, then DOMAIN-CHECK every root.</li>
+    <li>Application stuck in an exponent? The log is the crowbar.</li>
+  </ul>
+</div>
+
+<!-- SELF QUIZ -->
+<div class="section">
+  <div class="section-tag">Test Yourself</div>
+  <h2>Selected Practice Problems</h2>
+  <div class="quiz-q" onclick="this.classList.toggle('open')"><div class="question">Q1. Evaluate $\log_4 64$ without a calculator.</div><div class="answer">"4 to the what is 64?" $4^3 = 64$, so the answer is <strong>3</strong>.</div></div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')"><div class="question">Q2. Solve $\log_x 81 = 4$.</div><div class="answer">Exponential form: $x^4 = 81 \to x = 3$ (base must be positive, so reject $-3$). <strong>$x = 3$</strong>.</div></div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')"><div class="question">Q3. Expand $\log_2(8x)$.</div><div class="answer">$\log_2 8 + \log_2 x = 3 + \log_2 x$. <strong>$3+\log_2 x$</strong>.</div></div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')"><div class="question">Q4. Expand $\log_b\dfrac{x^3\sqrt{y}}{z^2}$.</div><div class="answer">Quotient, then product, then power: <strong>$3\log_b x + \frac{1}{2}\log_b y - 2\log_b z$</strong>.</div></div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')"><div class="question">Q5. Condense $2\log_b x + \frac{1}{2}\log_b y - 3\log_b z$.</div><div class="answer">Coefficients become exponents, plus → times, minus → divide: <strong>$\log_b\dfrac{x^2\sqrt{y}}{z^3}$</strong>.</div></div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')"><div class="question">Q6. Why is $\log_b(M+N) = \log_b M + \log_b N$ wrong?</div><div class="answer">The product rule needs a product inside, not a sum. There is <strong>no rule</strong> for the log of a sum; it cannot be split.</div></div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')"><div class="question">Q7. Evaluate $\log_3 50$ to three decimals.</div><div class="answer">$\frac{\ln 50}{\ln 3} = \frac{3.912}{1.099} \approx$ <strong>3.561</strong> (between $\log_3 27=3$ and $\log_3 81=4$, as expected).</div></div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')"><div class="question">Q8. Solve $5^x = 17$.</div><div class="answer">$x\ln 5 = \ln 17 \to x = \frac{\ln 17}{\ln 5} \approx$ <strong>1.760</strong>.</div></div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')"><div class="question">Q9. Solve $e^{2x} = 40$.</div><div class="answer">$2x = \ln 40 \to x = \frac{\ln 40}{2} \approx$ <strong>1.844</strong>.</div></div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')"><div class="question">Q10. Solve $\log_2 x + \log_2(x-2) = 3$.</div><div class="answer">$x(x-2)=8 \to x^2-2x-8=0 \to (x-4)(x+2)=0$. Domain needs $x>2$, so reject $-2$. <strong>$x=4$</strong>.</div></div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')"><div class="question">Q11. Find the domain of $y = \log_2(x-3)$.</div><div class="answer">Argument $>0$: $x-3>0 \to x>3$. Domain <strong>$(3,\infty)$</strong>; asymptote $x=3$.</div></div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')"><div class="question">Q12. Doubling time for 5% continuous interest?</div><div class="answer">$2=e^{0.05t} \to t=\frac{\ln 2}{0.05} \approx$ <strong>13.86 years</strong> (principal-independent).</div></div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')"><div class="question">Q13. Find the pH when $[\text{H}^+] = 10^{-4}$.</div><div class="answer">$\text{pH} = -\log(10^{-4}) = -(-4) =$ <strong>4</strong>.</div></div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')"><div class="question">Q14. Simplify $e^{\ln 7}$ and $\ln(e^5)$.</div><div class="answer">Inverse cancellations: $e^{\ln 7} = $ <strong>7</strong>, and $\ln(e^5) = $ <strong>5</strong>.</div></div>
+</div>
+
+<!-- CHECKLIST -->
+<div class="section">
+  <div class="section-tag">Before the Exam</div>
+  <h2>Pre-Exam Checklist</h2>
+  <div class="checklist-tier">🔴 Must Know</div>
+  <div class="checklist">
+    <label><input type="checkbox"> Definition: $\log_b x = y \iff b^y = x$</label>
+    <label><input type="checkbox"> The four pillar identities cold</label>
+    <label><input type="checkbox"> Product, quotient, and power rules</label>
+    <label><input type="checkbox"> The three forbidden non-rules (sum, log quotient, outer power)</label>
+    <label><input type="checkbox"> Expanding and condensing with coefficients as exponents</label>
+    <label><input type="checkbox"> Change of base to $\ln$ or $\log$</label>
+    <label><input type="checkbox"> Solving exponential equations by taking a log</label>
+    <label><input type="checkbox"> Solving log equations AND checking for extraneous roots</label>
+    <label><input type="checkbox"> Domain of a log via argument $>0$</label>
+  </div>
+  <div class="checklist-tier">🟡 Should Know</div>
+  <div class="checklist">
+    <label><input type="checkbox"> $\log$ vs $\ln$ notation and bases</label>
+    <label><input type="checkbox"> Log graph features: domain, range, asymptote, key points</label>
+    <label><input type="checkbox"> Log as the reflection of the exponential over $y=x$</label>
+    <label><input type="checkbox"> Horizontal shifts move the vertical asymptote</label>
+    <label><input type="checkbox"> Continuous interest $A=Pe^{rt}$ and doubling time</label>
+  </div>
+  <div class="checklist-tier">🟢 Bonus Points</div>
+  <div class="checklist">
+    <label><input type="checkbox"> One-line proof of the product rule via exponent laws</label>
+    <label><input type="checkbox"> Half-life constant $k=-\frac{\ln 2}{h}$ derivation</label>
+    <label><input type="checkbox"> pH, decibel, and Richter as log scales</label>
+    <label><input type="checkbox"> Why doubling time ignores the principal</label>
+  </div>
+</div>
+
+<!-- FINAL -->
+<div class="final-review">
+  <h2>Final 5-Minute Review</h2>
+  <p>The whole unit hangs on one sentence: a logarithm is an exponent. Write $\log_b x = y$ and you have written $b^y = x$ in disguise. From there, the three rules are exponent laws read backwards; multiplication downshifts to addition, division to subtraction, powers to multiplication. Guard the three forbidden moves: no splitting the log of a sum, no confusing a quotient of logs with the quotient rule, no pulling an outer power inside. Change of base sends the original base to the basement so your calculator can finish the job. Graphs are the exponential in a mirror, shy on the left, walled off at $x=0$. Equations come in two flavors: variable in the exponent, take a log; variable in the argument, go exponential and then check for impostors. Applications are all the same crowbar; when the unknown hides in an exponent, the log pries it loose. See the inverse relationship underneath every problem and the unit stops being a list of tricks. It becomes one idea, told eight ways.</p>
+</div>
+
+</div>
+
+</div><!-- end .content -->
+
+<script>
+// TAB SWITCHING
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const target = document.querySelector(`.tab-panel[data-tab="${tab.dataset.tab}"]`);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo({ top: document.querySelector('.nav').offsetTop, behavior: 'smooth' });
+    }
+  });
+});
+
+// THEME TOGGLE
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = '☀️';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '🌙';
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Precalc | Logarithms Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root, [data-theme="dark"] {
+    --bg: #160f16; --surface: #201521; --surface2: #2a1c2c; --border: #48304a;
+    --p900: #f0e6ee; --p800: #d8bcce; --p700: #b48aa8; --p600: #9a6e8e;
+    --p500: #7e5474; --p400: #623e58; --p300: #482c40; --p200: #321e2c; --p100: #211420;
+    --accent: #e07a52; --accent2: #d65a9a; --accent3: #46b0a4; --accent-light: #2a1815;
+    --text: #f0e6ee; --text-muted: #b48aa8;
+    --got-bg: #16302c; --got-text: #46b0a4;
+    --missed-bg: #2a1410; --missed-text: #e0795a; --missed-border: #5a3026;
+  }
+  [data-theme="light"] {
+    --bg: #f7f2f5; --surface: #ffffff; --surface2: #f0e6ec; --border: #e0cdd8;
+    --p900: #2a142a; --p800: #3e2440; --p700: #5a3a58; --p600: #6e4a6a;
+    --p500: #8a6080; --p400: #a87e9c; --p300: #c4a0b8; --p200: #ddc4d4; --p100: #ece0e8;
+    --accent: #c25530; --accent2: #c14a86; --accent3: #2f8a80; --accent-light: #fbeae2;
+    --text: #2a142a; --text-muted: #5a3a58;
+    --got-bg: #dcefe8; --got-text: #2f8a80;
+    --missed-bg: #fdece6; --missed-text: #c0442a; --missed-border: #e8c8b8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Libre Baskerville',Georgia,serif; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:30px 20px 50px; transition:background .3s,color .3s; }
+  .katex { color: var(--accent); }
+  .theme-toggle { position:fixed; top:16px; right:16px; z-index:999; width:44px; height:44px; border-radius:50%; background:var(--surface); border:1px solid var(--border); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:20px; transition:all .3s; box-shadow:0 2px 8px rgba(0,0,0,.3); }
+  .theme-toggle:hover { transform:scale(1.1); }
+
+  .header { text-align:center; max-width:540px; width:100%; margin-bottom:22px; }
+  .header-tag { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:3px; color:var(--p600); text-transform:uppercase; }
+  .header h1 { font-family:'Abril Fatface',serif; font-size:34px; font-weight:400; color:var(--p900); margin:8px 0 4px; }
+  .header h1 span { color:var(--accent); }
+  .header-sub { font-style:italic; font-size:13px; color:var(--text-muted); }
+
+  .timeline { width:100%; max-width:540px; margin-bottom:18px; }
+  .timeline-bar { width:100%; height:6px; background:var(--surface2); border-radius:3px; overflow:hidden; }
+  .timeline-fill { height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2)); border-radius:3px; transition:width .3s ease; }
+  .timeline-text { display:flex; justify-content:space-between; font-family:'Fira Code',monospace; font-size:11px; color:var(--text-muted); margin-top:6px; }
+
+  .filters { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; max-width:560px; width:100%; margin-bottom:20px; }
+  .filter-btn { font-family:'Fira Code',monospace; font-size:11px; letter-spacing:.5px; padding:6px 13px; border-radius:20px; border:1px solid var(--border); background:var(--surface); color:var(--text-muted); cursor:pointer; transition:all .2s; }
+  .filter-btn:hover { border-color:var(--accent); color:var(--accent); }
+  .filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+  .card-container { width:100%; max-width:540px; perspective:1400px; min-height:300px; margin-bottom:18px; }
+  .card { width:100%; min-height:300px; position:relative; cursor:pointer; transform-style:preserve-3d; transition:transform .5s ease; }
+  .card.flipped { transform:rotateY(180deg); }
+  .face { position:absolute; inset:0; backface-visibility:hidden; background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:30px 26px; display:flex; flex-direction:column; box-shadow:0 4px 20px rgba(0,0,0,.18); overflow-y:auto; }
+  .face.back { transform:rotateY(180deg); }
+
+  .card-topic { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--accent3); margin-bottom:16px; }
+  .card-question { font-size:18px; font-weight:700; color:var(--p900); line-height:1.55; flex:1; display:flex; align-items:center; }
+  .card-hint { font-family:'Fira Code',monospace; font-size:10px; color:var(--text-muted); margin-top:14px; text-align:center; }
+  .card-answer-label { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:12px; }
+  .card-answer { font-size:15px; line-height:1.7; color:var(--text); flex:1; display:flex; flex-direction:column; justify-content:center; }
+  .card-answer strong { color:var(--accent); }
+
+  /* expandable example */
+  .card-example { margin-top:12px; }
+  .ex-toggle { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--accent3); background:none; border:1px solid var(--accent3); border-radius:14px; padding:4px 12px; cursor:pointer; transition:all .2s; }
+  .ex-toggle:hover { background:var(--accent3); color:var(--surface); }
+  .ex-body { display:none; margin-top:10px; padding:11px 13px; background:var(--surface2); border:1px solid var(--border); border-left:3px solid var(--accent3); border-radius:8px; font-size:13.5px; line-height:1.7; color:var(--text); }
+  .ex-body.open { display:block; }
+  .ex-body strong { color:var(--accent); }
+  .ex-body .exlabel { font-family:'Fira Code',monospace; font-size:9px; letter-spacing:1px; text-transform:uppercase; color:var(--accent3); display:block; margin-bottom:5px; }
+
+  .actions { display:flex; gap:10px; max-width:540px; width:100%; margin-bottom:14px; }
+  .btn { flex:1; padding:12px; border:1px solid var(--border); border-radius:10px; font-family:'Fira Code',monospace; font-size:12px; font-weight:600; cursor:pointer; transition:all .2s; text-align:center; min-height:44px; display:flex; align-items:center; justify-content:center; gap:6px; }
+  .btn-got { background:var(--got-bg); color:var(--got-text); }
+  .btn-got:hover { border-color:var(--accent3); }
+  .btn-missed { background:var(--missed-bg); color:var(--missed-text); border-color:var(--missed-border); }
+  .btn-missed:hover { filter:brightness(1.1); }
+  .btn-shuffle { background:var(--surface); color:var(--text-muted); }
+  .btn-shuffle:hover { border-color:var(--accent); color:var(--accent); }
+
+  .score { font-family:'Fira Code',monospace; font-size:12px; color:var(--text-muted); max-width:540px; width:100%; text-align:center; }
+  .score-got { color:var(--accent3); font-weight:600; }
+  .score-missed { color:var(--missed-text); font-weight:600; }
+
+  @media(max-width:600px){ .header h1{font-size:28px;} .card-container,.card{min-height:280px;} .face{padding:24px 20px;} .card-question{font-size:16px;} }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Toggle light/dark mode">🌙</button>
+
+<div class="header">
+  <div class="header-tag">Precalculus · Logarithms</div>
+  <h1><span>Flashcards</span> — Log Rules & More</h1>
+  <div class="header-sub">Tap a card to flip. Open the example for a worked instance. Track what sticks.</div>
+</div>
+
+<div class="timeline">
+  <div class="timeline-bar"><div class="timeline-fill" id="progress" style="width:0%"></div></div>
+  <div class="timeline-text"><span id="counter">Card 1 of 40</span><span id="pct">0%</span></div>
+</div>
+
+<div class="filters" id="filters">
+  <button class="filter-btn active" data-topic="all">All</button>
+  <button class="filter-btn" data-topic="foundations">Foundations</button>
+  <button class="filter-btn" data-topic="rules">The Rules</button>
+  <button class="filter-btn" data-topic="expand">Expand</button>
+  <button class="filter-btn" data-topic="changebase">Change of Base</button>
+  <button class="filter-btn" data-topic="eln">e &amp; ln</button>
+  <button class="filter-btn" data-topic="graphs">Graphs</button>
+  <button class="filter-btn" data-topic="equations">Equations</button>
+  <button class="filter-btn" data-topic="apps">Apps</button>
+</div>
+
+<div class="card-container" onclick="flipCard()">
+  <div class="card" id="card">
+    <div class="face front">
+      <div class="card-topic" id="cardTopic"></div>
+      <div class="card-question" id="cardQuestion"></div>
+      <div class="card-hint">tap to flip</div>
+    </div>
+    <div class="face back">
+      <div class="card-answer-label">Answer</div>
+      <div class="card-answer" id="cardAnswer"></div>
+      <div class="card-example" id="cardExample"></div>
+    </div>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="btn btn-missed" onclick="markMissed(event)">✗ Missed</button>
+  <button class="btn btn-shuffle" onclick="shuffleDeck(event)">⟳ Shuffle</button>
+  <button class="btn btn-got" onclick="markGot(event)">✓ Got it</button>
+</div>
+
+<div class="score">
+  <span class="score-got" id="gotCount">0</span> got it ·
+  <span class="score-missed" id="missedCount">0</span> missed ·
+  <span id="remaining">40 remaining</span>
+</div>
+
+<script>
+const ALL_CARDS = [
+  // ── FOUNDATIONS ──
+  { topic:"foundations", q:"A logarithm answers what single question?", a:"\"To what power must I raise the <strong>base</strong> to land on this number?\" A log <strong>is</strong> an exponent. $\\log_b x = y \\iff b^y = x$.", ex:"$\\log_2 8 = 3$ because $2^3 = 8$. The log just names the exponent." },
+  { topic:"foundations", q:"Rewrite $\\log_3 81 = 4$ in exponential form.", a:"$3^4 = 81$. The two forms carry identical information.", ex:"Same move, new numbers: $\\log_5 25 = 2 \\iff 5^2 = 25$." },
+  { topic:"foundations", q:"Evaluate $\\log_4 64$ without a calculator.", a:"\"4 to the what is 64?\" $4^3 = 64$, so <strong>3</strong>.", ex:"$\\log_2 32 = 5$, since $2^5 = 32$. Ask the conversion question every time." },
+  { topic:"foundations", q:"State the four pillar identities.", a:"$\\log_b 1 = 0$ · $\\log_b b = 1$ · $\\log_b b^x = x$ · $b^{\\log_b x} = x$.", ex:"In base 7: $\\log_7 1 = 0$, $\\log_7 7 = 1$, $\\log_7 7^5 = 5$, $7^{\\log_7 9} = 9$." },
+  { topic:"foundations", q:"True or false: $\\log_2(-8)$ is defined.", a:"<strong>False.</strong> The argument must be positive. No real exponent turns a positive base negative.", ex:"$\\log_2 8 = 3$ is fine (positive). $\\log_2 0$ and $\\log_2(-8)$ are both undefined." },
+  { topic:"foundations", q:"Solve $\\log_x 81 = 4$.", a:"Exponential form $x^4 = 81 \\to x = 3$. Reject $-3$; the base must be positive. <strong>$x = 3$</strong>.", ex:"Same idea: $\\log_x 8 = 3 \\to x^3 = 8 \\to x = 2$." },
+
+  // ── THE RULES ──
+  { topic:"rules", q:"State the product rule.", a:"$\\log_b(MN) = \\log_b M + \\log_b N$. Multiply inside → add outside.", ex:"$\\log_2(4 \\cdot 8) = \\log_2 4 + \\log_2 8 = 2 + 3 = 5$. Check: $\\log_2 32 = 5$. ✓" },
+  { topic:"rules", q:"State the quotient rule.", a:"$\\log_b\\!\\frac{M}{N} = \\log_b M - \\log_b N$. Divide inside → subtract outside.", ex:"$\\log_2\\!\\frac{32}{4} = \\log_2 32 - \\log_2 4 = 5 - 2 = 3$. Check: $\\log_2 8 = 3$. ✓" },
+  { topic:"rules", q:"State the power rule.", a:"$\\log_b(M^p) = p\\log_b M$. The exponent drops to the front.", ex:"$\\log_2(8^2) = 2\\log_2 8 = 2 \\cdot 3 = 6$. Check: $\\log_2 64 = 6$. ✓" },
+  { topic:"rules", q:"True or false: $\\log_b(M+N) = \\log_b M + \\log_b N$.", a:"<strong>False.</strong> The product rule needs a <em>product</em>. There is no rule for the log of a sum.", ex:"$\\log_2(4+4) = \\log_2 8 = 3$, but $\\log_2 4 + \\log_2 4 = 2 + 2 = 4$. $3 \\neq 4$." },
+  { topic:"rules", q:"True or false: $(\\log_b M)^2 = 2\\log_b M$.", a:"<strong>False.</strong> The power rule needs the exponent on the <em>argument</em>, not the whole log. $(\\log_b M)^2$ stays put.", ex:"$(\\log_2 8)^2 = 3^2 = 9$, but $2\\log_2 8 = 6$. $9 \\neq 6$." },
+  { topic:"rules", q:"Evaluate $\\log_5 25^3$.", a:"Power rule: $3\\log_5 25 = 3 \\cdot 2 = $ <strong>6</strong>.", ex:"Verify by definition: $25^3 = (5^2)^3 = 5^6$, and $\\log_5(5^6) = 6$. ✓" },
+  { topic:"rules", q:"Rewrite $\\log_b \\sqrt{x}$ using the power rule.", a:"A root is a fractional power: $\\log_b x^{1/2} = \\frac{1}{2}\\log_b x$.", ex:"$\\log_2 \\sqrt{16} = \\frac{1}{2}\\log_2 16 = \\frac{1}{2}\\cdot 4 = 2$. Check: $\\sqrt{16}=4$, $\\log_2 4 = 2$. ✓" },
+  { topic:"rules", q:"One line: why does the product rule hold?", a:"Let $M=b^x, N=b^y$. Then $MN = b^{x+y}$, so $\\log_b(MN) = x+y = \\log_b M + \\log_b N$.", ex:"Numeric: $\\log_2(4 \\cdot 8) = \\log_2 32 = 5 = 2 + 3$. The exponent law $b^x b^y = b^{x+y}$ is the rule in disguise." },
+
+  // ── EXPAND / CONDENSE ──
+  { topic:"expand", q:"Expand $\\log_2(8x)$.", a:"$\\log_2 8 + \\log_2 x = $ <strong>$3 + \\log_2 x$</strong>.", ex:"Test at $x = 2$: $\\log_2 16 = 4$, and $3 + \\log_2 2 = 3 + 1 = 4$. ✓" },
+  { topic:"expand", q:"Expand $\\log_b\\dfrac{x^3\\sqrt{y}}{z^2}$.", a:"Quotient, then product, then power: <strong>$3\\log_b x + \\frac{1}{2}\\log_b y - 2\\log_b z$</strong>." },
+  { topic:"expand", q:"Condense $2\\log_b x + \\frac{1}{2}\\log_b y - 3\\log_b z$.", a:"Coefficients → exponents, plus → times, minus → divide: <strong>$\\log_b\\dfrac{x^2\\sqrt{y}}{z^3}$</strong>." },
+  { topic:"expand", q:"True or false: $2\\log x + \\log y = \\log(2xy)$.", a:"<strong>False.</strong> The coefficient is an exponent, not a multiplier: $\\log(x^2 y)$.", ex:"At $x=10, y=1$: correct $\\log(10^2 \\cdot 1) = \\log 100 = 2$; the wrong form $\\log(2 \\cdot 10) = \\log 20 \\approx 1.30$." },
+  { topic:"expand", q:"In what order do you expand a fraction inside a log?", a:"Quotient first (outermost cut), then product, then power on each piece, then evaluate clean logs.", ex:"$\\log_b\\dfrac{xy}{z} = \\log_b(xy) - \\log_b z = \\log_b x + \\log_b y - \\log_b z$. Bar first, then the product on top." },
+  { topic:"expand", q:"Expand $\\log_b \\dfrac{1}{x^4}$.", a:"$\\log_b 1 - \\log_b x^4 = 0 - 4\\log_b x = $ <strong>$-4\\log_b x$</strong>." },
+
+  // ── CHANGE OF BASE ──
+  { topic:"changebase", q:"State the change-of-base formula.", a:"$\\log_b x = \\dfrac{\\ln x}{\\ln b} = \\dfrac{\\log x}{\\log b}$. The original base goes in the <strong>basement</strong>.", ex:"$\\log_2 10 = \\dfrac{\\ln 10}{\\ln 2} = \\dfrac{2.303}{0.693} \\approx 3.32$." },
+  { topic:"changebase", q:"Evaluate $\\log_3 50$ to three decimals.", a:"$\\dfrac{\\ln 50}{\\ln 3} = \\dfrac{3.912}{1.099} \\approx$ <strong>3.561</strong> (between $3$ and $4$, as expected)." },
+  { topic:"changebase", q:"True or false: $\\dfrac{\\log M}{\\log N}$ is the quotient rule.", a:"<strong>False.</strong> A fraction of logs is change of base. The quotient rule gives a <em>difference</em>.", ex:"$\\dfrac{\\log 100}{\\log 10} = \\dfrac{2}{1} = 2$, but $\\log 100 - \\log 10 = 2 - 1 = 1$. Different answers." },
+  { topic:"changebase", q:"Derive change of base in one line.", a:"$y = \\log_b x \\Rightarrow b^y = x \\Rightarrow y\\ln b = \\ln x \\Rightarrow y = \\dfrac{\\ln x}{\\ln b}$. Power rule on the definition.", ex:"Check it: $\\log_2 8 = \\dfrac{\\ln 8}{\\ln 2} = \\dfrac{2.079}{0.693} = 3$. ✓" },
+
+  // ── e & ln ──
+  { topic:"eln", q:"What does $\\log x$ (no base shown) mean?", a:"$\\log_{10} x$, the <strong>common log</strong>. The base 10 is silent.", ex:"$\\log 1000 = 3$, because $10^3 = 1000$." },
+  { topic:"eln", q:"What does $\\ln x$ mean, and what is $e$?", a:"$\\ln x = \\log_e x$, the <strong>natural log</strong>. $e \\approx 2.71828$, the base of continuous growth.", ex:"$\\ln e^2 = 2$ and $\\ln 1 = 0$. The base is always $e$." },
+  { topic:"eln", q:"Simplify $e^{\\ln 7}$ and $\\ln(e^5)$.", a:"Inverse cancellations: $e^{\\ln 7} = $ <strong>7</strong> and $\\ln(e^5) = $ <strong>5</strong>.", ex:"Any number works: $e^{\\ln 3} = 3$, $\\ln(e^{12}) = 12$. They undo each other." },
+  { topic:"eln", q:"State the four pillars in base $e$.", a:"$\\ln 1 = 0$ · $\\ln e = 1$ · $\\ln e^x = x$ · $e^{\\ln x} = x$.", ex:"Concretely: $\\ln 1 = 0$, $\\ln e = 1$, $\\ln e^4 = 4$, $e^{\\ln 6} = 6$." },
+  { topic:"eln", q:"True or false: $\\ln x = \\dfrac{1}{\\log x}$.", a:"<strong>False.</strong> They relate by change of base: $\\ln x = \\dfrac{\\log x}{\\log e} \\approx 2.303\\log x$.", ex:"At $x = 100$: $\\ln 100 \\approx 4.605$, but $\\dfrac{1}{\\log 100} = \\dfrac{1}{2} = 0.5$. Not equal." },
+
+  // ── GRAPHS ──
+  { topic:"graphs", q:"Domain and range of $y = \\log_b x$?", a:"Domain <strong>$(0,\\infty)$</strong>, range <strong>$(-\\infty,\\infty)$</strong>.", ex:"$y = \\log_2 x$: $\\log_2 0.5 = -1$, $\\log_2 4 = 2$. Inputs stay positive; outputs roam all reals." },
+  { topic:"graphs", q:"Asymptote and two key points of the parent log?", a:"Vertical asymptote $x = 0$; passes through $(1,0)$ and $(b,1)$.", ex:"$y = \\log_3 x$ runs through $(1,0)$ and $(3,1)$, hugging the line $x = 0$." },
+  { topic:"graphs", q:"$y = \\log_b x$ is the inverse of what function?", a:"$y = b^x$. The log is the exponential reflected across $y = x$.", ex:"$2^3 = 8$ on the exponential ↔ $\\log_2 8 = 3$ on the log. Point $(3,8)$ mirrors to $(8,3)$." },
+  { topic:"graphs", q:"Find the domain of $y = \\log_2(x-3)$.", a:"Set the argument $>0$: $x - 3 > 0 \\to x > 3$. Domain <strong>$(3,\\infty)$</strong>; asymptote $x = 3$.", ex:"Shift the other way: $y = \\log_2(x+1)$ needs $x+1>0 \\to$ domain $(-1,\\infty)$, asymptote $x=-1$." },
+  { topic:"graphs", q:"Which way does $\\log_b(x-3)$ shift, and what moves with it?", a:"<strong>Right</strong> 3 (minus inside goes right). The vertical asymptote moves to $x = 3$ too.", ex:"Compare: $\\log_2(x+2)$ shifts <em>left</em> 2, asymptote $x = -2$. Sign inside is opposite the direction." },
+
+  // ── EQUATIONS ──
+  { topic:"equations", q:"Steps to solve an equation with the variable in the exponent?", a:"Isolate the exponential, take a log of both sides, power-rule the exponent down, solve.", ex:"$3^x = 20 \\to x\\ln 3 = \\ln 20 \\to x = \\dfrac{\\ln 20}{\\ln 3} \\approx 2.727$." },
+  { topic:"equations", q:"Solve $5^x = 17$.", a:"$x\\ln 5 = \\ln 17 \\to x = \\dfrac{\\ln 17}{\\ln 5} \\approx$ <strong>1.760</strong>.", ex:"Same recipe: $2^x = 10 \\to x = \\dfrac{\\ln 10}{\\ln 2} \\approx 3.322$." },
+  { topic:"equations", q:"Solve $\\log_2 x + \\log_2(x-2) = 3$.", a:"$x(x-2) = 8 \\to (x-4)(x+2) = 0$. Domain needs $x > 2$, so reject $-2$. <strong>$x = 4$</strong>." },
+  { topic:"equations", q:"In the problem above, why is $x = -2$ rejected?", a:"It feeds a negative number into a log. It is <strong>extraneous</strong>. Always domain-check log-equation roots.", ex:"Test $x = -2$: $\\log_2(-2)$ is undefined. The algebra produced it, but the domain forbids it." },
+
+  // ── APPLICATIONS ──
+  { topic:"apps", q:"Doubling time for rate $r$ compounded continuously?", a:"$2 = e^{rt} \\to t = \\dfrac{\\ln 2}{r}$. Independent of principal. At 5%: $\\approx$ <strong>13.86 yr</strong>.", ex:"At $r = 0.08$: $t = \\dfrac{\\ln 2}{0.08} = \\dfrac{0.693}{0.08} \\approx 8.66$ years." },
+  { topic:"apps", q:"Find the pH when $[\\text{H}^+] = 10^{-4}$.", a:"$\\text{pH} = -\\log(10^{-4}) = -(-4) = $ <strong>4</strong>.", ex:"Neutral water: $[\\text{H}^+] = 10^{-7} \\to \\text{pH} = -\\log(10^{-7}) = 7$." }
+];
+
+let deck = [...ALL_CARDS];
+let idx = 0, got = 0, missed = 0, activeFilter = 'all';
+
+function renderMath(el){
+  if(window.renderMathInElement){
+    renderMathInElement(el, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}], throwOnError:false});
+  }
+}
+function shuffleArray(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } }
+
+function renderCard(){
+  const card=document.getElementById('card');
+  card.classList.remove('flipped');
+  const exEl=document.getElementById('cardExample');
+  if(deck.length===0){
+    document.getElementById('cardTopic').textContent='';
+    document.getElementById('cardQuestion').innerHTML='All done! 🎉';
+    document.getElementById('cardAnswer').innerHTML='Got: '+got+' · Missed: '+missed+'<br>Tap Shuffle to restart.';
+    exEl.innerHTML=''; exEl.style.display='none';
+    updateProgress();
+    return;
+  }
+  const c=deck[idx%deck.length];
+  document.getElementById('cardTopic').textContent=c.topic;
+  const q=document.getElementById('cardQuestion'); q.innerHTML=c.q;
+  const ans=document.getElementById('cardAnswer'); ans.innerHTML=c.a;
+  if(c.ex){
+    exEl.innerHTML='<button class="ex-toggle" onclick="toggleExample(event)">▸ Example</button>'
+      +'<div class="ex-body"><span class="exlabel">Worked example</span>'+c.ex+'</div>';
+    exEl.style.display='block';
+  } else { exEl.innerHTML=''; exEl.style.display='none'; }
+  renderMath(q); renderMath(ans);
+  updateProgress();
+}
+function flipCard(){ document.getElementById('card').classList.toggle('flipped'); }
+function toggleExample(e){
+  e.stopPropagation();
+  const btn=e.target, body=btn.nextElementSibling;
+  const open=body.classList.toggle('open');
+  btn.textContent=(open?'▾ ':'▸ ')+'Example';
+  if(open && !body.dataset.rendered){ renderMath(body); body.dataset.rendered='1'; }
+}
+function markGot(e){ if(e)e.stopPropagation(); if(deck.length===0)return; got++; document.getElementById('gotCount').textContent=got; advance(); }
+function markMissed(e){ if(e)e.stopPropagation(); if(deck.length===0)return; missed++; document.getElementById('missedCount').textContent=missed; const c=deck.splice(idx%deck.length,1)[0]; deck.push(c); if(deck.length>0)idx=idx%deck.length; renderCard(); }
+function advance(){ deck.splice(idx%deck.length,1); if(deck.length>0)idx=idx%deck.length; renderCard(); }
+function shuffleDeck(e){ if(e)e.stopPropagation(); deck=ALL_CARDS.filter(c=>activeFilter==='all'||c.topic===activeFilter); shuffleArray(deck); idx=0; got=0; missed=0; document.getElementById('gotCount').textContent=0; document.getElementById('missedCount').textContent=0; renderCard(); }
+function updateProgress(){
+  const total=ALL_CARDS.filter(c=>activeFilter==='all'||c.topic===activeFilter).length;
+  const done=total-deck.length;
+  const pct=total>0?Math.round((done/total)*100):0;
+  document.getElementById('progress').style.width=pct+'%';
+  document.getElementById('counter').textContent='Card '+Math.min(done+1,total)+' of '+total;
+  document.getElementById('pct').textContent=pct+'%';
+  document.getElementById('remaining').textContent=deck.length+' remaining';
+}
+document.getElementById('filters').addEventListener('click',e=>{
+  if(!e.target.classList.contains('filter-btn'))return;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  activeFilter=e.target.dataset.topic;
+  shuffleDeck();
+});
+function toggleTheme(){
+  const html=document.documentElement, btn=document.getElementById('themeBtn');
+  if(html.getAttribute('data-theme')==='dark'){ html.setAttribute('data-theme','light'); btn.textContent='☀️'; }
+  else { html.setAttribute('data-theme','dark'); btn.textContent='🌙'; }
+}
+
+function init(){ shuffleArray(deck); renderCard(); }
+if(window.renderMathInElement){ init(); } else { window.addEventListener('load', init); }
+</script>
+</body>
+</html>

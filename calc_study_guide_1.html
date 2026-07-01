@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculus Study Guide | Ch. 3 & 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=JetBrains+Mono:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ef;
+    --surface: #eceae4;
+    --surface2: #e3e0d8;
+    --border: #d0ccc2;
+    --accent: #8a6a2e;
+    --accent2: #2e6e85;
+    --accent3: #6b3e9a;
+    --red: #b84444;
+    --green: #2e7a52;
+    --text: #1a1814;
+    --text-muted: #6b6860;
+    --formula-bg: #eeece6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.75;
+    padding: 0 0 80px 0;
+  }
+
+  /* HEADER */
+  .hero {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '∂';
+    position: absolute;
+    right: -20px; top: -40px;
+    font-size: 320px;
+    color: rgba(200,169,110,0.04);
+    font-family: 'Playfair Display', serif;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 16px;
+  }
+  .chapter-pills {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    background: var(--formula-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 5px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--accent2);
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* NAV INDEX */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 36px auto;
+    max-width: 1100px;
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+  .toc-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 6px;
+  }
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+    padding: 4px 0;
+    transition: color 0.2s;
+    text-decoration: none;
+  }
+  .toc-item:hover { color: var(--accent); }
+  .toc-num { color: var(--border); }
+
+  /* SECTION */
+  .section {
+    max-width: 1100px;
+    margin: 0 32px;
+    margin-bottom: 48px;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    padding-top: 4px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* SUBSECTION */
+  .subsection {
+    margin-bottom: 32px;
+  }
+  .sub-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    color: var(--accent2);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  /* FORMULA GRID */
+  .formula-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .formula-grid.cols-2 { grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); }
+  .formula-grid.cols-1 { grid-template-columns: 1fr; }
+
+  .fcard {
+    background: var(--formula-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.2s;
+  }
+  .fcard:hover { border-color: var(--accent); }
+  .fcard.accent { border-left: 3px solid var(--accent); }
+  .fcard.blue { border-left: 3px solid var(--accent2); }
+  .fcard.purple { border-left: 3px solid var(--accent3); }
+  .fcard.red { border-left: 3px solid var(--red); }
+  .fcard.green { border-left: 3px solid var(--green); }
+
+  .fcard-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .fcard-formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .fcard-formula .hi { color: var(--accent); }
+  .fcard-formula .bl { color: var(--accent2); }
+  .fcard-formula .pu { color: var(--accent3); }
+  .fcard-formula .rd { color: var(--red); }
+  .fcard-formula .gr { color: var(--green); }
+  .fcard-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 2px;
+  }
+
+  /* ALERT BOXES */
+  .alert {
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .alert.warn {
+    background: rgba(200,169,110,0.08);
+    border: 1px solid rgba(200,169,110,0.3);
+    color: var(--accent);
+  }
+  .alert.info {
+    background: rgba(126,184,201,0.07);
+    border: 1px solid rgba(126,184,201,0.25);
+    color: var(--accent2);
+  }
+  .alert.tip {
+    background: rgba(126,201,154,0.07);
+    border: 1px solid rgba(126,201,154,0.25);
+    color: var(--green);
+  }
+  .alert strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* THEOREM BLOCK */
+  .theorem {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent3);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin-bottom: 14px;
+  }
+  .theorem-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent3);
+    margin-bottom: 8px;
+  }
+  .theorem-body {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .theorem-body .mono {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent2);
+    font-size: 13px;
+  }
+
+  /* TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  th {
+    background: var(--surface2);
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(42,42,53,0.6);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .hi { color: var(--accent); }
+  .bl { color: var(--accent2); }
+  .pu { color: var(--accent3); }
+  .rd { color: var(--red); }
+  .gr { color: var(--green); }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 32px;
+  }
+
+  /* STEP LIST */
+  .steps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .steps li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .step-num {
+    background: var(--formula-bg);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* SHAPE CARDS */
+  .shape-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .shape-card {
+    background: var(--formula-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    transition: border-color 0.2s;
+  }
+  .shape-card:hover { border-color: var(--accent2); }
+  .shape-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .shape-icon { font-size: 18px; }
+  .shape-formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--text-muted);
+  }
+  .shape-formula span { color: var(--accent2); font-weight: 600; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 1px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .hero::before { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Stewart · Early Transcendentals · 9th Ed.</div>
+  <h1>Calculus <span>Ch. 3 & 4</span><br>Study Guide</h1>
+  <p class="hero-sub">Differentiation Rules · Applications · Geometry Formulas · Key Theorems</p>
+  <div class="chapter-pills">
+    <span class="pill">Ch 3 · Diff. Rules</span>
+    <span class="pill">Ch 4 · Applications</span>
+    <span class="pill">Inverse Trig Deriv.</span>
+    <span class="pill">Log Derivatives</span>
+    <span class="pill">Geometry</span>
+    <span class="pill">Theorems</span>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toc-title">// Contents</div>
+  <div class="toc-grid">
+    <a href="#core" class="toc-item"><span class="toc-num">01</span> Core Differentiation Rules</a>
+    <a href="#trig" class="toc-item"><span class="toc-num">02</span> Trig Derivatives</a>
+    <a href="#log" class="toc-item"><span class="toc-num">03</span> Ln & Exponential Derivatives</a>
+    <a href="#arctrig" class="toc-item"><span class="toc-num">04</span> Inverse Trig Derivatives</a>
+    <a href="#implicit" class="toc-item"><span class="toc-num">05</span> Implicit Differentiation</a>
+    <a href="#related" class="toc-item"><span class="toc-num">06</span> Related Rates</a>
+    <a href="#ch4" class="toc-item"><span class="toc-num">07</span> Ch 4 · Theorems & Tools</a>
+    <a href="#lhop" class="toc-item"><span class="toc-num">08</span> L'Hôpital's Rule</a>
+    <a href="#curve" class="toc-item"><span class="toc-num">09</span> Curve Sketching</a>
+    <a href="#optim" class="toc-item"><span class="toc-num">10</span> Optimization</a>
+    <a href="#antideriv" class="toc-item"><span class="toc-num">11</span> Antiderivatives</a>
+    <a href="#geometry" class="toc-item"><span class="toc-num">12</span> Area & Volume Formulas</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 1: CORE DIFFERENTIATION RULES -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="core">
+  <div class="section-header">
+    <span class="section-num">01 ——</span>
+    <h2 class="section-title">Core Differentiation Rules</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">// Fundamental Rules — Memorize Cold</div>
+    <div class="formula-grid">
+      <div class="fcard accent">
+        <span class="fcard-label">Constant Rule</span>
+        <span class="fcard-formula">d/dx [<span class="hi">c</span>] = <span class="hi">0</span></span>
+      </div>
+      <div class="fcard accent">
+        <span class="fcard-label">Power Rule</span>
+        <span class="fcard-formula">d/dx [<span class="hi">xⁿ</span>] = <span class="hi">n·xⁿ⁻¹</span></span>
+        <span class="fcard-note">Works for any real n, including fractions and negatives</span>
+      </div>
+      <div class="fcard accent">
+        <span class="fcard-label">Constant Multiple</span>
+        <span class="fcard-formula">d/dx [<span class="hi">c·f(x)</span>] = <span class="hi">c·f'(x)</span></span>
+      </div>
+      <div class="fcard accent">
+        <span class="fcard-label">Sum / Difference</span>
+        <span class="fcard-formula">d/dx [<span class="hi">f ± g</span>] = <span class="hi">f' ± g'</span></span>
+      </div>
+      <div class="fcard blue">
+        <span class="fcard-label">Product Rule</span>
+        <span class="fcard-formula">d/dx [<span class="bl">f·g</span>] = <span class="bl">f'g + fg'</span></span>
+        <span class="fcard-note">"First times deriv of second, plus second times deriv of first"</span>
+      </div>
+      <div class="fcard blue">
+        <span class="fcard-label">Quotient Rule</span>
+        <span class="fcard-formula">d/dx [<span class="bl">f/g</span>] = <span class="bl">(f'g − fg') / g²</span></span>
+        <span class="fcard-note">Lo·dHi minus Hi·dLo over Lo-squared. g(x) ≠ 0</span>
+      </div>
+      <div class="fcard purple">
+        <span class="fcard-label">Chain Rule</span>
+        <span class="fcard-formula">d/dx [<span class="pu">f(g(x))</span>] = <span class="pu">f'(g(x))·g'(x)</span></span>
+        <span class="fcard-note">Outer derivative × inner derivative. The single most tested rule.</span>
+      </div>
+      <div class="fcard purple">
+        <span class="fcard-label">Chain Rule (Leibniz)</span>
+        <span class="fcard-formula">dy/dx = <span class="pu">dy/du · du/dx</span></span>
+        <span class="fcard-note">u = g(x), y = f(u)</span>
+      </div>
+    </div>
+
+    <div class="alert warn">
+      <strong>⚠ Chain Rule Trap</strong>
+      You MUST apply the chain rule every time the inner function is anything other than bare x. d/dx[sin(3x²)] = cos(3x²)·6x, not just cos(3x²).
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 2: TRIG DERIVATIVES -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="trig">
+  <div class="section-header">
+    <span class="section-num">02 ——</span>
+    <h2 class="section-title">Trigonometric Derivatives</h2>
+  </div>
+
+  <div class="formula-grid">
+    <div class="fcard accent">
+      <span class="fcard-label">Sine</span>
+      <span class="fcard-formula">d/dx [<span class="hi">sin x</span>] = <span class="hi">cos x</span></span>
+    </div>
+    <div class="fcard accent">
+      <span class="fcard-label">Cosine</span>
+      <span class="fcard-formula">d/dx [<span class="hi">cos x</span>] = <span class="hi">−sin x</span></span>
+    </div>
+    <div class="fcard blue">
+      <span class="fcard-label">Tangent</span>
+      <span class="fcard-formula">d/dx [<span class="bl">tan x</span>] = <span class="bl">sec²x</span></span>
+    </div>
+    <div class="fcard blue">
+      <span class="fcard-label">Cotangent</span>
+      <span class="fcard-formula">d/dx [<span class="bl">cot x</span>] = <span class="bl">−csc²x</span></span>
+    </div>
+    <div class="fcard purple">
+      <span class="fcard-label">Secant</span>
+      <span class="fcard-formula">d/dx [<span class="pu">sec x</span>] = <span class="pu">sec x · tan x</span></span>
+    </div>
+    <div class="fcard purple">
+      <span class="fcard-label">Cosecant</span>
+      <span class="fcard-formula">d/dx [<span class="pu">csc x</span>] = <span class="pu">−csc x · cot x</span></span>
+    </div>
+  </div>
+
+  <div class="alert info">
+    <strong>Pattern</strong>
+    The "co-" functions (cos, cot, csc) all carry a negative sign. The "non-co" functions (sin, tan, sec) are all positive. Lock this in and you will never misremember.
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 3: LN & EXPONENTIAL -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="log">
+  <div class="section-header">
+    <span class="section-num">03 ——</span>
+    <h2 class="section-title">Logarithmic & Exponential Derivatives</h2>
+  </div>
+
+  <div class="formula-grid">
+    <div class="fcard accent">
+      <span class="fcard-label">Natural Log</span>
+      <span class="fcard-formula">d/dx [<span class="hi">ln x</span>] = <span class="hi">1/x</span></span>
+      <span class="fcard-note">x > 0</span>
+    </div>
+    <div class="fcard accent">
+      <span class="fcard-label">ln|x| (both sides)</span>
+      <span class="fcard-formula">d/dx [<span class="hi">ln|x|</span>] = <span class="hi">1/x</span></span>
+      <span class="fcard-note">x ≠ 0; valid for negative x too</span>
+    </div>
+    <div class="fcard blue">
+      <span class="fcard-label">Chain Rule on ln</span>
+      <span class="fcard-formula">d/dx [<span class="bl">ln(u)</span>] = <span class="bl">u'/u</span></span>
+      <span class="fcard-note">Where u = g(x). This is the key form for almost every ln problem.</span>
+    </div>
+    <div class="fcard blue">
+      <span class="fcard-label">Log base a</span>
+      <span class="fcard-formula">d/dx [<span class="bl">log_a(x)</span>] = <span class="bl">1/(x·ln a)</span></span>
+    </div>
+    <div class="fcard green">
+      <span class="fcard-label">e^x</span>
+      <span class="fcard-formula">d/dx [<span class="gr">eˣ</span>] = <span class="gr">eˣ</span></span>
+      <span class="fcard-note">The only function that is its own derivative.</span>
+    </div>
+    <div class="fcard green">
+      <span class="fcard-label">Chain Rule on e^u</span>
+      <span class="fcard-formula">d/dx [<span class="gr">e^u</span>] = <span class="gr">e^u · u'</span></span>
+      <span class="fcard-note">u = g(x); the exponent's derivative multiplies out front</span>
+    </div>
+    <div class="fcard purple">
+      <span class="fcard-label">a^x (any base)</span>
+      <span class="fcard-formula">d/dx [<span class="pu">aˣ</span>] = <span class="pu">aˣ · ln(a)</span></span>
+    </div>
+    <div class="fcard purple">
+      <span class="fcard-label">a^u (chain)</span>
+      <span class="fcard-formula">d/dx [<span class="pu">a^u</span>] = <span class="pu">a^u · ln(a) · u'</span></span>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">// Logarithmic Differentiation — When to Use It</div>
+    <div class="alert tip">
+      <strong>Technique</strong>
+      When you see a variable raised to a variable power (like x^x or x^(sin x)), take ln of both sides, differentiate implicitly, then solve for y'. This sidesteps the chain rule nightmare entirely.
+    </div>
+    <div class="fcard cols-1 fcard accent" style="margin-bottom:10px;">
+      <span class="fcard-label">Log Differentiation — Example Template</span>
+      <span class="fcard-formula" style="line-height:2.1;">
+        y = x^x<br>
+        ln y = x·ln x<br>
+        y'/y = ln x + x·(1/x) = ln x + 1<br>
+        y' = <span class="hi">x^x (ln x + 1)</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">// Key Log Properties (Algebra Before Differentiation)</div>
+    <div class="formula-grid">
+      <div class="fcard">
+        <span class="fcard-formula">ln(ab) = <span class="hi">ln a + ln b</span></span>
+      </div>
+      <div class="fcard">
+        <span class="fcard-formula">ln(a/b) = <span class="hi">ln a − ln b</span></span>
+      </div>
+      <div class="fcard">
+        <span class="fcard-formula">ln(aⁿ) = <span class="hi">n·ln a</span></span>
+      </div>
+      <div class="fcard">
+        <span class="fcard-formula">ln(eˣ) = <span class="hi">x</span> &nbsp;|&nbsp; e^(ln x) = <span class="hi">x</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 4: INVERSE TRIG DERIVATIVES -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="arctrig">
+  <div class="section-header">
+    <span class="section-num">04 ——</span>
+    <h2 class="section-title">Inverse Trigonometric Derivatives</h2>
+  </div>
+
+  <div class="alert info">
+    <strong>Note on Notation</strong>
+    arcsin = sin⁻¹, arccos = cos⁻¹, arctan = tan⁻¹. These are NOT reciprocals; the -1 means inverse function. Every formula below pairs with its "co-" twin which is identical but negative.
+  </div>
+
+  <div class="formula-grid">
+    <div class="fcard accent">
+      <span class="fcard-label">arcsin x</span>
+      <span class="fcard-formula">d/dx [<span class="hi">arcsin x</span>] = <span class="hi">1 / √(1−x²)</span></span>
+      <span class="fcard-note">Domain: |x| < 1</span>
+    </div>
+    <div class="fcard red">
+      <span class="fcard-label">arccos x</span>
+      <span class="fcard-formula">d/dx [<span class="rd">arccos x</span>] = <span class="rd">−1 / √(1−x²)</span></span>
+      <span class="fcard-note">Exact negative of arcsin</span>
+    </div>
+    <div class="fcard blue">
+      <span class="fcard-label">arctan x</span>
+      <span class="fcard-formula">d/dx [<span class="bl">arctan x</span>] = <span class="bl">1 / (1+x²)</span></span>
+      <span class="fcard-note">Most frequently tested. No square root.</span>
+    </div>
+    <div class="fcard red">
+      <span class="fcard-label">arccot x</span>
+      <span class="fcard-formula">d/dx [<span class="rd">arccot x</span>] = <span class="rd">−1 / (1+x²)</span></span>
+    </div>
+    <div class="fcard purple">
+      <span class="fcard-label">arcsec x</span>
+      <span class="fcard-formula">d/dx [<span class="pu">arcsec x</span>] = <span class="pu">1 / (|x|√(x²−1))</span></span>
+      <span class="fcard-note">|x| > 1</span>
+    </div>
+    <div class="fcard red">
+      <span class="fcard-label">arccsc x</span>
+      <span class="fcard-formula">d/dx [<span class="rd">arccsc x</span>] = <span class="rd">−1 / (|x|√(x²−1))</span></span>
+    </div>
+  </div>
+
+  <div class="alert warn">
+    <strong>Chain Rule Always Applies</strong>
+    d/dx[arctan(u)] = u' / (1+u²). The u' in the numerator is what students consistently forget under exam pressure.
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 5: IMPLICIT DIFFERENTIATION -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="implicit">
+  <div class="section-header">
+    <span class="section-num">05 ——</span>
+    <h2 class="section-title">Implicit Differentiation</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">// The Process</div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Differentiate both sides with respect to x.</li>
+      <li><span class="step-num">2</span>Every time you differentiate a term with y in it, multiply by dy/dx (chain rule — y is a function of x).</li>
+      <li><span class="step-num">3</span>Collect all dy/dx terms on one side of the equation.</li>
+      <li><span class="step-num">4</span>Factor out dy/dx and divide to isolate it.</li>
+    </ul>
+  </div>
+
+  <div class="fcard blue" style="margin-top:16px;">
+    <span class="fcard-label">Example: circle x² + y² = r²</span>
+    <span class="fcard-formula" style="line-height:2.1;">
+      2x + 2y·<span class="bl">dy/dx</span> = 0<br>
+      dy/dx = <span class="bl">−x/y</span>
+    </span>
+  </div>
+
+  <div class="alert info" style="margin-top:12px;">
+    <strong>Second Derivative Implicitly</strong>
+    To find d²y/dx², differentiate dy/dx implicitly again and substitute the expression for dy/dx back in. Messy, but methodical.
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 6: RELATED RATES -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="related">
+  <div class="section-header">
+    <span class="section-num">06 ——</span>
+    <h2 class="section-title">Related Rates</h2>
+  </div>
+
+  <ul class="steps">
+    <li><span class="step-num">1</span>Draw a diagram. Label every quantity that changes with time as a variable.</li>
+    <li><span class="step-num">2</span>Write an equation relating those variables (geometry formulas, Pythagorean theorem, similar triangles, etc.).</li>
+    <li><span class="step-num">3</span>Differentiate both sides with respect to time t (implicit differentiation).</li>
+    <li><span class="step-num">4</span>Plug in all known values and solve for the unknown rate.</li>
+  </ul>
+
+  <div class="alert warn" style="margin-top:16px;">
+    <strong>⚠ Common Mistake</strong>
+    Do NOT substitute specific values for variables before differentiating. Differentiate the general equation first, then substitute. Substituting too early kills the dt terms.
+  </div>
+
+  <div class="subsection" style="margin-top:20px;">
+    <div class="sub-title">// Frequently Appearing Related Rates Setups</div>
+    <div class="formula-grid">
+      <div class="fcard">
+        <span class="fcard-label">Pythagorean (ladder, shadow)</span>
+        <span class="fcard-formula">x² + y² = z²<br>2x·<span class="hi">ẋ</span> + 2y·<span class="hi">ẏ</span> = 2z·<span class="hi">ż</span></span>
+      </div>
+      <div class="fcard">
+        <span class="fcard-label">Circle area expanding</span>
+        <span class="fcard-formula">A = πr²<br>dA/dt = <span class="bl">2πr · dr/dt</span></span>
+      </div>
+      <div class="fcard">
+        <span class="fcard-label">Sphere volume</span>
+        <span class="fcard-formula">V = (4/3)πr³<br>dV/dt = <span class="bl">4πr² · dr/dt</span></span>
+      </div>
+      <div class="fcard">
+        <span class="fcard-label">Cone volume (variable r,h)</span>
+        <span class="fcard-formula">V = (1/3)πr²h<br>Use similar triangles if r/h = const</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 7: CH 4 THEOREMS -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="ch4">
+  <div class="section-header">
+    <span class="section-num">07 ——</span>
+    <h2 class="section-title">Chapter 4 · Theorems & Derivative Tests</h2>
+  </div>
+
+  <div class="theorem">
+    <div class="theorem-name">Extreme Value Theorem (EVT)</div>
+    <div class="theorem-body">If f is continuous on a closed interval [a, b], then f attains both an absolute maximum and an absolute minimum on [a, b]. The key constraint is closed and bounded, not open.</div>
+  </div>
+
+  <div class="theorem">
+    <div class="theorem-name">Fermat's Theorem</div>
+    <div class="theorem-body">If f has a local max or min at c, and f'(c) exists, then <span class="mono">f'(c) = 0</span>. Critical numbers: where f'(c) = 0 OR f'(c) does not exist.</div>
+  </div>
+
+  <div class="theorem">
+    <div class="theorem-name">Rolle's Theorem</div>
+    <div class="theorem-body">If f is continuous on [a,b], differentiable on (a,b), and f(a) = f(b), then there exists at least one c in (a,b) such that <span class="mono">f'(c) = 0</span>.</div>
+  </div>
+
+  <div class="theorem">
+    <div class="theorem-name">Mean Value Theorem (MVT)</div>
+    <div class="theorem-body">If f is continuous on [a,b] and differentiable on (a,b), then there exists c in (a,b) such that <span class="mono">f'(c) = [f(b) − f(a)] / (b − a)</span>. The instantaneous rate of change equals the average rate at some point. This is one of the most important theoretical results in all of calculus.</div>
+  </div>
+
+  <div class="subsection" style="margin-top:24px;">
+    <div class="sub-title">// First Derivative Test</div>
+    <table>
+      <thead>
+        <tr><th>Behavior of f' around critical point c</th><th>Conclusion</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="mono">f' changes + → −</td><td class="gr">Local Maximum at c</td></tr>
+        <tr><td class="mono">f' changes − → +</td><td class="rd">Local Minimum at c</td></tr>
+        <tr><td class="mono">f' does not change sign</td><td>No local extremum (inflection point possible)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">// Second Derivative Test</div>
+    <table>
+      <thead>
+        <tr><th>Condition</th><th>Conclusion</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="mono">f'(c) = 0</span> and <span class="mono gr">f''(c) > 0</span></td><td class="gr">Local Minimum at c (concave up)</td></tr>
+        <tr><td><span class="mono">f'(c) = 0</span> and <span class="mono rd">f''(c) < 0</span></td><td class="rd">Local Maximum at c (concave down)</td></tr>
+        <tr><td><span class="mono">f'(c) = 0</span> and <span class="mono">f''(c) = 0</span></td><td>Test fails. Use 1st derivative test.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">// Concavity & Inflection Points</div>
+    <div class="formula-grid">
+      <div class="fcard green">
+        <span class="fcard-label">Concave Up</span>
+        <span class="fcard-formula"><span class="gr">f''(x) > 0</span> on interval</span>
+        <span class="fcard-note">Graph curves upward like a bowl. f' is increasing.</span>
+      </div>
+      <div class="fcard red">
+        <span class="fcard-label">Concave Down</span>
+        <span class="fcard-formula"><span class="rd">f''(x) < 0</span> on interval</span>
+        <span class="fcard-note">Graph curves downward like a hill. f' is decreasing.</span>
+      </div>
+      <div class="fcard accent">
+        <span class="fcard-label">Inflection Point</span>
+        <span class="fcard-formula">Where <span class="hi">f''(x) = 0</span> AND concavity changes</span>
+        <span class="fcard-note">f''=0 alone is NOT sufficient. The sign must change.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">// Finding Absolute Extrema on [a, b] — Closed Interval Method</div>
+    <ul class="steps">
+      <li><span class="step-num">1</span>Find all critical numbers of f in the open interval (a, b).</li>
+      <li><span class="step-num">2</span>Evaluate f at each critical number and at the endpoints a and b.</li>
+      <li><span class="step-num">3</span>The largest value is the absolute max; the smallest is the absolute min.</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 8: L'HOPITAL -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="lhop">
+  <div class="section-header">
+    <span class="section-num">08 ——</span>
+    <h2 class="section-title">L'Hôpital's Rule</h2>
+  </div>
+
+  <div class="theorem">
+    <div class="theorem-name">L'Hôpital's Rule</div>
+    <div class="theorem-body">
+      If lim f(x)/g(x) produces the indeterminate form <span class="mono">0/0</span> or <span class="mono">±∞/±∞</span>, and if f and g are differentiable near a, then:<br><br>
+      <span class="mono">lim [f(x)/g(x)] = lim [f'(x)/g'(x)]</span><br><br>
+      Apply this as many times as necessary until the limit resolves. You are differentiating numerator and denominator independently, not using the quotient rule.
+    </div>
+  </div>
+
+  <div class="subsection" style="margin-top: 16px;">
+    <div class="sub-title">// Indeterminate Forms & How to Handle Them</div>
+    <table>
+      <thead>
+        <tr><th>Form</th><th>Strategy</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="mono hi">0/0 , ∞/∞</td><td>Apply L'Hôpital directly.</td></tr>
+        <tr><td class="mono hi">0 · ∞</td><td>Rewrite as 0/(1/∞) or ∞/(1/0) to get a fraction, then apply L'Hôpital.</td></tr>
+        <tr><td class="mono hi">∞ − ∞</td><td>Combine into a single fraction, then apply L'Hôpital.</td></tr>
+        <tr><td class="mono hi">1^∞, 0⁰, ∞⁰</td><td>Take ln of the limit expression, evaluate, then exponentiate the result.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert warn">
+    <strong>⚠ When NOT to Use L'Hôpital</strong>
+    If the limit is NOT indeterminate (e.g., it already equals a finite number or clean infinity), L'Hôpital does not apply. Using it anyway produces wrong answers.
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 9: CURVE SKETCHING -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="curve">
+  <div class="section-header">
+    <span class="section-num">09 ——</span>
+    <h2 class="section-title">Curve Sketching (The Full Checklist)</h2>
+  </div>
+
+  <ul class="steps">
+    <li><span class="step-num">A</span><strong>Domain:</strong> Where is f(x) defined? Note restrictions.</li>
+    <li><span class="step-num">B</span><strong>Intercepts:</strong> x-intercepts (set y=0), y-intercept (set x=0).</li>
+    <li><span class="step-num">C</span><strong>Symmetry:</strong> Even (f(-x)=f(x), symmetric about y-axis), Odd (f(-x)=-f(x), rotational symmetry), or neither.</li>
+    <li><span class="step-num">D</span><strong>Asymptotes:</strong> Horizontal (lim as x→±∞), Vertical (where denominator=0 or function blows up), Oblique (if degree of numerator exceeds denominator by 1, do polynomial long division).</li>
+    <li><span class="step-num">E</span><strong>Increasing/Decreasing:</strong> Find f'. Solve f'(x)=0. Build sign chart. f'>0 means increasing; f'<0 means decreasing.</li>
+    <li><span class="step-num">F</span><strong>Local Extrema:</strong> Apply 1st or 2nd derivative test at critical numbers.</li>
+    <li><span class="step-num">G</span><strong>Concavity:</strong> Find f''. Solve f''(x)=0. Build sign chart. Note inflection points where concavity changes.</li>
+    <li><span class="step-num">H</span><strong>Sketch:</strong> Plot intercepts, asymptotes, and extrema. Connect using concavity information.</li>
+  </ul>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 10: OPTIMIZATION -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="optim">
+  <div class="section-header">
+    <span class="section-num">10 ——</span>
+    <h2 class="section-title">Optimization Problems</h2>
+  </div>
+
+  <ul class="steps">
+    <li><span class="step-num">1</span>Read the problem carefully. Identify what is to be maximized or minimized. Name it Q.</li>
+    <li><span class="step-num">2</span>Write an equation for Q in terms of the relevant variables.</li>
+    <li><span class="step-num">3</span>Use a constraint equation to reduce Q to a function of ONE variable.</li>
+    <li><span class="step-num">4</span>Find the domain of Q (often a closed or half-open interval from the physical context).</li>
+    <li><span class="step-num">5</span>Differentiate Q, set Q'=0, find critical numbers.</li>
+    <li><span class="step-num">6</span>Use the closed interval method OR first/second derivative test to confirm it is a max or min.</li>
+    <li><span class="step-num">7</span>Answer the question; include units.</li>
+  </ul>
+
+  <div class="alert tip" style="margin-top:16px;">
+    <strong>Tip</strong>
+    The constraint is often hidden in the word problem as a fixed total: perimeter, cost, surface area, volume, or total length. Identify it immediately and write it down before doing anything else.
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 11: ANTIDERIVATIVES -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="antideriv">
+  <div class="section-header">
+    <span class="section-num">11 ——</span>
+    <h2 class="section-title">Antiderivatives (§4.9)</h2>
+  </div>
+
+  <div class="alert info">
+    <strong>What is an Antiderivative?</strong>
+    F is an antiderivative of f if F'(x) = f(x). The general antiderivative is F(x) + C, where C is an arbitrary constant. This bridges Chapter 4 to integration.
+  </div>
+
+  <div class="formula-grid" style="margin-top:16px;">
+    <div class="fcard accent">
+      <span class="fcard-label">Power Rule (reverse)</span>
+      <span class="fcard-formula">∫ <span class="hi">xⁿ dx</span> = <span class="hi">xⁿ⁺¹/(n+1) + C</span></span>
+      <span class="fcard-note">n ≠ −1</span>
+    </div>
+    <div class="fcard accent">
+      <span class="fcard-label">n = −1 exception</span>
+      <span class="fcard-formula">∫ <span class="hi">1/x dx</span> = <span class="hi">ln|x| + C</span></span>
+    </div>
+    <div class="fcard blue">
+      <span class="fcard-label">∫ eˣ dx</span>
+      <span class="fcard-formula">= <span class="bl">eˣ + C</span></span>
+    </div>
+    <div class="fcard blue">
+      <span class="fcard-label">∫ sin x dx</span>
+      <span class="fcard-formula">= <span class="bl">−cos x + C</span></span>
+    </div>
+    <div class="fcard blue">
+      <span class="fcard-label">∫ cos x dx</span>
+      <span class="fcard-formula">= <span class="bl">sin x + C</span></span>
+    </div>
+    <div class="fcard blue">
+      <span class="fcard-label">∫ sec²x dx</span>
+      <span class="fcard-formula">= <span class="bl">tan x + C</span></span>
+    </div>
+    <div class="fcard purple">
+      <span class="fcard-label">∫ csc²x dx</span>
+      <span class="fcard-formula">= <span class="pu">−cot x + C</span></span>
+    </div>
+    <div class="fcard purple">
+      <span class="fcard-label">∫ sec x tan x dx</span>
+      <span class="fcard-formula">= <span class="pu">sec x + C</span></span>
+    </div>
+    <div class="fcard purple">
+      <span class="fcard-label">∫ csc x cot x dx</span>
+      <span class="fcard-formula">= <span class="pu">−csc x + C</span></span>
+    </div>
+    <div class="fcard green">
+      <span class="fcard-label">∫ 1/√(1−x²) dx</span>
+      <span class="fcard-formula">= <span class="gr">arcsin x + C</span></span>
+    </div>
+    <div class="fcard green">
+      <span class="fcard-label">∫ 1/(1+x²) dx</span>
+      <span class="fcard-formula">= <span class="gr">arctan x + C</span></span>
+    </div>
+  </div>
+
+  <div class="subsection" style="margin-top:16px;">
+    <div class="sub-title">// Rectilinear Motion (Position, Velocity, Acceleration)</div>
+    <div class="formula-grid">
+      <div class="fcard">
+        <span class="fcard-formula"><span class="hi">a(t)</span> = v'(t) = s''(t)</span>
+        <span class="fcard-note">Acceleration is derivative of velocity, 2nd derivative of position</span>
+      </div>
+      <div class="fcard">
+        <span class="fcard-formula"><span class="bl">v(t)</span> = ∫ a(t) dt</span>
+        <span class="fcard-note">Integrate acceleration to get velocity; use initial condition to find C</span>
+      </div>
+      <div class="fcard">
+        <span class="fcard-formula"><span class="gr">s(t)</span> = ∫ v(t) dt</span>
+        <span class="fcard-note">Integrate velocity to get position</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 12: GEOMETRY -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="geometry">
+  <div class="section-header">
+    <span class="section-num">12 ——</span>
+    <h2 class="section-title">Area & Volume of Common Shapes</h2>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">// 2D Areas</div>
+    <div class="shape-grid">
+      <div class="shape-card">
+        <div class="shape-name"><span class="shape-icon">○</span> Circle</div>
+        <div class="shape-formula">
+          Area: <span>A = πr²</span><br>
+          Circumference: <span>C = 2πr</span>
+        </div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-name"><span class="shape-icon">▭</span> Rectangle</div>
+        <div class="shape-formula">
+          Area: <span>A = lw</span><br>
+          Perimeter: <span>P = 2l + 2w</span>
+        </div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-name"><span class="shape-icon">△</span> Triangle</div>
+        <div class="shape-formula">
+          Area: <span>A = ½bh</span><br>
+          Perimeter: <span>P = a + b + c</span>
+        </div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-name"><span class="shape-icon">▱</span> Trapezoid</div>
+        <div class="shape-formula">
+          Area: <span>A = ½(b₁ + b₂)h</span><br>
+          b₁, b₂ are the parallel bases
+        </div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-name"><span class="shape-icon">◇</span> Parallelogram</div>
+        <div class="shape-formula">
+          Area: <span>A = bh</span><br>
+          h = perpendicular height (not side length)
+        </div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-name"><span class="shape-icon">⌒</span> Sector of Circle</div>
+        <div class="shape-formula">
+          Area: <span>A = ½r²θ</span><br>
+          Arc Length: <span>s = rθ</span><br>
+          θ must be in radians
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">// 3D Volumes & Surface Areas</div>
+    <div class="shape-grid">
+      <div class="shape-card">
+        <div class="shape-name">Sphere</div>
+        <div class="shape-formula">
+          Volume: <span>V = (4/3)πr³</span><br>
+          Surface Area: <span>SA = 4πr²</span>
+        </div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-name">Cylinder</div>
+        <div class="shape-formula">
+          Volume: <span>V = πr²h</span><br>
+          Lateral SA: <span>2πrh</span><br>
+          Total SA: <span>2πr² + 2πrh</span>
+        </div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-name">Cone</div>
+        <div class="shape-formula">
+          Volume: <span>V = (1/3)πr²h</span><br>
+          Lateral SA: <span>πrl</span>&nbsp; (l = slant height)<br>
+          Total SA: <span>πr² + πrl</span>
+        </div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-name">Rectangular Box</div>
+        <div class="shape-formula">
+          Volume: <span>V = lwh</span><br>
+          Surface Area: <span>SA = 2(lw + lh + wh)</span>
+        </div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-name">Square Pyramid</div>
+        <div class="shape-formula">
+          Volume: <span>V = (1/3)Bh</span><br>
+          B = area of base, h = height
+        </div>
+      </div>
+      <div class="shape-card">
+        <div class="shape-name">General Prism</div>
+        <div class="shape-formula">
+          Volume: <span>V = Bh</span><br>
+          B = base area, h = height
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- BONUS: QUICK REFERENCE MASTER TABLE -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">BONUS ——</span>
+    <h2 class="section-title">Master Quick-Reference Table</h2>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Function f(x)</th><th>Derivative f'(x)</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="mono hi">c</td><td class="mono">0</td><td>Constant</td></tr>
+      <tr><td class="mono hi">xⁿ</td><td class="mono">n·xⁿ⁻¹</td><td>Power Rule</td></tr>
+      <tr><td class="mono hi">√x = x^(1/2)</td><td class="mono">1/(2√x)</td><td>Power Rule applied</td></tr>
+      <tr><td class="mono hi">1/x = x⁻¹</td><td class="mono">−1/x²</td><td>Power Rule applied</td></tr>
+      <tr><td class="mono bl">eˣ</td><td class="mono bl">eˣ</td><td>Unique self-referential</td></tr>
+      <tr><td class="mono bl">aˣ</td><td class="mono bl">aˣ · ln a</td><td>a > 0, a ≠ 1</td></tr>
+      <tr><td class="mono bl">ln x</td><td class="mono bl">1/x</td><td>x > 0</td></tr>
+      <tr><td class="mono bl">log_a x</td><td class="mono bl">1/(x ln a)</td><td></td></tr>
+      <tr><td class="mono gr">sin x</td><td class="mono gr">cos x</td><td></td></tr>
+      <tr><td class="mono gr">cos x</td><td class="mono gr">−sin x</td><td></td></tr>
+      <tr><td class="mono gr">tan x</td><td class="mono gr">sec²x</td><td></td></tr>
+      <tr><td class="mono gr">cot x</td><td class="mono gr">−csc²x</td><td></td></tr>
+      <tr><td class="mono gr">sec x</td><td class="mono gr">sec x tan x</td><td></td></tr>
+      <tr><td class="mono gr">csc x</td><td class="mono gr">−csc x cot x</td><td></td></tr>
+      <tr><td class="mono pu">arcsin x</td><td class="mono pu">1/√(1−x²)</td><td>|x| < 1</td></tr>
+      <tr><td class="mono pu">arccos x</td><td class="mono pu">−1/√(1−x²)</td><td>|x| < 1</td></tr>
+      <tr><td class="mono pu">arctan x</td><td class="mono pu">1/(1+x²)</td><td>All reals</td></tr>
+      <tr><td class="mono pu">arccot x</td><td class="mono pu">−1/(1+x²)</td><td></td></tr>
+      <tr><td class="mono pu">arcsec x</td><td class="mono pu">1/(|x|√(x²−1))</td><td>|x| > 1</td></tr>
+      <tr><td class="mono pu">arccsc x</td><td class="mono pu">−1/(|x|√(x²−1))</td><td>|x| > 1</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- BONUS: COMMON TRIG VALUES -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">BONUS ——</span>
+    <h2 class="section-title">Essential Trig Values</h2>
+  </div>
+  <table>
+    <thead>
+      <tr><th>θ (rad)</th><th>θ (deg)</th><th>sin θ</th><th>cos θ</th><th>tan θ</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="mono">0</td><td>0°</td><td class="mono hi">0</td><td class="mono hi">1</td><td class="mono hi">0</td></tr>
+      <tr><td class="mono">π/6</td><td>30°</td><td class="mono hi">1/2</td><td class="mono hi">√3/2</td><td class="mono hi">1/√3 = √3/3</td></tr>
+      <tr><td class="mono">π/4</td><td>45°</td><td class="mono hi">√2/2</td><td class="mono hi">√2/2</td><td class="mono hi">1</td></tr>
+      <tr><td class="mono">π/3</td><td>60°</td><td class="mono hi">√3/2</td><td class="mono hi">1/2</td><td class="mono hi">√3</td></tr>
+      <tr><td class="mono">π/2</td><td>90°</td><td class="mono hi">1</td><td class="mono hi">0</td><td class="mono rd">undefined</td></tr>
+      <tr><td class="mono">π</td><td>180°</td><td class="mono hi">0</td><td class="mono hi">−1</td><td class="mono hi">0</td></tr>
+      <tr><td class="mono">3π/2</td><td>270°</td><td class="mono hi">−1</td><td class="mono hi">0</td><td class="mono rd">undefined</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  Stewart · Calculus: Early Transcendentals · 9th Edition · Ch. 3 & 4 · Good luck.
+</div>
+
+</body>
+</html>

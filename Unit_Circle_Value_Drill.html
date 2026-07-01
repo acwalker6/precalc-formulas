@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Value Drill | 40 in 6</title>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<style>
+  :root, [data-theme="dark"] {
+    --bg: #1c1220; --surface: #271a2c; --surface2: #322238; --border: #4a3652;
+    --p900: #f0e6f2; --p800: #d8c4dc; --text: #f0e6f2; --text-muted: #b4a0ba;
+    --bronze: #c17817; --emerald: #1f9d6b; --teal: #2a9d8f; --brick: #b0402f;
+    --pos-bg: #17332a; --neg-bg: #3a1d1a;
+    --hero-bg: #241830; --card-bg: #271a2c;
+  }
+  [data-theme="light"] {
+    --bg: #f4eef6; --surface: #ffffff; --surface2: #ece0f0; --border: #d8c4dc;
+    --p900: #2a1830; --p800: #3a2440; --text: #2a1830; --text-muted: #6a4e72;
+    --bronze: #a8620f; --emerald: #157a52; --teal: #1f7a70; --brick: #a8402f;
+    --pos-bg: #d8f0e6; --neg-bg: #f8e0dc;
+    --hero-bg: #ece0f0; --card-bg: #ffffff;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background:var(--bg); color:var(--text); font-family:'Libre Baskerville',Georgia,serif; min-height:100vh; transition:background .3s,color .3s; overflow-x:hidden; }
+  .katex { color:var(--bronze); }
+  .theme-toggle { position:fixed; top:14px; right:14px; z-index:999; width:40px; height:40px; border-radius:50%; background:var(--surface); border:1px solid var(--border); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; }
+
+  .wrap { max-width:640px; margin:0 auto; padding:20px 20px 60px; min-height:100vh; display:flex; flex-direction:column; }
+
+  .start-screen { flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; }
+  .start-tag { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:3px; color:var(--teal); text-transform:uppercase; margin-bottom:10px; }
+  .start-screen h1 { font-family:'Abril Fatface',serif; font-size:36px; font-weight:400; margin-bottom:10px; color:var(--p900); }
+  .start-screen h1 em { font-style:normal; color:var(--bronze); }
+  .start-sub { color:var(--text-muted); font-style:italic; font-size:14px; margin-bottom:28px; }
+  .goal-box { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:24px; font-size:14px; line-height:1.7; text-align:left; }
+  .goal-box .label { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--teal); margin-bottom:6px; }
+  .goal-box strong { color:var(--bronze); }
+  .start-btn { font-family:'Fira Code',monospace; font-size:14px; letter-spacing:2px; text-transform:uppercase; background:var(--emerald); color:#fff; border:none; border-radius:12px; padding:18px 36px; cursor:pointer; font-weight:600; box-shadow:0 4px 16px rgba(31,157,107,.3); }
+  .start-btn:hover { transform:translateY(-2px); }
+  .keys-note { margin-top:18px; font-family:'Fira Code',monospace; font-size:11px; color:var(--text-muted); }
+  .keys-note kbd { background:var(--surface2); border:1px solid var(--border); border-radius:4px; padding:2px 7px; font-family:'Fira Code',monospace; }
+
+  .quiz-screen { flex:1; display:none; flex-direction:column; }
+  .quiz-screen.active { display:flex; }
+  .hud { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-family:'Fira Code',monospace; font-size:12px; }
+  .hud-item { color:var(--text-muted); }
+  .hud-timer { color:var(--bronze); font-weight:600; font-size:16px; }
+  .hud-timer.urgent { color:var(--brick); animation:pulse 1s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.5;} }
+  .progress-bar { height:6px; background:var(--surface2); border-radius:6px; overflow:hidden; margin-bottom:24px; }
+  .progress-fill { height:100%; background:var(--teal); width:0%; transition:width .2s; }
+
+  .question-card { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:10px 0 20px; }
+  .q-label { font-family:'Fira Code',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:12px; }
+  .q-expr { font-size:28px; min-height:50px; display:flex; align-items:center; }
+
+  .options-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; flex:1; align-content:start; }
+  .opt-btn { font-size:20px; border-radius:12px; padding:22px 8px; cursor:pointer; border:2px solid var(--border); background:var(--surface); color:var(--p900); transition:transform .1s; }
+  .opt-btn:active { transform:scale(.96); }
+  .opt-btn.correct-flash { background:var(--pos-bg); border-color:var(--emerald); animation:flashGreen .3s; }
+  .opt-btn.wrong-flash { background:var(--neg-bg); border-color:var(--brick); animation:flashRed .3s; }
+  @keyframes flashGreen { 0%{background:var(--emerald); } }
+  @keyframes flashRed { 0%{background:var(--brick); } }
+
+  .results-screen { flex:1; display:none; flex-direction:column; justify-content:center; }
+  .results-screen.active { display:flex; }
+  .results-hero { text-align:center; margin-bottom:24px; }
+  .results-hero .big-score { font-family:'Abril Fatface',serif; font-size:56px; color:var(--bronze); }
+  .results-hero .score-sub { font-family:'Fira Code',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); margin-top:4px; }
+  .verdict { text-align:center; font-size:15px; margin-bottom:24px; padding:14px; border-radius:10px; }
+  .verdict.pass { background:var(--pos-bg); color:var(--emerald); border:1px solid var(--emerald); }
+  .verdict.fail { background:var(--neg-bg); color:var(--brick); border:1px solid var(--brick); }
+  .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px; }
+  .stat-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center; }
+  .stat-box .n { font-family:'Abril Fatface',serif; font-size:24px; color:var(--p900); }
+  .stat-box .l { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); margin-top:2px; }
+
+  .missed-section h3 { font-family:'Abril Fatface',serif; font-size:18px; color:var(--brick); margin-bottom:10px; font-weight:400; }
+  .missed-item { display:flex; justify-content:space-between; align-items:center; background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--brick); border-radius:8px; padding:10px 14px; margin-bottom:6px; font-size:13px; }
+  .missed-item .m-answer { font-family:'Fira Code',monospace; font-size:13px; color:var(--emerald); }
+  .no-missed { text-align:center; color:var(--emerald); font-size:14px; padding:16px; background:var(--pos-bg); border-radius:10px; }
+  .missed-section { margin-bottom:24px; }
+
+  .retry-btn { width:100%; font-family:'Fira Code',monospace; font-size:13px; letter-spacing:1px; text-transform:uppercase; border-radius:10px; padding:14px; cursor:pointer; border:1px solid var(--emerald); background:var(--emerald); color:#fff; font-weight:600; }
+
+  @media(max-width:480px) { .start-screen h1{font-size:28px;} .q-expr{font-size:22px;} .opt-btn{padding:18px 6px; font-size:17px;} .results-hero .big-score{font-size:44px;} }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+
+<div class="wrap">
+
+  <div class="start-screen" id="startScreen">
+    <div class="start-tag">Unit Circle · Value Drill</div>
+    <h1>40 Values. <em>6 Minutes.</em></h1>
+    <div class="start-sub">Companion to the sign drill. Now the exact value, not just +/-.</div>
+    <div class="goal-box">
+      <div class="label">🎯 Approach</div>
+      Get the <strong>reference angle</strong> first (distance to the nearest x-axis), pull its QI value, then slap on the sign from ASTC. Four multiple-choice options each — tap the right one, no typing.
+    </div>
+    <button class="start-btn" onclick="startQuiz()">Start Drill</button>
+    <div class="keys-note">Keyboard: <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> to answer &nbsp; <kbd>Space</kbd> to start</div>
+  </div>
+
+  <div class="quiz-screen" id="quizScreen">
+    <div class="hud">
+      <div class="hud-item" id="hudProgress">Q 1 / 40</div>
+      <div class="hud-timer" id="hudTimer">6:00</div>
+      <div class="hud-item" id="hudCorrect">✓ 0</div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div class="question-card">
+      <div class="q-label">Evaluate</div>
+      <div class="q-expr" id="qExpr"></div>
+    </div>
+
+    <div class="options-grid" id="optionsGrid"></div>
+  </div>
+
+  <div class="results-screen" id="resultsScreen">
+    <div class="results-hero">
+      <div class="big-score" id="finalScore">0/40</div>
+      <div class="score-sub" id="finalTime">in 0:00</div>
+    </div>
+    <div class="verdict" id="verdictBox"></div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="n" id="statAccuracy">0%</div><div class="l">Accuracy</div></div>
+      <div class="stat-box"><div class="n" id="statAvg">0.0s</div><div class="l">Avg / Question</div></div>
+    </div>
+    <div class="missed-section" id="missedSection">
+      <h3>Review Misses</h3>
+      <div id="missedList"></div>
+    </div>
+    <button class="retry-btn" onclick="startQuiz()">Retry Drill</button>
+  </div>
+
+</div>
+
+<script>
+// ══════════ ANGLE / VALUE BANK ══════════
+const ANGLES = [
+  {deg:'30°',  rad:'\\frac{\\pi}{6}',  quad:1, ref:30},
+  {deg:'45°',  rad:'\\frac{\\pi}{4}',  quad:1, ref:45},
+  {deg:'60°',  rad:'\\frac{\\pi}{3}',  quad:1, ref:60},
+  {deg:'120°', rad:'\\frac{2\\pi}{3}', quad:2, ref:60},
+  {deg:'135°', rad:'\\frac{3\\pi}{4}', quad:2, ref:45},
+  {deg:'150°', rad:'\\frac{5\\pi}{6}', quad:2, ref:30},
+  {deg:'210°', rad:'\\frac{7\\pi}{6}', quad:3, ref:30},
+  {deg:'225°', rad:'\\frac{5\\pi}{4}', quad:3, ref:45},
+  {deg:'240°', rad:'\\frac{4\\pi}{3}', quad:3, ref:60},
+  {deg:'300°', rad:'\\frac{5\\pi}{3}', quad:4, ref:60},
+  {deg:'315°', rad:'\\frac{7\\pi}{4}', quad:4, ref:45},
+  {deg:'330°', rad:'\\frac{11\\pi}{6}',quad:4, ref:30},
+];
+const FUNCS = ['sin','cos','tan','csc','sec','cot'];
+const POS_IN_QUAD = { 1:['sin','cos','tan','csc','sec','cot'], 2:['sin','csc'], 3:['tan','cot'], 4:['cos','sec'] };
+// magnitude by reference angle + function
+const MAGNITUDE = {
+  30: {sin:'\\frac{1}{2}', cos:'\\frac{\\sqrt{3}}{2}', tan:'\\frac{\\sqrt{3}}{3}', csc:'2', sec:'\\frac{2\\sqrt{3}}{3}', cot:'\\sqrt{3}'},
+  45: {sin:'\\frac{\\sqrt{2}}{2}', cos:'\\frac{\\sqrt{2}}{2}', tan:'1', csc:'\\sqrt{2}', sec:'\\sqrt{2}', cot:'1'},
+  60: {sin:'\\frac{\\sqrt{3}}{2}', cos:'\\frac{1}{2}', tan:'\\sqrt{3}', csc:'\\frac{2\\sqrt{3}}{3}', sec:'2', cot:'\\frac{\\sqrt{3}}{3}'},
+};
+const MAG_POOL = ['\\frac{1}{2}','\\frac{\\sqrt{3}}{2}','\\frac{\\sqrt{3}}{3}','2','\\frac{2\\sqrt{3}}{3}','\\sqrt{3}','\\frac{\\sqrt{2}}{2}','1','\\sqrt{2}'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function signedLatex(mag, positive) { return positive ? mag : `-${mag}`; }
+
+function buildQuestionBank() {
+  let pool = [];
+  ANGLES.forEach(a => {
+    FUNCS.forEach(f => {
+      const positive = POS_IN_QUAD[a.quad].includes(f);
+      const mag = MAGNITUDE[a.ref][f];
+      const correct = signedLatex(mag, positive);
+      pool.push({angle:a, func:f, correct, mag});
+    });
+  });
+  pool = shuffle(pool).slice(0, 40);
+  // build 4 options per question
+  pool.forEach(q => {
+    let opts = new Set([q.correct]);
+    // guaranteed sign-flip distractor
+    opts.add(signedLatex(q.mag, !POS_IN_QUAD[q.angle.quad].includes(q.func)));
+    let attempts = 0;
+    while (opts.size < 4 && attempts < 30) {
+      attempts++;
+      const randMag = MAG_POOL[Math.floor(Math.random() * MAG_POOL.length)];
+      const randSign = Math.random() < 0.5;
+      opts.add(signedLatex(randMag, randSign));
+    }
+    q.options = shuffle(Array.from(opts));
+  });
+  return pool;
+}
+
+let questions = [], current = 0, correctCount = 0, missed = [];
+let timerInterval = null, secondsLeft = 360, quizActive = false;
+
+function startQuiz() {
+  questions = buildQuestionBank();
+  current = 0; correctCount = 0; missed = []; secondsLeft = 360; quizActive = true;
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('resultsScreen').classList.remove('active');
+  document.getElementById('quizScreen').classList.add('active');
+  clearInterval(timerInterval);
+  timerInterval = setInterval(tickTimer, 1000);
+  updateTimerDisplay();
+  renderQuestion();
+}
+
+function tickTimer() {
+  secondsLeft--;
+  updateTimerDisplay();
+  if (secondsLeft <= 0) endQuiz();
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(secondsLeft / 60), s = secondsLeft % 60;
+  const el = document.getElementById('hudTimer');
+  el.textContent = `${m}:${s.toString().padStart(2,'0')}`;
+  el.classList.toggle('urgent', secondsLeft <= 30);
+}
+
+function renderQuestion() {
+  if (current >= questions.length) { endQuiz(); return; }
+  const q = questions[current];
+  document.getElementById('hudProgress').textContent = `Q ${current+1} / 40`;
+  document.getElementById('hudCorrect').textContent = `✓ ${correctCount}`;
+  document.getElementById('progressFill').style.width = `${(current/40)*100}%`;
+
+  const exprEl = document.getElementById('qExpr');
+  exprEl.innerHTML = '';
+  if (window.katex) {
+    try { katex.render(`${q.func}\\left(${q.angle.rad}\\right)`, exprEl, {throwOnError:false}); } catch(e) {}
+  }
+
+  const grid = document.getElementById('optionsGrid');
+  grid.innerHTML = '';
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.onclick = () => selectAnswer(opt, btn);
+    grid.appendChild(btn);
+    try { katex.render(opt, btn, {throwOnError:false}); } catch(e) { btn.textContent = opt; }
+  });
+}
+
+function selectAnswer(chosen, btnEl) {
+  if (!quizActive) return;
+  const q = questions[current];
+  const correct = chosen === q.correct;
+  if (correct) {
+    correctCount++;
+    btnEl.classList.add('correct-flash');
+  } else {
+    missed.push(q);
+    btnEl.classList.add('wrong-flash');
+  }
+  setTimeout(() => {
+    current++;
+    renderQuestion();
+  }, 150);
+}
+
+// keyboard 1-4 maps to option index
+document.addEventListener('keydown', (e) => {
+  if (quizActive && ['1','2','3','4'].includes(e.key)) {
+    const idx = parseInt(e.key) - 1;
+    const btns = document.querySelectorAll('#optionsGrid .opt-btn');
+    if (btns[idx]) btns[idx].click();
+  } else if (!quizActive && document.getElementById('startScreen').style.display !== 'none' && e.code === 'Space') {
+    e.preventDefault();
+    startQuiz();
+  }
+});
+
+function endQuiz() {
+  quizActive = false;
+  clearInterval(timerInterval);
+  document.getElementById('quizScreen').classList.remove('active');
+  document.getElementById('resultsScreen').classList.add('active');
+
+  const answered = current;
+  const totalTimeUsed = 360 - secondsLeft;
+  const mins = Math.floor(totalTimeUsed / 60), secs = totalTimeUsed % 60;
+
+  document.getElementById('finalScore').textContent = `${correctCount}/40`;
+  document.getElementById('finalTime').textContent = `in ${mins}:${secs.toString().padStart(2,'0')}`;
+
+  const accuracy = answered > 0 ? Math.round((correctCount/answered)*100) : 0;
+  document.getElementById('statAccuracy').textContent = `${accuracy}%`;
+  const avgPerQ = answered > 0 ? (totalTimeUsed/answered).toFixed(1) : '0.0';
+  document.getElementById('statAvg').textContent = `${avgPerQ}s`;
+
+  const verdictBox = document.getElementById('verdictBox');
+  const under6 = totalTimeUsed <= 360 && answered === 40;
+  if (correctCount === 40 && under6) {
+    verdictBox.className = 'verdict pass';
+    verdictBox.textContent = '🎯 Perfect run, exact values locked in under 6 minutes.';
+  } else if (correctCount >= 34 && under6) {
+    verdictBox.className = 'verdict pass';
+    verdictBox.textContent = `✓ Solid run. ${40-correctCount} miss${40-correctCount===1?'':'es'} to review below.`;
+  } else if (answered < 40) {
+    verdictBox.className = 'verdict fail';
+    verdictBox.textContent = `⏱ Time ran out at Q${answered}. Values take longer than signs — that's expected early on.`;
+  } else {
+    verdictBox.className = 'verdict fail';
+    verdictBox.textContent = `Retry needed — ${40-correctCount} misses. Review below.`;
+  }
+
+  const missedList = document.getElementById('missedList');
+  const missedSection = document.getElementById('missedSection');
+  if (missed.length === 0) {
+    missedSection.querySelector('h3').style.display = 'none';
+    missedList.innerHTML = '<div class="no-missed">No misses. Every value correct.</div>';
+  } else {
+    missedSection.querySelector('h3').style.display = 'block';
+    missedList.innerHTML = '';
+    missed.forEach(q => {
+      const row = document.createElement('div');
+      row.className = 'missed-item';
+      const left = document.createElement('span');
+      left.textContent = `${q.func}(${q.angle.deg})`;
+      const right = document.createElement('span');
+      right.className = 'm-answer';
+      row.appendChild(left);
+      row.appendChild(right);
+      missedList.appendChild(row);
+      try { katex.render(q.correct, right, {throwOnError:false}); } catch(e) { right.textContent = q.correct; }
+    });
+  }
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = '☀️';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '🌙';
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculus I | Complete Final Review Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+<style>
+:root {
+  --bg:#fef9f2;--surface:#fffdf6;--surface2:#f6efe4;--border:#e8ddd0;
+  --t900:#0e2e2c;--t800:#164240;--t700:#205854;--t600:#2c706a;--t500:#388880;
+  --t400:#50a098;--t300:#70b8b0;--t200:#98cec8;--t100:#c0e2de;--t50:#e2f2f0;
+  --coral:#e85868;--coral-l:#fde0e4;
+  --mango:#e07838;--mango-l:#fce4cc;
+  --sand:#c8a838;--sand-l:#f8ecd0;
+  --palm:#40a870;--palm-l:#d0f0dc;
+  --teal:#388880;--teal-l:#d0e8e4;
+  --sky:#4888b0;--sky-l:#d4e8f4;
+  --indigo:#5868a8;--indigo-l:#dce0f4;
+  --plum:#8858a0;--plum-l:#e8d8f0;
+  --text:#2a2420;--muted:#7a6e64;
+  --font-title:'Bebas Neue',sans-serif;
+  --font-body:'Lato',sans-serif;
+  --font-label:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.6;padding:0 0 40px;}
+/* HERO */
+.hero{background:linear-gradient(135deg,#70b8b0 0%,#e07838 55%,#e85868 100%);padding:36px 32px 30px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(255,255,255,.1),transparent 60%);pointer-events:none;}
+.hero-inner{position:relative;max-width:1400px;margin:0 auto;}
+.hero-tag{font-family:var(--font-label);font-size:11px;letter-spacing:3px;color:rgba(255,255,255,.7);text-transform:uppercase;margin-bottom:8px;}
+.hero h1{font-family:var(--font-title);font-size:50px;font-weight:400;line-height:1.05;color:#fff;margin-bottom:4px;letter-spacing:2px;}
+.hero h1 em{font-style:normal;color:#fff;text-shadow:0 0 20px rgba(255,255,255,.3);}
+.hero-sub{color:rgba(255,255,255,.75);font-style:italic;font-size:14px;margin-bottom:14px;}
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap;}
+.stat{text-align:center;}
+.stat-n{font-family:var(--font-title);font-size:30px;color:#fff;letter-spacing:1px;}
+.stat-l{font-family:var(--font-label);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.65);}
+/* NAV */
+.nav{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.nav::-webkit-scrollbar{display:none;}
+.nav-inner{max-width:1400px;margin:0 auto;display:flex;gap:3px;padding:6px 12px;}
+.nav-tab{font-family:var(--font-label);font-size:12px;letter-spacing:.5px;text-decoration:none;padding:4px 8px;border-radius:5px;white-space:nowrap;transition:all .2s;flex-shrink:0;cursor:pointer;text-transform:uppercase;font-weight:500;}
+.nav-tab:nth-child(8n+1){color:var(--coral);background:var(--coral-l);}
+.nav-tab:nth-child(8n+2){color:var(--mango);background:var(--mango-l);}
+.nav-tab:nth-child(8n+3){color:var(--sand);background:var(--sand-l);}
+.nav-tab:nth-child(8n+4){color:var(--palm);background:var(--palm-l);}
+.nav-tab:nth-child(8n+5){color:var(--teal);background:var(--teal-l);}
+.nav-tab:nth-child(8n+6){color:var(--sky);background:var(--sky-l);}
+.nav-tab:nth-child(8n+7){color:var(--indigo);background:var(--indigo-l);}
+.nav-tab:nth-child(8n+8){color:var(--plum);background:var(--plum-l);}
+.nav-tab:hover{filter:brightness(.92);}
+/* CONTENT */
+.content{max-width:1400px;margin:0 auto;padding:16px 20px;}
+.section{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:16px;}
+.section-tag{font-family:var(--font-label);font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;font-weight:600;}
+.section h2{font-family:var(--font-title);font-size:36px;color:var(--t900);margin-bottom:12px;line-height:1.1;letter-spacing:1.5px;}
+.section h3{font-family:var(--font-title);font-size:26px;color:var(--t700);margin:16px 0 8px;letter-spacing:1px;}
+.section p{margin-bottom:8px;}
+/* CALLOUTS */
+.callout{border-radius:8px;padding:12px 16px;margin:12px 0;font-size:16px;line-height:1.6;}
+.c-memory{background:var(--palm-l);border-left:4px solid var(--palm);}
+.c-warning{background:var(--coral-l);border-left:4px solid var(--coral);}
+.c-exam{background:var(--mango-l);border:2px solid var(--mango);}
+.c-key{background:var(--sky-l);border-left:4px solid var(--sky);}
+.c-prof{background:var(--plum-l);border-left:4px solid var(--plum);font-style:italic;}
+.cl{font-family:var(--font-label);font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;gap:5px;}
+.c-memory .cl{color:var(--palm);}
+.c-warning .cl{color:var(--coral);}
+.c-exam .cl{color:var(--mango);}
+.c-key .cl{color:var(--sky);}
+.c-prof .cl{color:var(--plum);}
+/* FORMULA BOX */
+.formula-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin:8px 0;overflow-x:auto;}
+.formula-box .katex{font-size:1.05em;}
+.formula-title{font-family:var(--font-label);font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;font-weight:600;}
+/* COMPARE GRID */
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin:10px 0;}
+.compare-card{border-radius:8px;padding:14px 14px;border:1px solid var(--border);font-size:15px;}
+.compare-card h4{font-family:var(--font-label);font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:600;}
+.cc1{background:var(--coral-l);}.cc1 h4{color:var(--coral);}
+.cc2{background:var(--mango-l);}.cc2 h4{color:var(--mango);}
+.cc3{background:var(--palm-l);}.cc3 h4{color:var(--palm);}
+.cc4{background:var(--sky-l);}.cc4 h4{color:var(--sky);}
+.cc5{background:var(--indigo-l);}.cc5 h4{color:var(--indigo);}
+.cc6{background:var(--plum-l);}.cc6 h4{color:var(--plum);}
+.cc7{background:var(--sand-l);}.cc7 h4{color:var(--sand);}
+.cc8{background:var(--teal-l);}.cc8 h4{color:var(--teal);}
+/* STEPS */
+.steps-box{background:var(--surface2);border-radius:10px;padding:14px 16px;margin:10px 0;}
+.step{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid var(--border);font-size:15px;}
+.step:last-child{border-bottom:none;}
+.step-num{font-family:var(--font-title);font-size:22px;color:var(--t500);flex-shrink:0;width:28px;text-align:center;letter-spacing:1px;}
+/* TABLE */
+.table-wrap{overflow-x:auto;margin:10px 0;border-radius:8px;border:1px solid var(--border);}
+.study-table{width:100%;border-collapse:collapse;font-size:16px;}
+.study-table th{background:var(--t900);color:#fff;font-family:var(--font-label);font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:6px 10px;text-align:left;}
+.study-table td{padding:5px 10px;border-bottom:1px solid var(--border);line-height:1.2;vertical-align:middle;text-align:center;}
+.study-table tr:nth-child(even){background:var(--t50);}
+.study-table tr:nth-child(odd){background:var(--surface);}
+/* overridden below */
+/* QUIZ */
+.quiz-q{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px 10px 14px;margin:6px 0;cursor:pointer;transition:all .2s;font-size:14px;position:relative;}
+.quiz-q:hover{border-color:var(--t400);}
+.quiz-q .question{font-weight:700;font-size:15px;color:var(--t800);padding-right:80px;}
+.quiz-q .answer{display:none;margin-top:8px;padding-top:8px;border-top:1px dashed var(--border);font-size:14px;}
+.quiz-q.open .answer{display:block;}
+.quiz-q::after{content:'tap to reveal';font-family:var(--font-label);font-size:9px;color:var(--t400);position:absolute;top:12px;right:14px;background:var(--mango-l);padding:2px 6px;border-radius:3px;letter-spacing:.5px;}
+.quiz-q.open::after{content:'✓ shown';color:var(--palm);background:var(--palm-l);}
+/* GLOSSARY */
+.glossary{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:4px 16px;}
+.gloss-item{padding:5px 0;border-bottom:1px solid var(--t50);font-size:14px;}
+.gloss-term{font-weight:700;color:var(--t700);}
+/* CHEAT SHEET */
+.cheat-sheet{background:linear-gradient(135deg,var(--t900),var(--t700));color:#fff;border-radius:10px;padding:18px 20px;margin:14px 0;}
+.cheat-sheet h2{font-family:var(--font-title);color:var(--mango);font-size:28px;margin-bottom:10px;letter-spacing:2px;}
+.cheat-sheet ul{list-style:none;padding:0;}
+.cheat-sheet li{padding:4px 0;font-size:15px;border-bottom:1px solid rgba(255,255,255,.1);}
+.cheat-sheet li::before{content:'→ ';color:var(--t300);font-weight:700;}
+/* CHECKLIST */
+.checklist label{display:flex;align-items:flex-start;gap:8px;padding:4px 0;font-size:14px;cursor:pointer;}
+.checklist input[type="checkbox"]{width:16px;height:16px;accent-color:var(--t500);margin-top:1px;flex-shrink:0;}
+.checklist-tier{font-family:var(--font-label);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:10px 0 4px;font-weight:600;}
+/* FINAL REVIEW */
+.final-review{background:linear-gradient(135deg,var(--t300),var(--mango),var(--coral));color:#fff;border-radius:10px;padding:20px 22px;margin:14px 0;text-align:center;}
+.final-review h2{font-family:var(--font-title);color:#fff;margin-bottom:10px;font-size:30px;letter-spacing:2px;}
+.final-review p{font-size:15px;line-height:1.65;max-width:680px;margin:0 auto;color:rgba(255,255,255,.92);}
+/* SVG GRAPHS */
+.graph-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin:10px 0;}
+.graph-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center;}
+.graph-card svg{width:100%;max-width:180px;height:auto;}
+.graph-card .graph-label{font-family:var(--font-title);font-size:16px;color:var(--t700);margin-top:3px;letter-spacing:1px;}
+.graph-card .graph-eq{font-family:var(--font-label);font-size:11px;color:var(--muted);margin-top:1px;}
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero{padding:24px 16px 20px;}.hero h1{font-size:30px;}
+  .content{padding:12px 10px;}.section{padding:14px 14px;}
+  .compare-grid{grid-template-columns:1fr;}.glossary{grid-template-columns:1fr;}
+  .graph-grid{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));}
+}
+
+
+/* SPARKLE/GLITTER SYSTEM */
+50%{opacity:.9;transform:scale(1.1);}}
+100%{background-position:200% 0;}}
+25%{opacity:1;}75%{opacity:.3;}}
+
+
+/* Shimmer overlay for formula boxes */
+
+
+/* Glitter on section headers */
+
+
+/* Sparkle accents on callout icons */
+
+
+/* Gold shimmer on cheat sheet */
+
+
+
+
+
+/* GLITTER HERO TEXTURE */
+
+/* GLITTER SECTION DIVIDERS */
+
+/* WATERCOLOR SURFBOARD POSITIONING */
+
+@media(max-width:768px){}
+
+
+/* TWO-COLUMN FORMULA LAYOUT */
+.formula-2col{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;}
+.formula-2col .formula-box{margin:0;}
+@media(max-width:768px){.formula-2col{grid-template-columns:1fr;}}
+/* UNIFORM FORMULA FONT */
+.formula-box,.formula-box p,.formula-box span{font-family:var(--font-body);font-size:16px;}
+.formula-box .katex{font-size:3.0em !important;line-height:1.4;}
+.study-table .katex{font-size:3.0em !important;}
+.compare-card .katex{font-size:3.0em !important;line-height:1.4;}
+.formula-title{font-family:var(--font-label);font-size:14px;letter-spacing:1.5px;}
+/* Ensure all callout text matches */
+.callout,.callout span,.callout em,.callout strong{font-family:var(--font-body);font-size:16px;}
+.cl{font-size:13px;}
+
+
+/* MASTER TABLE - MUCH LARGER FONT */
+.master-table{font-size:16px !important;}
+.master-table th{font-size:12px !important;padding:6px 10px !important;letter-spacing:1.2px;}
+.master-table td{padding:5px 10px !important;line-height:1.2;}
+.master-table .katex{font-size:3.0em !important;}
+
+
+/* TWO-COLUMN BENTO LAYOUT */
+.bento-content{column-count:2;column-gap:28px;column-fill:balance;}
+.bento-content .section{break-inside:avoid;page-break-inside:avoid;-webkit-column-break-inside:avoid;display:block;width:100%;}
+.bento-content .section.full-width,.bento-content .cheat-sheet,.bento-content .final-review{column-span:all;-webkit-column-span:all;break-before:column;}
+@media(max-width:900px){.bento-content{column-count:1;}}
+/* Tighten sections for bento density */
+.bento-content .section{margin-bottom:14px;padding:22px 26px;}
+.bento-content .section h2{font-size:32px;margin-bottom:10px;}
+.bento-content .section h3{font-size:24px;margin:14px 0 6px;}
+
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">CALCULUS I · COMPLETE FINAL REVIEW · THURSDAY EXAM</div>
+    <h1>CALCULUS I: <em>EVERYTHING</em> YOU NEED TO KNOW</h1>
+    <div class="hero-sub">Algebra &bull; Trig &bull; Geometry &bull; Limits &bull; Derivatives &bull; Integrals &bull; Applications</div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n">12</div><div class="stat-l">Sections</div></div>
+      <div class="stat"><div class="stat-n">90+</div><div class="stat-l">Formulas</div></div>
+      <div class="stat"><div class="stat-n">16</div><div class="stat-l">Parent Graphs</div></div>
+      <div class="stat"><div class="stat-n">20</div><div class="stat-l">Quiz Questions</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<div class="nav"><div class="nav-inner">
+  <a href="#algebra" class="nav-tab" onclick="event.preventDefault();document.getElementById('algebra').scrollIntoView({behavior:'smooth'})">Algebra</a>
+  <a href="#geometry" class="nav-tab" onclick="event.preventDefault();document.getElementById('geometry').scrollIntoView({behavior:'smooth'})">Geometry</a>
+  <a href="#trig" class="nav-tab" onclick="event.preventDefault();document.getElementById('trig').scrollIntoView({behavior:'smooth'})">Trig</a>
+  <a href="#limits" class="nav-tab" onclick="event.preventDefault();document.getElementById('limits').scrollIntoView({behavior:'smooth'})">Limits</a>
+  <a href="#deriv-rules" class="nav-tab" onclick="event.preventDefault();document.getElementById('deriv-rules').scrollIntoView({behavior:'smooth'})">Derivative Rules</a>
+  <a href="#deriv-formulas" class="nav-tab" onclick="event.preventDefault();document.getElementById('deriv-formulas').scrollIntoView({behavior:'smooth'})">Derivative Formulas</a>
+  <a href="#deriv-apps" class="nav-tab" onclick="event.preventDefault();document.getElementById('deriv-apps').scrollIntoView({behavior:'smooth'})">Deriv Applications</a>
+  <a href="#integrals" class="nav-tab" onclick="event.preventDefault();document.getElementById('integrals').scrollIntoView({behavior:'smooth'})">Integrals</a>
+  <a href="#int-apps" class="nav-tab" onclick="event.preventDefault();document.getElementById('int-apps').scrollIntoView({behavior:'smooth'})">Integral Apps</a>
+  <a href="#graphs" class="nav-tab" onclick="event.preventDefault();document.getElementById('graphs').scrollIntoView({behavior:'smooth'})">Parent Functions</a>
+  <a href="#master" class="nav-tab" onclick="event.preventDefault();document.getElementById('master').scrollIntoView({behavior:'smooth'})">Master Table</a>
+  <a href="#glossary" class="nav-tab" onclick="event.preventDefault();document.getElementById('glossary').scrollIntoView({behavior:'smooth'})">Glossary</a>
+  <a href="#cheatsheet" class="nav-tab" onclick="event.preventDefault();document.getElementById('cheatsheet').scrollIntoView({behavior:'smooth'})">Cheat Sheet</a>
+  <a href="#quiz" class="nav-tab" onclick="event.preventDefault();document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">Self-Quiz</a>
+  <a href="#checklist" class="nav-tab" onclick="event.preventDefault();document.getElementById('checklist').scrollIntoView({behavior:'smooth'})">Checklist</a>
+</div></div>
+
+<div class="content">
+<div class="bento-content">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 1: ALGEBRA BOOTCAMP -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="algebra" class="section">
+  <div class="section-tag" style="color:var(--coral);">SECTION 01 · PREREQUISITES</div>
+  <h2>ALGEBRA BOOTCAMP</h2>
+  <p>These are the algebra fundamentals that show up inside every calculus problem. You won't be tested on them directly, but you <strong>will</strong> get stuck without them.</p>
+
+  <h3>EXPONENT RULES</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--coral);">Laws of Exponents</div>
+    $$x^a \cdot x^b = x^{a+b} \qquad \frac{x^a}{x^b} = x^{a-b} \qquad (x^a)^b = x^{ab}$$
+    $$x^0 = 1 \qquad x^{-a} = \frac{1}{x^a} \qquad x^{a/b} = \sqrt[b]{x^a}$$
+    $$(xy)^a = x^a y^a \qquad \left(\frac{x}{y}\right)^a = \frac{x^a}{y^a}$$
+  </div>
+
+  <div class="callout c-memory">
+    <div class="cl">🧠 Memory Hook</div>
+    <strong>Picture two armies merging:</strong> when bases match and you multiply, the exponents join forces (add). When you divide, the bottom army deserts (subtract). When an army gets promoted (power to a power), every soldier's rank multiplies.
+  </div>
+
+  <h3>LOGARITHM RULES</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--mango);">Laws of Logarithms</div>
+    $$\log_b(xy) = \log_b x + \log_b y \qquad \log_b\!\left(\frac{x}{y}\right) = \log_b x - \log_b y$$
+    $$\log_b(x^n) = n\log_b x \qquad \log_b b = 1 \qquad \log_b 1 = 0$$
+    $$b^{\log_b x} = x \qquad \log_b(b^x) = x \qquad \log_b x = \frac{\ln x}{\ln b}$$
+  </div>
+
+  <div class="callout c-memory">
+    <div class="cl">🧠 Memory Hook</div>
+    <em>"Logs turn multiply into plus, divide into minus, and powers into front."</em> Say it in a sing-song rhythm three times. That's the whole ruleset.
+  </div>
+
+  <h3>FACTORING TECHNIQUES</h3>
+  <div class="compare-grid">
+    <div class="compare-card cc1">
+      <h4>GCF</h4>
+      <p>$6x^3 + 9x^2 = 3x^2(2x + 3)$</p>
+    </div>
+    <div class="compare-card cc2">
+      <h4>Difference of Squares</h4>
+      <p>$a^2 - b^2 = (a+b)(a-b)$</p>
+    </div>
+    <div class="compare-card cc3">
+      <h4>Sum/Diff of Cubes</h4>
+      <p>$a^3 \pm b^3 = (a \pm b)(a^2 \mp ab + b^2)$</p>
+    </div>
+    <div class="compare-card cc4">
+      <h4>Trinomial</h4>
+      <p>$x^2 + bx + c = (x+p)(x+q)$<br>where $p + q = b$ and $pq = c$</p>
+    </div>
+    <div class="compare-card cc5">
+      <h4>Grouping</h4>
+      <p>Group terms in pairs, factor each pair, then factor the common binomial.</p>
+    </div>
+    <div class="compare-card cc6">
+      <h4>Completing the Square</h4>
+      <p>$x^2 + bx + \left(\frac{b}{2}\right)^2 = \left(x + \frac{b}{2}\right)^2$</p>
+    </div>
+  </div>
+
+  <div class="callout c-memory">
+    <div class="cl">🧠 Memory Hook</div>
+    <strong>SOAP for cubes:</strong> <em>Same, Opposite, Always Positive.</em> The first sign is the <strong>Same</strong> as the original, the second is <strong>Opposite</strong>, and the last term is <strong>Always Positive</strong>.
+  </div>
+
+  <h3>QUADRATIC FORMULA & DISCRIMINANT</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--palm);">The Quadratic Formula</div>
+    $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+    <p style="margin-top:8px;font-size:13px;"><strong>Discriminant</strong> $D = b^2 - 4ac$: if $D > 0$ two real roots; $D = 0$ one repeated root; $D < 0$ no real roots.</p>
+  </div>
+
+  <h3>SPECIAL BINOMIALS & IDENTITIES</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--indigo);">Binomial Expansions</div>
+    $$(a + b)^2 = a^2 + 2ab + b^2 \qquad (a - b)^2 = a^2 - 2ab + b^2$$
+    $$(a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3$$
+  </div>
+
+  <h3>RATIONALIZATION</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--sky);">Rationalizing Denominators</div>
+    $$\frac{1}{\sqrt{a}} \cdot \frac{\sqrt{a}}{\sqrt{a}} = \frac{\sqrt{a}}{a} \qquad \frac{1}{a + \sqrt{b}} \cdot \frac{a - \sqrt{b}}{a - \sqrt{b}} = \frac{a - \sqrt{b}}{a^2 - b}$$
+  </div>
+
+  <div class="callout c-exam">
+    <div class="cl">⚡ Exam Hack</div>
+    <strong>Free response gold:</strong> When you're stuck evaluating a limit with a square root, multiply by the conjugate. Show the conjugate multiplication step explicitly for partial credit even if you mess up the arithmetic after.
+  </div>
+
+  <h3>POLYNOMIAL LONG DIVISION & SYNTHETIC DIVISION</h3>
+  <p>Use <strong>long division</strong> when dividing by any polynomial. Use <strong>synthetic division</strong> only when dividing by $(x - c)$. The remainder equals $f(c)$ by the <strong>Remainder Theorem</strong>.</p>
+
+  <div class="callout c-warning">
+    <div class="cl">⚠️ Watch Out</div>
+    If a power is "missing" in the dividend (e.g., $x^3 + 5x + 1$ has no $x^2$ term), you <strong>must</strong> insert a placeholder $0x^2$ or the division will collapse.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 2: GEOMETRY -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="geometry" class="section">
+  <div class="section-tag" style="color:var(--mango);">SECTION 02 · PREREQUISITES</div>
+  <h2>GEOMETRY & COORDINATE GEOMETRY</h2>
+
+  <h3>AREA FORMULAS</h3>
+  <div class="compare-grid">
+    <div class="compare-card cc2"><h4>Rectangle</h4><p>$A = lw$</p></div>
+    <div class="compare-card cc3"><h4>Triangle</h4><p>$A = \frac{1}{2}bh$</p></div>
+    <div class="compare-card cc4"><h4>Circle</h4><p>$A = \pi r^2$, $C = 2\pi r$</p></div>
+    <div class="compare-card cc5"><h4>Trapezoid</h4><p>$A = \frac{1}{2}(b_1 + b_2)h$</p></div>
+    <div class="compare-card cc6"><h4>Parallelogram</h4><p>$A = bh$</p></div>
+    <div class="compare-card cc1"><h4>Sector</h4><p>$A = \frac{1}{2}r^2\theta$ (radians)</p></div>
+  </div>
+
+  <h3>VOLUME FORMULAS</h3>
+  <div class="compare-grid">
+    <div class="compare-card cc8"><h4>Cylinder</h4><p>$V = \pi r^2 h$</p></div>
+    <div class="compare-card cc7"><h4>Cone</h4><p>$V = \frac{1}{3}\pi r^2 h$</p></div>
+    <div class="compare-card cc4"><h4>Sphere</h4><p>$V = \frac{4}{3}\pi r^3$, $SA = 4\pi r^2$</p></div>
+    <div class="compare-card cc5"><h4>Rectangular Box</h4><p>$V = lwh$</p></div>
+  </div>
+
+  <h3>COORDINATE GEOMETRY</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--palm);">Essential Formulas</div>
+    $$\text{Distance: } d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+    $$\text{Midpoint: } M = \left(\frac{x_1 + x_2}{2},\; \frac{y_1 + y_2}{2}\right)$$
+    $$\text{Slope: } m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{\Delta y}{\Delta x}$$
+    $$\text{Point-Slope: } y - y_1 = m(x - x_1) \qquad \text{Slope-Intercept: } y = mx + b$$
+    $$\text{Circle: } (x - h)^2 + (y - k)^2 = r^2$$
+  </div>
+
+  <div class="callout c-memory">
+    <div class="cl">🧠 Memory Hook</div>
+    <em>"Rise over run, that's how slope is done."</em> $\Delta y$ on top, $\Delta x$ on the bottom. Picture yourself climbing a hill: how much you go UP divided by how far you go ACROSS.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 3: TRIGONOMETRY -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="trig" class="section full-width">
+  <div class="section-tag" style="color:var(--sand);">SECTION 03 · PREREQUISITES</div>
+  <h2>TRIGONOMETRY ESSENTIALS</h2>
+
+  <h3>SOH-CAH-TOA & RECIPROCALS</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--sand);">Basic Trig Ratios</div>
+    $$\sin\theta = \frac{\text{opp}}{\text{hyp}} \qquad \cos\theta = \frac{\text{adj}}{\text{hyp}} \qquad \tan\theta = \frac{\text{opp}}{\text{adj}} = \frac{\sin\theta}{\cos\theta}$$
+    $$\csc\theta = \frac{1}{\sin\theta} \qquad \sec\theta = \frac{1}{\cos\theta} \qquad \cot\theta = \frac{1}{\tan\theta} = \frac{\cos\theta}{\sin\theta}$$
+  </div>
+
+  <h3>UNIT CIRCLE KEY VALUES</h3>
+  <div style="text-align:center;margin:10px 0;">
+        <svg viewBox="0 0 900 920" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:800px;background:#fffdf6;border-radius:10px;border:1px solid #e8ddd0;padding:10px;">
+      <!-- Axes -->
+      <line x1="30" y1="450" x2="870" y2="450" stroke="#e0dcd4" stroke-width="1"/>
+      <line x1="450" y1="30" x2="450" y2="890" stroke="#e0dcd4" stroke-width="1"/>
+      <!-- Circle -->
+      <circle cx="450" cy="450" r="260" fill="none" stroke="#388880" stroke-width="2"/>
+      <!-- Quadrant labels -->
+      <text x="510" y="410" font-family="IBM Plex Mono" font-size="11" fill="#388880" opacity=".3">I (+,+)</text>
+      <text x="330" y="410" font-family="IBM Plex Mono" font-size="11" fill="#388880" opacity=".3">II (−,+)</text>
+      <text x="330" y="505" font-family="IBM Plex Mono" font-size="11" fill="#388880" opacity=".3">III (−,−)</text>
+      <text x="510" y="505" font-family="IBM Plex Mono" font-size="11" fill="#388880" opacity=".3">IV (+,−)</text>
+      <!-- 0° -->
+      <circle cx="710" cy="450" r="5" fill="#e07838"/>
+      <line x1="712" y1="450" x2="726" y2="449" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="730" y="445" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600">0°</text>
+      <text x="730" y="461" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64">(1, 0)</text>
+      <!-- 30° -->
+      <circle cx="675" cy="320" r="5" fill="#e85868"/>
+      <line x1="677" y1="320" x2="726" y2="294" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="730" y="290" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600">30° = π/6</text>
+      <text x="730" y="306" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64">(√3/2, 1/2)</text>
+      <!-- 45° -->
+      <circle cx="634" cy="266" r="5" fill="#40a870"/>
+      <line x1="636" y1="266" x2="726" y2="244" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="730" y="240" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600">45° = π/4</text>
+      <text x="730" y="256" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64">(√2/2, √2/2)</text>
+      <!-- 60° -->
+      <circle cx="580" cy="225" r="5" fill="#5868a8"/>
+      <line x1="582" y1="225" x2="726" y2="194" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="730" y="190" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600">60° = π/3</text>
+      <text x="730" y="206" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64">(1/2, √3/2)</text>
+      <!-- 90° -->
+      <circle cx="450" cy="190" r="5" fill="#e07838"/>
+      <line x1="450" y1="188" x2="450" y2="160" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="450" y="145" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600" text-anchor="middle">90° = π/2</text>
+      <text x="450" y="130" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64" text-anchor="middle">(0, 1)</text>
+      <!-- 120° -->
+      <circle cx="320" cy="225" r="5" fill="#5868a8"/>
+      <line x1="318" y1="225" x2="170" y2="194" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="10" y="190" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600">120° = 2π/3</text>
+      <text x="10" y="206" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64">(−1/2, √3/2)</text>
+      <!-- 135° -->
+      <circle cx="266" cy="266" r="5" fill="#40a870"/>
+      <line x1="264" y1="266" x2="170" y2="244" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="10" y="240" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600">135° = 3π/4</text>
+      <text x="10" y="256" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64">(−√2/2, √2/2)</text>
+      <!-- 150° -->
+      <circle cx="225" cy="320" r="5" fill="#e85868"/>
+      <line x1="223" y1="320" x2="170" y2="294" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="10" y="290" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600">150° = 5π/6</text>
+      <text x="10" y="306" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64">(−√3/2, 1/2)</text>
+      <!-- 180° -->
+      <circle cx="190" cy="450" r="5" fill="#e07838"/>
+      <line x1="188" y1="450" x2="170" y2="449" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="10" y="445" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600">180° = π</text>
+      <text x="10" y="461" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64">(−1, 0)</text>
+      <!-- 210° -->
+      <circle cx="225" cy="580" r="5" fill="#e85868"/>
+      <line x1="223" y1="580" x2="170" y2="604" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="10" y="600" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600">210° = 7π/6</text>
+      <text x="10" y="616" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64">(−√3/2, −1/2)</text>
+      <!-- 225° -->
+      <circle cx="266" cy="634" r="5" fill="#40a870"/>
+      <line x1="264" y1="634" x2="170" y2="654" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="10" y="650" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600">225° = 5π/4</text>
+      <text x="10" y="666" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64">(−√2/2, −√2/2)</text>
+      <!-- 240° -->
+      <circle cx="320" cy="675" r="5" fill="#5868a8"/>
+      <line x1="318" y1="675" x2="170" y2="704" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="10" y="700" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600">240° = 4π/3</text>
+      <text x="10" y="716" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64">(−1/2, −√3/2)</text>
+      <!-- 270° -->
+      <circle cx="450" cy="710" r="5" fill="#e07838"/>
+      <line x1="450" y1="712" x2="450" y2="740" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="450" y="760" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600" text-anchor="middle">270° = 3π/2</text>
+      <text x="450" y="776" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64" text-anchor="middle">(0, −1)</text>
+      <!-- 300° -->
+      <circle cx="580" cy="675" r="5" fill="#5868a8"/>
+      <line x1="582" y1="675" x2="726" y2="704" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="730" y="700" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600">300° = 5π/3</text>
+      <text x="730" y="716" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64">(1/2, −√3/2)</text>
+      <!-- 315° -->
+      <circle cx="634" cy="634" r="5" fill="#40a870"/>
+      <line x1="636" y1="634" x2="726" y2="654" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="730" y="650" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600">315° = 7π/4</text>
+      <text x="730" y="666" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64">(√2/2, −√2/2)</text>
+      <!-- 330° -->
+      <circle cx="675" cy="580" r="5" fill="#e85868"/>
+      <line x1="677" y1="580" x2="726" y2="604" stroke="#e0dcd4" stroke-width=".7"/>
+      <text x="730" y="600" font-family="IBM Plex Mono" font-size="13" fill="#2a2420" font-weight="600">330° = 11π/6</text>
+      <text x="730" y="616" font-family="IBM Plex Mono" font-size="11" fill="#7a6e64">(√3/2, −1/2)</text>
+      <!-- Axis labels -->
+      <text x="450" y="24" font-family="Bebas Neue" font-size="16" fill="#388880" text-anchor="middle">+Y</text>
+      <text x="880" y="455" font-family="Bebas Neue" font-size="16" fill="#388880">+X</text>
+      <text x="10" y="455" font-family="Bebas Neue" font-size="16" fill="#388880">−X</text>
+      <!-- Color legend -->
+      <circle cx="120" cy="900" r="4" fill="#e07838"/><text x="130" y="904" font-family="IBM Plex Mono" font-size="10" fill="#7a6e64">Axis points</text>
+      <circle cx="260" cy="900" r="4" fill="#e85868"/><text x="270" y="904" font-family="IBM Plex Mono" font-size="10" fill="#7a6e64">30° family</text>
+      <circle cx="400" cy="900" r="4" fill="#40a870"/><text x="410" y="904" font-family="IBM Plex Mono" font-size="10" fill="#7a6e64">45° family</text>
+      <circle cx="540" cy="900" r="4" fill="#5868a8"/><text x="550" y="904" font-family="IBM Plex Mono" font-size="10" fill="#7a6e64">60° family</text>
+    </svg>
+  </div>
+  <div class="table-wrap">
+    <table class="study-table">
+      <tr><th>$\theta$ (deg)</th><th>$\theta$ (rad)</th><th>$\sin\theta$</th><th>$\cos\theta$</th><th>$\tan\theta$</th></tr>
+      <tr><td>$0°$</td><td>$0$</td><td>$0$</td><td>$1$</td><td>$0$</td></tr>
+      <tr><td>$30°$</td><td>$\frac{\pi}{6}$</td><td>$\frac{1}{2}$</td><td>$\frac{\sqrt{3}}{2}$</td><td>$\frac{\sqrt{3}}{3}$</td></tr>
+      <tr><td>$45°$</td><td>$\frac{\pi}{4}$</td><td>$\frac{\sqrt{2}}{2}$</td><td>$\frac{\sqrt{2}}{2}$</td><td>$1$</td></tr>
+      <tr><td>$60°$</td><td>$\frac{\pi}{3}$</td><td>$\frac{\sqrt{3}}{2}$</td><td>$\frac{1}{2}$</td><td>$\sqrt{3}$</td></tr>
+      <tr><td>$90°$</td><td>$\frac{\pi}{2}$</td><td>$1$</td><td>$0$</td><td>undef</td></tr>
+      <tr><td>$180°$</td><td>$\pi$</td><td>$0$</td><td>$-1$</td><td>$0$</td></tr>
+      <tr><td>$270°$</td><td>$\frac{3\pi}{2}$</td><td>$-1$</td><td>$0$</td><td>undef</td></tr>
+      <tr><td>$360°$</td><td>$2\pi$</td><td>$0$</td><td>$1$</td><td>$0$</td></tr>
+    </table>
+  </div>
+
+  <div class="callout c-memory">
+    <div class="cl">🧠 Memory Hook</div>
+    <strong>The finger trick for sin:</strong> Picture your left hand, fingers spread. Thumb = 0°, index = 30°, middle = 45°, ring = 60°, pinky = 90°. For $\sin$: fold down the finger, count fingers BELOW it, put that number under a square root, divide by 2. So $\sin(30°)$: fold index finger, 1 finger below = $\frac{\sqrt{1}}{2} = \frac{1}{2}$. For $\cos$: count fingers ABOVE the folded one instead.
+  </div>
+
+  <h3>PYTHAGOREAN IDENTITIES</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--coral);">The Big Three</div>
+    $$\sin^2\theta + \cos^2\theta = 1$$
+    $$1 + \tan^2\theta = \sec^2\theta$$
+    $$1 + \cot^2\theta = \csc^2\theta$$
+  </div>
+
+  <div class="callout c-memory">
+    <div class="cl">🧠 Memory Hook</div>
+    <em>"Sin-cos is the OG, divide by cos-squared you get tan-sec, divide by sin-squared you get cot-csc."</em> One identity, two divisions, all three formulas.
+  </div>
+
+  <h3>DOUBLE ANGLE & HALF ANGLE</h3>
+  <div class="formula-2col">
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--indigo);">Double Angle Formulas</div>
+    $$\sin(2\theta) = 2\sin\theta\cos\theta$$
+    $$\cos(2\theta) = \cos^2\theta - \sin^2\theta$$
+    $$= 2\cos^2\theta - 1 = 1 - 2\sin^2\theta$$
+    $$\tan(2\theta) = \frac{2\tan\theta}{1 - \tan^2\theta}$$
+  </div>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--plum);">Half Angle (Power-Reducing)</div>
+    $$\sin^2\theta = \frac{1 - \cos(2\theta)}{2}$$
+    $$\cos^2\theta = \frac{1 + \cos(2\theta)}{2}$$
+  </div>
+  </div>
+
+  <h3>SUM & DIFFERENCE FORMULAS</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--sky);">Sum/Difference Identities</div>
+    $$\sin(\alpha \pm \beta) = \sin\alpha\cos\beta \pm \cos\alpha\sin\beta$$
+    $$\cos(\alpha \pm \beta) = \cos\alpha\cos\beta \mp \sin\alpha\sin\beta$$
+    $$\tan(\alpha \pm \beta) = \frac{\tan\alpha \pm \tan\beta}{1 \mp \tan\alpha\tan\beta}$$
+  </div>
+
+  <div class="callout c-warning">
+    <div class="cl">⚠️ Watch Out</div>
+    The $\cos$ sum/difference formula flips the sign ($\mp$ not $\pm$). "Cosine is contrary." If the angle has a plus, the middle gets a minus.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 4: LIMITS -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="limits" class="section">
+  <div class="section-tag" style="color:var(--palm);">SECTION 04</div>
+  <h2>LIMITS & CONTINUITY</h2>
+
+  <h3>LIMIT DEFINITION</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--palm);">Formal (Epsilon-Delta) Definition</div>
+    $$\lim_{x \to a} f(x) = L \;\;\text{ means: for every } \varepsilon > 0 \text{ there exists } \delta > 0 \text{ such that}$$
+    $$\text{if } 0 < |x - a| < \delta, \text{ then } |f(x) - L| < \varepsilon$$
+  </div>
+
+  <div class="callout c-memory">
+    <div class="cl">🧠 Memory Hook</div>
+    <strong>Picture a target:</strong> $\varepsilon$ is how tight the bullseye is (how close $f(x)$ must be to $L$). $\delta$ is how close $x$ must stand to the throw line $a$. The limit exists if for ANY bullseye size, there's always a close-enough throw line.
+  </div>
+
+  <h3>LIMIT LAWS</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--teal);">Properties (assuming both limits exist)</div>
+    $$\lim[f(x) \pm g(x)] = \lim f(x) \pm \lim g(x)$$
+    $$\lim[f(x) \cdot g(x)] = \lim f(x) \cdot \lim g(x)$$
+    $$\lim\frac{f(x)}{g(x)} = \frac{\lim f(x)}{\lim g(x)} \quad (\text{if } \lim g(x) \neq 0)$$
+    $$\lim[cf(x)] = c \cdot \lim f(x) \qquad \lim[f(x)]^n = [\lim f(x)]^n$$
+  </div>
+
+  <h3>SPECIAL LIMITS</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--mango);">Must-Know Special Limits</div>
+    $$\lim_{x \to 0}\frac{\sin x}{x} = 1 \qquad \lim_{x \to 0}\frac{1 - \cos x}{x} = 0$$
+    $$\lim_{x \to 0}\frac{e^x - 1}{x} = 1 \qquad \lim_{x \to \infty}\left(1 + \frac{1}{x}\right)^x = e$$
+  </div>
+
+  <h3>LIMIT TECHNIQUES</h3>
+  <div class="steps-box">
+    <div class="step"><div class="step-num">1</div><div><strong>Direct substitution.</strong> Plug in. If you get a number, done.</div></div>
+    <div class="step"><div class="step-num">2</div><div><strong>If $\frac{0}{0}$:</strong> Factor and cancel, rationalize (conjugate), or use L'Hôpital's Rule.</div></div>
+    <div class="step"><div class="step-num">3</div><div><strong>If $\frac{k}{0}$:</strong> Check one-sided limits. Likely $\pm\infty$ or DNE.</div></div>
+    <div class="step"><div class="step-num">4</div><div><strong>Limits at infinity:</strong> Divide every term by the highest power of $x$ in the denominator.</div></div>
+    <div class="step"><div class="step-num">5</div><div><strong>Squeeze Theorem:</strong> If $g(x) \le f(x) \le h(x)$ and $\lim g = \lim h = L$, then $\lim f = L$.</div></div>
+  </div>
+
+  <h3>CONTINUITY</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--sky);">Three Conditions for Continuity at $x = a$</div>
+    <p>1. $f(a)$ is defined &nbsp;&nbsp; 2. $\lim_{x \to a} f(x)$ exists &nbsp;&nbsp; 3. $\lim_{x \to a} f(x) = f(a)$</p>
+  </div>
+
+  <div class="callout c-key">
+    <div class="cl">🔑 Key Concept</div>
+    <strong>Intermediate Value Theorem (IVT):</strong> If $f$ is continuous on $[a, b]$ and $N$ is between $f(a)$ and $f(b)$, then there exists at least one $c \in (a, b)$ such that $f(c) = N$. Used to prove a root exists.
+  </div>
+
+  <div class="callout c-exam">
+    <div class="cl">⚡ Exam Hack</div>
+    <strong>For IVT problems on free response:</strong> state (1) $f$ is continuous on $[a,b]$ (say why), (2) $f(a)$ and $f(b)$ have opposite signs (compute them), (3) therefore by IVT, there exists $c$ where $f(c) = 0$. Three sentences, full credit.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 5: DERIVATIVE RULES -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="deriv-rules" class="section">
+  <div class="section-tag" style="color:var(--teal);">SECTION 05</div>
+  <h2>DERIVATIVE RULES</h2>
+
+  <h3>LIMIT DEFINITION OF DERIVATIVE</h3>
+  <div class="formula-2col">
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--teal);">Form 1: General</div>
+    $$f'(x) = \lim_{h \to 0}\frac{f(x+h) - f(x)}{h}$$
+  </div>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--teal);">Form 2: At a Point</div>
+    $$f'(a) = \lim_{x \to a}\frac{f(x) - f(a)}{x - a}$$
+  </div>
+  </div>
+
+  <h3>THE BIG FOUR RULES</h3>
+  <div class="compare-grid">
+    <div class="compare-card cc3">
+      <h4>Power Rule</h4>
+      <p>$$\frac{d}{dx}[x^n] = nx^{n-1}$$</p>
+      <p style="font-size:12px;">Works for ALL real $n$, including negatives and fractions.</p>
+    </div>
+    <div class="compare-card cc4">
+      <h4>Product Rule</h4>
+      <p>$$\frac{d}{dx}[fg] = f'g + fg'$$</p>
+      <p style="font-size:12px;"><em>"First d-second plus second d-first."</em></p>
+    </div>
+    <div class="compare-card cc1">
+      <h4>Quotient Rule</h4>
+      <p>$$\frac{d}{dx}\!\left[\frac{f}{g}\right] = \frac{f'g - fg'}{g^2}$$</p>
+      <p style="font-size:12px;"><em>"Low d-high minus high d-low, square the bottom and away we go."</em></p>
+    </div>
+    <div class="compare-card cc5">
+      <h4>Chain Rule</h4>
+      <p>$$\frac{d}{dx}[f(g(x))] = f'(g(x)) \cdot g'(x)$$</p>
+      <p style="font-size:12px;">Derivative of the outside, leave inside alone, times derivative of inside.</p>
+    </div>
+  </div>
+
+  <div class="callout c-memory">
+    <div class="cl">🧠 Memory Hook</div>
+    <strong>Quotient Rule rhythm:</strong> <em>"Lo dee-Hi minus Hi dee-Lo, draw the line and square below."</em> Sing it. $g$ is Lo (bottom), $f$ is Hi (top). The denominator is $g^2$ (square below).
+  </div>
+
+  <div class="callout c-warning">
+    <div class="cl">⚠️ Watch Out</div>
+    The <strong>product rule has a PLUS</strong> sign. The <strong>quotient rule has a MINUS</strong> sign. They are NOT interchangeable. The quotient rule's numerator order matters: it's $f'g - fg'$, not $fg' - f'g$.
+  </div>
+
+  <h3>CONSTANT & SUM RULES</h3>
+  <div class="formula-box">
+    $$\frac{d}{dx}[c] = 0 \qquad \frac{d}{dx}[cf(x)] = cf'(x) \qquad \frac{d}{dx}[f \pm g] = f' \pm g'$$
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 6: DERIVATIVE FORMULAS -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="deriv-formulas" class="section">
+  <div class="section-tag" style="color:var(--sky);">SECTION 06</div>
+  <h2>DERIVATIVE FORMULAS TABLE</h2>
+  <p>Every derivative formula you need. This is the section to screenshot.</p>
+
+  <h3>TRIG DERIVATIVES</h3>
+  <div class="table-wrap">
+    <table class="study-table">
+      <tr><th>Function</th><th>Derivative</th></tr>
+      <tr><td>$\sin x$</td><td>$\cos x$</td></tr>
+      <tr><td>$\cos x$</td><td>$-\sin x$</td></tr>
+      <tr><td>$\tan x$</td><td>$\sec^2 x$</td></tr>
+      <tr><td>$\cot x$</td><td>$-\csc^2 x$</td></tr>
+      <tr><td>$\sec x$</td><td>$\sec x \tan x$</td></tr>
+      <tr><td>$\csc x$</td><td>$-\csc x \cot x$</td></tr>
+    </table>
+  </div>
+
+  <div class="callout c-memory">
+    <div class="cl">🧠 Memory Hook</div>
+    <strong>The "co" functions all get negatives.</strong> $\cos$, $\cot$, $\csc$ are the "co" crew, and their derivatives always carry a negative sign. Picture the "co" functions as the moody twins who always flip the sign.
+  </div>
+
+  <h3>INVERSE TRIG DERIVATIVES</h3>
+  <div class="table-wrap">
+    <table class="study-table">
+      <tr><th>Function</th><th>Derivative</th></tr>
+      <tr><td>$\arcsin x$</td><td>$\dfrac{1}{\sqrt{1 - x^2}}$</td></tr>
+      <tr><td>$\arccos x$</td><td>$\dfrac{-1}{\sqrt{1 - x^2}}$</td></tr>
+      <tr><td>$\arctan x$</td><td>$\dfrac{1}{1 + x^2}$</td></tr>
+      <tr><td>$\text{arccot}\; x$</td><td>$\dfrac{-1}{1 + x^2}$</td></tr>
+      <tr><td>$\text{arcsec}\; x$</td><td>$\dfrac{1}{|x|\sqrt{x^2 - 1}}$</td></tr>
+      <tr><td>$\text{arccsc}\; x$</td><td>$\dfrac{-1}{|x|\sqrt{x^2 - 1}}$</td></tr>
+    </table>
+  </div>
+
+  <div class="callout c-memory">
+    <div class="cl">🧠 Memory Hook</div>
+    <em>"Arc-sin has a $1 - x^2$ under a root. Arc-tan has a $1 + x^2$ with no root."</em> Just remember those two; the "co" versions are the same but negative.
+  </div>
+
+  <h3>EXPONENTIAL & LOGARITHMIC</h3>
+  <div class="formula-2col">
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--mango);">Exponential Derivatives</div>
+    $$\frac{d}{dx}[e^x] = e^x$$
+    $$\frac{d}{dx}[a^x] = a^x \ln a$$
+    $$\frac{d}{dx}[e^{u}] = e^{u} \cdot u'$$
+  </div>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--mango);">Logarithmic Derivatives</div>
+    $$\frac{d}{dx}[\ln x] = \frac{1}{x}$$
+    $$\frac{d}{dx}[\log_a x] = \frac{1}{x \ln a}$$
+    $$\frac{d}{dx}[\ln u] = \frac{u'}{u}$$
+  </div>
+  </div>
+
+  <div class="callout c-key">
+    <div class="cl">🔑 Key Concept</div>
+    <strong>Logarithmic Differentiation:</strong> For products/quotients of many terms or variable-base-variable-exponent like $x^x$: take $\ln$ of both sides, use log rules to simplify, then differentiate implicitly.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 7: APPLICATIONS OF DERIVATIVES -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="deriv-apps" class="section">
+  <div class="section-tag" style="color:var(--indigo);">SECTION 07</div>
+  <h2>APPLICATIONS OF DERIVATIVES</h2>
+
+  <h3>IMPLICIT DIFFERENTIATION</h3>
+  <div class="steps-box">
+    <div class="step"><div class="step-num">1</div><div>Differentiate both sides with respect to $x$.</div></div>
+    <div class="step"><div class="step-num">2</div><div>Every time you differentiate a $y$ term, multiply by $\frac{dy}{dx}$ (chain rule).</div></div>
+    <div class="step"><div class="step-num">3</div><div>Collect all $\frac{dy}{dx}$ terms on one side, factor it out, solve.</div></div>
+  </div>
+
+  <h3>RELATED RATES</h3>
+  <div class="steps-box">
+    <div class="step"><div class="step-num">1</div><div><strong>Draw a picture.</strong> Label all variables.</div></div>
+    <div class="step"><div class="step-num">2</div><div><strong>Write an equation</strong> relating the variables (geometry formula, Pythagorean theorem, etc.).</div></div>
+    <div class="step"><div class="step-num">3</div><div><strong>Differentiate both sides</strong> with respect to $t$ (time). Use chain rule.</div></div>
+    <div class="step"><div class="step-num">4</div><div><strong>Substitute known values</strong> and solve for the unknown rate.</div></div>
+  </div>
+
+  <div class="callout c-exam">
+    <div class="cl">⚡ Exam Hack</div>
+    <strong>Never substitute numbers before differentiating.</strong> This is the #1 related rates mistake. If you plug in the specific values too early, those become constants and their derivatives vanish. Differentiate first, substitute second.
+  </div>
+
+  <h3>L'HÔPITAL'S RULE</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--coral);">L'Hôpital's Rule</div>
+    $$\text{If } \lim\frac{f}{g} = \frac{0}{0} \text{ or } \frac{\infty}{\infty}, \text{ then } \lim\frac{f}{g} = \lim\frac{f'}{g'}$$
+  </div>
+
+  <div class="callout c-warning">
+    <div class="cl">⚠️ Watch Out</div>
+    L'Hôpital's Rule ONLY applies to $\frac{0}{0}$ or $\frac{\infty}{\infty}$ forms. If it's $\frac{5}{0}$ or $\frac{0}{3}$, you CANNOT use it. Also: you differentiate numerator and denominator SEPARATELY (not the quotient rule).
+  </div>
+
+  <h3>CURVE SKETCHING TOOLKIT</h3>
+  <div class="compare-grid">
+    <div class="compare-card cc3">
+      <h4>First Derivative Test</h4>
+      <p>$f'(x) > 0$: increasing<br>$f'(x) < 0$: decreasing<br>Sign change $+$ to $-$: local max<br>Sign change $-$ to $+$: local min</p>
+    </div>
+    <div class="compare-card cc5">
+      <h4>Second Derivative Test</h4>
+      <p>$f''(x) > 0$: concave up (cup)<br>$f''(x) < 0$: concave down (cap)<br>At critical point $c$:<br>$f''(c) > 0$ → local min<br>$f''(c) < 0$ → local max</p>
+    </div>
+    <div class="compare-card cc4">
+      <h4>Inflection Points</h4>
+      <p>Where $f''(x) = 0$ <strong>AND</strong> concavity changes sign. Not every zero of $f''$ is an inflection point.</p>
+    </div>
+  </div>
+
+  <div class="callout c-memory">
+    <div class="cl">🧠 Memory Hook</div>
+    <strong>Concave UP = CUP</strong> (holds water, smiley face, $f'' > 0$). <strong>Concave DOWN = CAP/frown</strong> (dumps water, $f'' < 0$). Picture pouring water onto the curve.
+  </div>
+
+  <h3>CURVE SKETCHING WORKED EXAMPLE</h3>
+  <p>Sketch $f(x) = x^3 - 3x + 2$. Here's the full analysis:</p>
+  <div style="text-align:center;margin:8px 0;">
+    <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px;background:#fffdf6;border-radius:8px;border:1px solid #e8ddd0;">
+      <!-- Grid -->
+      <line x1="40" y1="140" x2="380" y2="140" stroke="#d0d0d0" stroke-width="1"/>
+      <line x1="200" y1="20" x2="200" y2="260" stroke="#d0d0d0" stroke-width="1"/>
+      <!-- Curve: x³ - 3x + 2 scaled -->
+      <path d="M50,230 C80,250 120,250 160,180 C180,140 190,80 200,60 C210,40 220,30 240,20 C270,50 290,80 310,140 C330,200 350,240 380,260" fill="none" stroke="#0e2e2c" stroke-width="2.5"/>
+      <!-- Local max at x=-1, f(-1)=4 -->
+      <circle cx="140" cy="55" r="5" fill="#e85868"/>
+      <text x="90" y="48" font-family="IBM Plex Mono" font-size="9" fill="#e85868" font-weight="600">LOCAL MAX</text>
+      <text x="90" y="60" font-family="IBM Plex Mono" font-size="8" fill="#7a6e64">(-1, 4)</text>
+      <!-- Local min at x=1, f(1)=0 -->
+      <circle cx="260" cy="140" r="5" fill="#40a870"/>
+      <text x="270" y="133" font-family="IBM Plex Mono" font-size="9" fill="#40a870" font-weight="600">LOCAL MIN</text>
+      <text x="270" y="145" font-family="IBM Plex Mono" font-size="8" fill="#7a6e64">(1, 0)</text>
+      <!-- Inflection point at x=0 -->
+      <circle cx="200" cy="97" r="5" fill="#5868a8"/>
+      <text x="210" y="92" font-family="IBM Plex Mono" font-size="9" fill="#5868a8" font-weight="600">INFLECTION</text>
+      <text x="210" y="104" font-family="IBM Plex Mono" font-size="8" fill="#7a6e64">(0, 2)</text>
+      <!-- Concavity labels -->
+      <text x="100" y="268" font-family="IBM Plex Mono" font-size="8" fill="#8858a0">f'' &lt; 0 (concave down)</text>
+      <text x="260" y="268" font-family="IBM Plex Mono" font-size="8" fill="#8858a0">f'' &gt; 0 (concave up)</text>
+      <!-- Increasing/decreasing -->
+      <path d="M60,25 L80,20" fill="none" stroke="#40a870" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="55" y="18" font-family="IBM Plex Mono" font-size="7" fill="#40a870">↗ inc</text>
+      <text x="155" y="180" font-family="IBM Plex Mono" font-size="7" fill="#e85868">↘ dec</text>
+      <text x="310" y="210" font-family="IBM Plex Mono" font-size="7" fill="#40a870">↗ inc</text>
+    </svg>
+  </div>
+  <div class="steps-box">
+    <div class="step"><div class="step-num">1</div><div><strong>$f'(x) = 3x^2 - 3 = 3(x+1)(x-1)$.</strong> Critical points at $x = -1$ and $x = 1$.</div></div>
+    <div class="step"><div class="step-num">2</div><div><strong>$f'(x) > 0$ on $(-\infty,-1)$ and $(1,\infty)$</strong> → increasing. $f'(x) < 0$ on $(-1,1)$ → decreasing.</div></div>
+    <div class="step"><div class="step-num">3</div><div><strong>$f''(x) = 6x$.</strong> $f''(-1) = -6 < 0$ → local max at $(-1, 4)$. $f''(1) = 6 > 0$ → local min at $(1, 0)$.</div></div>
+    <div class="step"><div class="step-num">4</div><div><strong>$f''(x) = 0$ at $x = 0$.</strong> Sign changes from $-$ to $+$ → inflection point at $(0, 2)$.</div></div>
+  </div>
+
+  <h3>OPTIMIZATION</h3>
+  <div class="steps-box">
+    <div class="step"><div class="step-num">1</div><div><strong>Identify what to maximize/minimize.</strong> Write it as a function of one variable.</div></div>
+    <div class="step"><div class="step-num">2</div><div><strong>Use a constraint equation</strong> to eliminate a variable if needed.</div></div>
+    <div class="step"><div class="step-num">3</div><div><strong>Take the derivative,</strong> set it equal to zero, solve for critical points.</div></div>
+    <div class="step"><div class="step-num">4</div><div><strong>Check endpoints</strong> (if closed interval) and critical points. Compare values.</div></div>
+    <div class="step"><div class="step-num">5</div><div><strong>Answer the actual question.</strong> They often want the dimensions, not just the max/min value.</div></div>
+  </div>
+
+  <h3>MEAN VALUE THEOREM</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--plum);">MVT</div>
+    $$\text{If } f \text{ is continuous on } [a,b] \text{ and differentiable on } (a,b), \text{ then } \exists\; c \in (a,b):$$
+    $$f'(c) = \frac{f(b) - f(a)}{b - a}$$
+  </div>
+
+  <div class="callout c-memory">
+    <div class="cl">🧠 Memory Hook</div>
+    <em>"Somewhere on the road trip, your speedometer hit the average speed."</em> The instantaneous rate (slope of tangent) equals the average rate (slope of secant) at some point $c$.
+  </div>
+
+  <h3>LINEAR APPROXIMATION</h3>
+  <div class="formula-2col">
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--sky);">Linearization</div>
+    $$L(x) = f(a) + f'(a)(x - a)$$
+    <p style="font-size:11px;margin-top:3px;">$f(x) \approx L(x)$ near $x = a$</p>
+  </div>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--sky);">Differentials</div>
+    $$dy = f'(x)\,dx$$
+    <p style="font-size:11px;margin-top:3px;">Used for approximation problems</p>
+  </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 8: INTEGRALS -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="integrals" class="section">
+  <div class="section-tag" style="color:var(--plum);">SECTION 08</div>
+  <h2>INTEGRALS</h2>
+
+  <h3>RIEMANN SUMS (VISUAL)</h3>
+  <p>Approximating area under a curve using rectangles. The more rectangles, the better the approximation.</p>
+  <div class="graph-grid" style="grid-template-columns:repeat(3,1fr);">
+    <!-- LEFT RIEMANN -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="160" fill="#fffdf6"/>
+        <line x1="30" y1="140" x2="190" y2="140" stroke="#888" stroke-width="1"/>
+        <line x1="30" y1="10" x2="30" y2="140" stroke="#888" stroke-width="1"/>
+        <rect x="30" y="80" width="40" height="60" fill="#d0f0dc" stroke="#40a870" stroke-width="1" opacity=".7"/>
+        <rect x="70" y="55" width="40" height="85" fill="#d0f0dc" stroke="#40a870" stroke-width="1" opacity=".7"/>
+        <rect x="110" y="38" width="40" height="102" fill="#d0f0dc" stroke="#40a870" stroke-width="1" opacity=".7"/>
+        <rect x="150" y="30" width="40" height="110" fill="#d0f0dc" stroke="#40a870" stroke-width="1" opacity=".7"/>
+        <path d="M30,80 C60,58 100,38 190,25" fill="none" stroke="#0e2e2c" stroke-width="2"/>
+      </svg>
+      <div class="graph-label">LEFT RIEMANN</div>
+      <div class="graph-eq">Uses left endpoint height</div>
+    </div>
+    <!-- RIGHT RIEMANN -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="160" fill="#fffdf6"/>
+        <line x1="30" y1="140" x2="190" y2="140" stroke="#888" stroke-width="1"/>
+        <line x1="30" y1="10" x2="30" y2="140" stroke="#888" stroke-width="1"/>
+        <rect x="30" y="55" width="40" height="85" fill="#fce4cc" stroke="#e07838" stroke-width="1" opacity=".7"/>
+        <rect x="70" y="38" width="40" height="102" fill="#fce4cc" stroke="#e07838" stroke-width="1" opacity=".7"/>
+        <rect x="110" y="30" width="40" height="110" fill="#fce4cc" stroke="#e07838" stroke-width="1" opacity=".7"/>
+        <rect x="150" y="25" width="40" height="115" fill="#fce4cc" stroke="#e07838" stroke-width="1" opacity=".7"/>
+        <path d="M30,80 C60,58 100,38 190,25" fill="none" stroke="#0e2e2c" stroke-width="2"/>
+      </svg>
+      <div class="graph-label">RIGHT RIEMANN</div>
+      <div class="graph-eq">Uses right endpoint height</div>
+    </div>
+    <!-- MIDPOINT -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="160" fill="#fffdf6"/>
+        <line x1="30" y1="140" x2="190" y2="140" stroke="#888" stroke-width="1"/>
+        <line x1="30" y1="10" x2="30" y2="140" stroke="#888" stroke-width="1"/>
+        <rect x="30" y="67" width="40" height="73" fill="#dce0f4" stroke="#5868a8" stroke-width="1" opacity=".7"/>
+        <rect x="70" y="46" width="40" height="94" fill="#dce0f4" stroke="#5868a8" stroke-width="1" opacity=".7"/>
+        <rect x="110" y="34" width="40" height="106" fill="#dce0f4" stroke="#5868a8" stroke-width="1" opacity=".7"/>
+        <rect x="150" y="27" width="40" height="113" fill="#dce0f4" stroke="#5868a8" stroke-width="1" opacity=".7"/>
+        <path d="M30,80 C60,58 100,38 190,25" fill="none" stroke="#0e2e2c" stroke-width="2"/>
+      </svg>
+      <div class="graph-label">MIDPOINT</div>
+      <div class="graph-eq">Uses midpoint height (most accurate)</div>
+    </div>
+  </div>
+
+  <h3>FUNDAMENTAL THEOREM OF CALCULUS</h3>
+  <div class="compare-grid">
+    <div class="compare-card cc6">
+      <h4>FTC Part 1</h4>
+      <p>$$\frac{d}{dx}\int_a^x f(t)\,dt = f(x)$$</p>
+      <p style="font-size:12px;">Differentiation undoes integration. If the upper limit is $g(x)$, chain rule gives $f(g(x)) \cdot g'(x)$.</p>
+    </div>
+    <div class="compare-card cc3">
+      <h4>FTC Part 2</h4>
+      <p>$$\int_a^b f(x)\,dx = F(b) - F(a)$$</p>
+      <p style="font-size:12px;">Where $F$ is any antiderivative of $f$. Find the antiderivative, plug in bounds, subtract.</p>
+    </div>
+  </div>
+
+  <div class="callout c-warning">
+    <div class="cl">⚠️ Watch Out</div>
+    <strong>FTC Part 1 with a function in the upper limit:</strong> If you have $\frac{d}{dx}\int_a^{x^2} f(t)\,dt$, the answer is $f(x^2) \cdot 2x$, NOT just $f(x^2)$. The chain rule multiplier is the most commonly dropped step.
+  </div>
+
+  <h3>BASIC INTEGRATION RULES</h3>
+  <div class="table-wrap">
+    <table class="study-table">
+      <tr><th>Function</th><th>Antiderivative</th></tr>
+      <tr><td>$x^n$ ($n \neq -1$)</td><td>$\dfrac{x^{n+1}}{n+1} + C$</td></tr>
+      <tr><td>$\dfrac{1}{x}$</td><td>$\ln|x| + C$</td></tr>
+      <tr><td>$e^x$</td><td>$e^x + C$</td></tr>
+      <tr><td>$a^x$</td><td>$\dfrac{a^x}{\ln a} + C$</td></tr>
+      <tr><td>$\sin x$</td><td>$-\cos x + C$</td></tr>
+      <tr><td>$\cos x$</td><td>$\sin x + C$</td></tr>
+      <tr><td>$\sec^2 x$</td><td>$\tan x + C$</td></tr>
+      <tr><td>$\csc^2 x$</td><td>$-\cot x + C$</td></tr>
+      <tr><td>$\sec x \tan x$</td><td>$\sec x + C$</td></tr>
+      <tr><td>$\csc x \cot x$</td><td>$-\csc x + C$</td></tr>
+      <tr><td>$\dfrac{1}{\sqrt{1-x^2}}$</td><td>$\arcsin x + C$</td></tr>
+      <tr><td>$\dfrac{1}{1+x^2}$</td><td>$\arctan x + C$</td></tr>
+    </table>
+  </div>
+
+  <div class="callout c-exam">
+    <div class="cl">⚡ Exam Hack</div>
+    <strong>Always write $+C$ on indefinite integrals.</strong> On free response exams, a missing $+C$ is typically a point deduction every single time. Build the habit: the integral sign goes on, $+C$ comes out.
+  </div>
+
+  <h3>U-SUBSTITUTION</h3>
+  <div class="steps-box">
+    <div class="step"><div class="step-num">1</div><div><strong>Choose $u$</strong> = the inner function (what's inside the composition).</div></div>
+    <div class="step"><div class="step-num">2</div><div><strong>Compute $du$</strong> = $u'(x)\,dx$.</div></div>
+    <div class="step"><div class="step-num">3</div><div><strong>Rewrite the integral</strong> entirely in terms of $u$ and $du$. No $x$'s should remain.</div></div>
+    <div class="step"><div class="step-num">4</div><div><strong>Integrate</strong> in terms of $u$.</div></div>
+    <div class="step"><div class="step-num">5</div><div><strong>Substitute back</strong> to $x$ (or change bounds if definite integral).</div></div>
+  </div>
+
+  <div class="callout c-memory">
+    <div class="cl">🧠 Memory Hook</div>
+    <strong>u-sub is the chain rule in reverse.</strong> Picture unwrapping a gift: the chain rule wraps a function inside another; u-sub peels it apart. Look for a function and its derivative sitting next to each other. That derivative is your $du$.
+  </div>
+
+  <h3>NET CHANGE THEOREM</h3>
+  <div class="formula-box">
+    $$\int_a^b f'(x)\,dx = f(b) - f(a)$$
+    <p style="margin-top:6px;font-size:13px;">The integral of a rate of change gives the net change. If $v(t)$ is velocity, $\int_a^b v(t)\,dt$ = net displacement (not total distance).</p>
+  </div>
+
+  <div class="callout c-warning">
+    <div class="cl">⚠️ Watch Out</div>
+    <strong>Displacement vs. Total Distance:</strong> Displacement = $\int_a^b v(t)\,dt$ (can be negative). Total distance = $\int_a^b |v(t)|\,dt$ (always positive). Split at zeros of $v(t)$ and add absolute values.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 9: APPLICATIONS OF INTEGRALS -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="int-apps" class="section">
+  <div class="section-tag" style="color:var(--coral);">SECTION 09</div>
+  <h2>APPLICATIONS OF INTEGRALS</h2>
+
+  <h3>AREA BETWEEN CURVES</h3>
+  <div class="formula-2col">
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--coral);">Area (dx)</div>
+    $$A = \int_a^b [f(x) - g(x)]\,dx$$
+    <p style="font-size:11px;margin-top:4px;">where $f(x) \ge g(x)$ on $[a,b]$</p>
+  </div>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--coral);">Area (dy)</div>
+    $$A = \int_c^d [f(y) - g(y)]\,dy$$
+    <p style="font-size:11px;margin-top:4px;">right minus left</p>
+  </div>
+  </div>
+
+  <div class="callout c-exam">
+    <div class="cl">⚡ Exam Hack</div>
+    <strong>Top minus bottom</strong> (for $dx$) or <strong>right minus left</strong> (for $dy$). Always. Sketch the region first; identify which function is on top. If they switch, split the integral at the intersection.
+  </div>
+
+  <h3>VOLUME: DISK/WASHER METHOD</h3>
+  <div class="formula-2col">
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--palm);">Disk/Washer Method</div>
+    $$V_{\text{disk}} = \pi\int_a^b [R(x)]^2\,dx$$
+    $$V_{\text{washer}} = \pi\int_a^b [R^2 - r^2]\,dx$$
+    <p style="font-size:11px;margin-top:4px;">Slices ⊥ to axis. $R$=outer, $r$=inner.</p>
+  </div>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--indigo);">Shell Method</div>
+    $$V = 2\pi\int_a^b (\text{radius})(\text{height})\,dx$$
+    <p style="font-size:11px;margin-top:4px;">Slices ∥ to axis. Radius = dist from axis.</p>
+  </div>
+  </div>
+
+  <div class="callout c-memory">
+    <div class="cl">🧠 Memory Hook</div>
+    <strong>Disk/Washer:</strong> slices are perpendicular to the axis of rotation (like slicing a loaf of bread). <strong>Shell:</strong> slices are parallel to the axis (like peeling layers off an onion). Picture the bread loaf vs. the onion.
+  </div>
+
+  <h3>AVERAGE VALUE</h3>
+  <div class="formula-box">
+    <div class="formula-title" style="color:var(--sky);">Average Value of a Function</div>
+    $$f_{\text{avg}} = \frac{1}{b-a}\int_a^b f(x)\,dx$$
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 10: PARENT FUNCTIONS -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="graphs" class="section full-width">
+  <div class="section-tag" style="color:var(--mango);">SECTION 10</div>
+  <h2>PARENT FUNCTION GALLERY</h2>
+  <p>Know the shape, domain, range, and key features of each one cold.</p>
+
+  <div class="graph-grid">
+    <!-- LINEAR -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="20" y1="180" x2="180" y2="20" stroke="#388880" stroke-width="2.5"/>
+      </svg>
+      <div class="graph-label">LINEAR</div>
+      <div class="graph-eq">f(x) = x &bull; D: all reals &bull; R: all reals</div>
+    </div>
+    <!-- QUADRATIC -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <path d="M20,180 Q100,0 180,180" fill="none" stroke="#e07838" stroke-width="2.5"/>
+      </svg>
+      <div class="graph-label">QUADRATIC</div>
+      <div class="graph-eq">f(x) = x² &bull; D: all reals &bull; R: [0, ∞)</div>
+    </div>
+    <!-- CUBIC -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <path d="M40,185 C75,180 95,100 100,100 C105,100 125,20 160,15" fill="none" stroke="#e85868" stroke-width="2.5"/>
+      </svg>
+      <div class="graph-label">CUBIC</div>
+      <div class="graph-eq">f(x) = x³ &bull; D: all reals &bull; R: all reals</div>
+    </div>
+    <!-- SQUARE ROOT -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <path d="M100,100 C100,75 105,55 115,45 C130,30 150,22 175,15 L190,12" fill="none" stroke="#40a870" stroke-width="2.5"/>
+      </svg>
+      <div class="graph-label">SQUARE ROOT</div>
+      <div class="graph-eq">f(x) = √x &bull; D: [0, ∞) &bull; R: [0, ∞)</div>
+    </div>
+    <!-- CUBE ROOT -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <path d="M10,170 C55,165 100,140 100,100 C100,60 145,35 190,30" fill="none" stroke="#5868a8" stroke-width="2.5"/>
+      </svg>
+      <div class="graph-label">CUBE ROOT</div>
+      <div class="graph-eq">f(x) = ∛x &bull; D: all reals &bull; R: all reals</div>
+    </div>
+    <!-- ABSOLUTE VALUE -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <polyline points="20,180 100,100 180,180" fill="none" stroke="#8858a0" stroke-width="2.5"/>
+      </svg>
+      <div class="graph-label">ABSOLUTE VALUE</div>
+      <div class="graph-eq">f(x) = |x| &bull; D: all reals &bull; R: [0, ∞)</div>
+    </div>
+    <!-- RECIPROCAL -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <path d="M105,10 C105,30 104,60 110,80 Q120,95 190,98" fill="none" stroke="#c8a838" stroke-width="2.5"/>
+        <path d="M95,190 C95,170 96,140 90,120 Q80,105 10,102" fill="none" stroke="#c8a838" stroke-width="2.5"/>
+      </svg>
+      <div class="graph-label">RECIPROCAL</div>
+      <div class="graph-eq">f(x) = 1/x &bull; D: x≠0 &bull; R: y≠0</div>
+    </div>
+    <!-- EXPONENTIAL -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <path d="M10,175 C30,174 60,170 85,158 C110,143 130,120 145,90 C160,55 170,30 180,12" fill="none" stroke="#388880" stroke-width="2.5"/>
+        <line x1="10" y1="180" x2="190" y2="180" stroke="#e85868" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="170" y="175" font-family="IBM Plex Mono" font-size="8" fill="#e85868">y=0</text>
+      </svg>
+      <div class="graph-label">EXPONENTIAL</div>
+      <div class="graph-eq">f(x) = eˣ &bull; D: all reals &bull; R: (0, ∞)</div>
+    </div>
+    <!-- NATURAL LOG -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <path d="M102,190 C103,165 107,140 118,118 C135,92 160,72 190,55" fill="none" stroke="#e07838" stroke-width="2.5"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#e85868" stroke-width="1" stroke-dasharray="4,3"/>
+      </svg>
+      <div class="graph-label">NATURAL LOG</div>
+      <div class="graph-eq">f(x) = ln(x) &bull; D: (0, ∞) &bull; R: all reals</div>
+    </div>
+    <!-- SIN -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <path d="M20,100 C35,100 35,30 55,30 C75,30 75,170 95,170 C115,170 115,30 135,30 C155,30 155,170 175,170 C185,170 188,135 190,120" fill="none" stroke="#e85868" stroke-width="2.5"/>
+      </svg>
+      <div class="graph-label">SINE</div>
+      <div class="graph-eq">f(x) = sin(x) &bull; D: all reals &bull; R: [-1, 1]</div>
+    </div>
+    <!-- COS -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <path d="M20,30 C40,30 40,170 60,170 C80,170 80,30 100,30 C120,30 120,170 140,170 C160,170 160,30 180,30 C185,30 188,55 190,70" fill="none" stroke="#40a870" stroke-width="2.5"/>
+      </svg>
+      <div class="graph-label">COSINE</div>
+      <div class="graph-eq">f(x) = cos(x) &bull; D: all reals &bull; R: [-1, 1]</div>
+    </div>
+    <!-- TAN -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="50" y1="10" x2="50" y2="190" stroke="#e85868" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="150" y1="10" x2="150" y2="190" stroke="#e85868" stroke-width="1" stroke-dasharray="4,3"/>
+        <path d="M52,185 C58,160 68,135 82,115 C92,103 98,100 100,100 C102,100 108,97 118,85 C132,65 142,40 148,15" fill="none" stroke="#5868a8" stroke-width="2.5"/>
+      </svg>
+      <div class="graph-label">TANGENT</div>
+      <div class="graph-eq">f(x) = tan(x) &bull; D: x≠π/2+nπ &bull; R: all reals</div>
+    </div>
+    <!-- 1/x² -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <path d="M105,12 C107,28 112,50 122,68 C138,85 160,95 190,98" fill="none" stroke="#8858a0" stroke-width="2.5"/>
+        <path d="M95,12 C93,28 88,50 78,68 C62,85 40,95 10,98" fill="none" stroke="#8858a0" stroke-width="2.5"/>
+      </svg>
+      <div class="graph-label">RECIPROCAL SQUARED</div>
+      <div class="graph-eq">f(x) = 1/x² &bull; D: x≠0 &bull; R: (0, ∞)</div>
+    </div>
+    <!-- e^-x -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <path d="M15,12 C30,40 55,90 85,130 C115,158 145,170 190,173" fill="none" stroke="#c8a838" stroke-width="2.5"/>
+        <line x1="10" y1="175" x2="190" y2="175" stroke="#e85868" stroke-width="1" stroke-dasharray="4,3"/>
+      </svg>
+      <div class="graph-label">EXPONENTIAL DECAY</div>
+      <div class="graph-eq">f(x) = e⁻ˣ &bull; D: all reals &bull; R: (0, ∞)</div>
+    </div>
+    <!-- ARCTAN -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="10" y1="55" x2="190" y2="55" stroke="#e85868" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="10" y1="145" x2="190" y2="145" stroke="#e85868" stroke-width="1" stroke-dasharray="4,3"/>
+        <path d="M10,142 C45,138 70,125 90,108 C95,103 98,101 100,100 C102,99 105,97 110,92 C130,75 155,62 190,58" fill="none" stroke="#388880" stroke-width="2.5"/>
+        <text x="165" y="50" font-family="IBM Plex Mono" font-size="7" fill="#e85868">y=π/2</text>
+        <text x="160" y="155" font-family="IBM Plex Mono" font-size="7" fill="#e85868">y=-π/2</text>
+      </svg>
+      <div class="graph-label">ARCTANGENT</div>
+      <div class="graph-eq">f(x) = arctan(x) &bull; D: all reals &bull; R: (-π/2, π/2)</div>
+    </div>
+    <!-- PIECEWISE ABS -->
+    <div class="graph-card">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" fill="#fffdf6"/>
+        <line x1="10" y1="100" x2="190" y2="100" stroke="#d0d0d0" stroke-width="1"/>
+        <line x1="100" y1="10" x2="100" y2="190" stroke="#d0d0d0" stroke-width="1"/>
+        <path d="M20,60 L80,60 L80,100" fill="none" stroke="#e07838" stroke-width="2.5"/>
+        <path d="M80,100 L140,140 L190,140" fill="none" stroke="#e07838" stroke-width="2.5"/>
+        <circle cx="80" cy="60" r="4" fill="#fffdf6" stroke="#e07838" stroke-width="2"/>
+        <circle cx="80" cy="100" r="4" fill="#e07838"/>
+      </svg>
+      <div class="graph-label">PIECEWISE</div>
+      <div class="graph-eq">Check continuity at breakpoints &bull; Open vs closed dots</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 11: MASTER FORMULA TABLE -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="master" class="section full-width">
+  <div class="section-tag" style="color:var(--coral);">EXAM CHEAT SHEET</div>
+  <h2>MASTER DERIVATIVE & INTEGRAL TABLE</h2>
+  <p>Side-by-side. Derivative on the left, integral on the right. This is the page to have open during review.</p>
+
+  <div class="table-wrap">
+    <table class="study-table master-table">
+      <tr><th>$f(x)$</th><th>$f'(x)$</th><th>$\int f(x)\,dx$</th></tr>
+      <tr><td>$c$</td><td>$0$</td><td>$cx + C$</td></tr>
+      <tr><td>$x^n$</td><td>$nx^{n-1}$</td><td>$\frac{x^{n+1}}{n+1}+C$</td></tr>
+      <tr><td>$e^x$</td><td>$e^x$</td><td>$e^x + C$</td></tr>
+      <tr><td>$a^x$</td><td>$a^x\ln a$</td><td>$\frac{a^x}{\ln a}+C$</td></tr>
+      <tr><td>$\ln x$</td><td>$\frac{1}{x}$</td><td>$x\ln x - x + C$</td></tr>
+      <tr><td>$\sin x$</td><td>$\cos x$</td><td>$-\cos x + C$</td></tr>
+      <tr><td>$\cos x$</td><td>$-\sin x$</td><td>$\sin x + C$</td></tr>
+      <tr><td>$\tan x$</td><td>$\sec^2 x$</td><td>$-\ln|\cos x|+C$</td></tr>
+      <tr><td>$\sec x$</td><td>$\sec x\tan x$</td><td>$\ln|\sec x+\tan x|+C$</td></tr>
+      <tr><td>$\csc x$</td><td>$-\csc x\cot x$</td><td>$-\ln|\csc x+\cot x|+C$</td></tr>
+      <tr><td>$\cot x$</td><td>$-\csc^2 x$</td><td>$\ln|\sin x|+C$</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- GLOSSARY -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="glossary" class="section full-width">
+  <div class="section-tag" style="color:var(--plum);">REFERENCE</div>
+  <h2>EVERY KEY TERM IN ONE PLACE</h2>
+  <div class="glossary">
+    <div class="gloss-item"><span class="gloss-term">Limit:</span> The value $f(x)$ approaches as $x$ approaches a specific value.</div>
+    <div class="gloss-item"><span class="gloss-term">Continuity:</span> $f$ is continuous at $a$ if $\lim_{x\to a}f(x) = f(a)$.</div>
+    <div class="gloss-item"><span class="gloss-term">Derivative:</span> Instantaneous rate of change; slope of the tangent line at a point.</div>
+    <div class="gloss-item"><span class="gloss-term">Critical Point:</span> Where $f'(x) = 0$ or $f'(x)$ is undefined.</div>
+    <div class="gloss-item"><span class="gloss-term">Inflection Point:</span> Where concavity changes (requires $f''$ sign change).</div>
+    <div class="gloss-item"><span class="gloss-term">Local Max/Min:</span> A point where $f$ changes from increasing to decreasing (max) or vice versa (min).</div>
+    <div class="gloss-item"><span class="gloss-term">Absolute Max/Min:</span> The largest/smallest value of $f$ on a closed interval, found by EVT.</div>
+    <div class="gloss-item"><span class="gloss-term">Antiderivative:</span> A function $F$ such that $F'(x) = f(x)$.</div>
+    <div class="gloss-item"><span class="gloss-term">Definite Integral:</span> $\int_a^b f(x)\,dx$; the net signed area under $f$ from $a$ to $b$.</div>
+    <div class="gloss-item"><span class="gloss-term">Indefinite Integral:</span> The family of all antiderivatives, $F(x) + C$.</div>
+    <div class="gloss-item"><span class="gloss-term">Riemann Sum:</span> Approximation of area using rectangles (left, right, midpoint, trapezoidal).</div>
+    <div class="gloss-item"><span class="gloss-term">FTC:</span> Fundamental Theorem of Calculus. Links differentiation and integration.</div>
+    <div class="gloss-item"><span class="gloss-term">IVT:</span> Intermediate Value Theorem. Continuous functions hit all intermediate values.</div>
+    <div class="gloss-item"><span class="gloss-term">MVT:</span> Mean Value Theorem. Instantaneous rate equals average rate somewhere.</div>
+    <div class="gloss-item"><span class="gloss-term">EVT:</span> Extreme Value Theorem. Continuous function on $[a,b]$ has an absolute max and min.</div>
+    <div class="gloss-item"><span class="gloss-term">L'Hôpital's Rule:</span> Resolves $0/0$ or $\infty/\infty$ limits by differentiating top and bottom.</div>
+    <div class="gloss-item"><span class="gloss-term">u-Substitution:</span> Reverse chain rule for integration.</div>
+    <div class="gloss-item"><span class="gloss-term">Implicit Differentiation:</span> Differentiating equations not solved for $y$.</div>
+    <div class="gloss-item"><span class="gloss-term">Related Rates:</span> Using derivatives to find how rates of change are connected.</div>
+    <div class="gloss-item"><span class="gloss-term">Concave Up:</span> $f'' > 0$; graph curves upward like a cup.</div>
+    <div class="gloss-item"><span class="gloss-term">Concave Down:</span> $f'' < 0$; graph curves downward like a cap.</div>
+    <div class="gloss-item"><span class="gloss-term">Asymptote:</span> A line the graph approaches but never reaches (vertical, horizontal, or oblique).</div>
+    <div class="gloss-item"><span class="gloss-term">Linearization:</span> Approximating $f$ near $a$ with the tangent line $L(x) = f(a) + f'(a)(x-a)$.</div>
+    <div class="gloss-item"><span class="gloss-term">Net Change:</span> $\int_a^b f'(x)\,dx = f(b) - f(a)$.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 60-SECOND CHEAT SHEET -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="cheatsheet" class="cheat-sheet">
+  <h2>⏱ 60-SECOND CHEAT SHEET</h2>
+  <ul>
+    <li>Power Rule: bring the exponent down, subtract one from the power</li>
+    <li>Product Rule: $f'g + fg'$ (plus sign). Quotient Rule: $\frac{f'g - fg'}{g^2}$ (minus sign, square bottom)</li>
+    <li>Chain Rule: derivative of outside $\times$ derivative of inside</li>
+    <li>$\frac{d}{dx}[\sin x] = \cos x$; $\frac{d}{dx}[\cos x] = -\sin x$; "co" functions get negatives</li>
+    <li>$\frac{d}{dx}[e^x] = e^x$; $\frac{d}{dx}[\ln x] = 1/x$</li>
+    <li>$\lim_{x\to 0}\frac{\sin x}{x} = 1$</li>
+    <li>FTC: $\int_a^b f(x)\,dx = F(b) - F(a)$; don't forget $+C$ on indefinite integrals</li>
+    <li>Area between curves: top minus bottom; Volume: $\pi\int R^2\,dx$ (disk) or $2\pi\int r\cdot h\,dx$ (shell)</li>
+    <li>For optimization: derivative = 0, check endpoints and critical points</li>
+    <li>Related rates: differentiate with respect to $t$ BEFORE plugging in numbers</li>
+    <li>L'Hôpital: only for $0/0$ or $\infty/\infty$; differentiate top and bottom separately</li>
+    <li>MVT: somewhere the instantaneous rate equals the average rate</li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SELF-QUIZ -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="quiz" class="section">
+  <div class="section-tag" style="color:var(--sky);">TEST YOURSELF</div>
+  <h2>SELF-QUIZ (TAP TO REVEAL)</h2>
+
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">What is $\frac{d}{dx}[\tan x]$?</div>
+    <div class="answer">$\sec^2 x$</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">State the Product Rule.</div>
+    <div class="answer">$(fg)' = f'g + fg'$. Derivative of the first times the second, plus the first times the derivative of the second.</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">What is $\lim_{x \to 0} \frac{\sin x}{x}$?</div>
+    <div class="answer">$1$. This is a must-know special limit.</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">What three conditions must hold for $f$ to be continuous at $x = a$?</div>
+    <div class="answer">1. $f(a)$ is defined. 2. $\lim_{x\to a}f(x)$ exists. 3. $\lim_{x\to a}f(x) = f(a)$.</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">When can you use L'Hôpital's Rule?</div>
+    <div class="answer">Only when the limit gives the indeterminate form $\frac{0}{0}$ or $\frac{\pm\infty}{\pm\infty}$. Then you differentiate numerator and denominator separately.</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">What is the derivative of $\ln(3x^2 + 1)$?</div>
+    <div class="answer">$\frac{6x}{3x^2 + 1}$ by the chain rule: derivative of $\ln u$ is $\frac{u'}{u}$, and $u' = 6x$.</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">State the Fundamental Theorem of Calculus Part 2.</div>
+    <div class="answer">$\int_a^b f(x)\,dx = F(b) - F(a)$ where $F$ is any antiderivative of $f$.</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">What is $\int \sec^2 x\,dx$?</div>
+    <div class="answer">$\tan x + C$</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">In a related rates problem, why must you differentiate BEFORE substituting known values?</div>
+    <div class="answer">Because substituting first turns variables into constants, and the derivative of a constant is 0. You'd lose the rate of change you're solving for.</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">What is the difference between displacement and total distance?</div>
+    <div class="answer">Displacement = $\int_a^b v(t)\,dt$ (signed, can be negative). Total distance = $\int_a^b |v(t)|\,dt$ (always positive). Split at zeros of $v(t)$.</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">Concave up means $f''$ is ____. Concave down means $f''$ is ____.</div>
+    <div class="answer">Concave up: $f'' > 0$. Concave down: $f'' < 0$.</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">What is $\frac{d}{dx}\left[\int_0^{x^3} e^t\,dt\right]$?</div>
+    <div class="answer">$e^{x^3} \cdot 3x^2$ by FTC Part 1 with chain rule. Replace $t$ with the upper limit, then multiply by the derivative of the upper limit.</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">What is the average value formula?</div>
+    <div class="answer">$f_{\text{avg}} = \frac{1}{b-a}\int_a^b f(x)\,dx$</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">$\frac{d}{dx}[x^{-3}] = ?$</div>
+    <div class="answer">$-3x^{-4}$ or equivalently $\frac{-3}{x^4}$. The power rule works for negative exponents.</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">$a^3 + b^3 = ?$ (factored form)</div>
+    <div class="answer">$(a + b)(a^2 - ab + b^2)$. Remember SOAP: Same, Opposite, Always Positive.</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">$\sin^2\theta + \cos^2\theta = ?$</div>
+    <div class="answer">$1$. The fundamental Pythagorean identity.</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">Disk method formula for volume when revolving around the x-axis?</div>
+    <div class="answer">$V = \pi\int_a^b [f(x)]^2\,dx$</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">What does the Mean Value Theorem guarantee?</div>
+    <div class="answer">If $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$, there exists $c \in (a,b)$ where $f'(c) = \frac{f(b)-f(a)}{b-a}$. The instantaneous rate equals the average rate somewhere.</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">Evaluate: $\int_0^1 2x\,dx$</div>
+    <div class="answer">$[x^2]_0^1 = 1^2 - 0^2 = 1$</div>
+  </div>
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="question">What is the linearization of $f$ at $x = a$?</div>
+    <div class="answer">$L(x) = f(a) + f'(a)(x - a)$. It's the tangent line used as an approximation.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PRE-EXAM CHECKLIST -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="checklist" class="section">
+  <div class="section-tag" style="color:var(--palm);">BEFORE THE EXAM</div>
+  <h2>PRE-EXAM CHECKLIST</h2>
+
+  <div class="checklist-tier" style="color:var(--coral);">🔴 MUST KNOW (if you miss these, you're in trouble)</div>
+  <div class="checklist">
+    <label><input type="checkbox"> Power Rule, Product Rule, Quotient Rule, Chain Rule</label>
+    <label><input type="checkbox"> All 6 trig derivatives and their signs</label>
+    <label><input type="checkbox"> Derivative of $e^x$, $\ln x$, $a^x$</label>
+    <label><input type="checkbox"> FTC Parts 1 and 2</label>
+    <label><input type="checkbox"> Basic integration table (power rule, trig, exp)</label>
+    <label><input type="checkbox"> u-substitution technique</label>
+    <label><input type="checkbox"> Setting up area between curves</label>
+    <label><input type="checkbox"> Continuity definition (3 conditions)</label>
+    <label><input type="checkbox"> Related rates setup (differentiate before substituting)</label>
+  </div>
+
+  <div class="checklist-tier" style="color:var(--mango);">🟡 SHOULD KNOW (high-probability exam topics)</div>
+  <div class="checklist">
+    <label><input type="checkbox"> L'Hôpital's Rule (when to use and when NOT to)</label>
+    <label><input type="checkbox"> Optimization problems (full 5-step process)</label>
+    <label><input type="checkbox"> Implicit differentiation</label>
+    <label><input type="checkbox"> First and Second Derivative Tests</label>
+    <label><input type="checkbox"> Mean Value Theorem statement and application</label>
+    <label><input type="checkbox"> Volume by disk/washer method</label>
+    <label><input type="checkbox"> Inverse trig derivatives (arcsin, arctan at minimum)</label>
+    <label><input type="checkbox"> Limits at infinity (dividing by highest power)</label>
+    <label><input type="checkbox"> IVT and how to use it to prove a root exists</label>
+  </div>
+
+  <div class="checklist-tier" style="color:var(--palm);">🟢 BONUS POINTS (the extra edge)</div>
+  <div class="checklist">
+    <label><input type="checkbox"> Shell method for volumes</label>
+    <label><input type="checkbox"> Logarithmic differentiation</label>
+    <label><input type="checkbox"> Average value of a function</label>
+    <label><input type="checkbox"> Squeeze Theorem</label>
+    <label><input type="checkbox"> Linear approximation / differentials</label>
+    <label><input type="checkbox"> Displacement vs. total distance distinction</label>
+    <label><input type="checkbox"> Epsilon-delta definition (conceptual understanding)</label>
+  </div>
+</div>
+
+</div><!-- /bento-content -->
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- FINAL 5-MINUTE REVIEW -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="final-review">
+  <h2>FINAL 5-MINUTE REVIEW</h2>
+  <p>
+    Here's the whole course in one breath. Calculus is the study of change, and it rests on two pillars: derivatives (instantaneous rates) and integrals (accumulated totals). Derivatives answer "how fast is this changing right now?" and integrals answer "how much total stuff accumulated?" The Fundamental Theorem ties them together: integration and differentiation are inverse operations.
+  </p>
+  <p style="margin-top:12px;">
+    For derivatives, you need the power rule, product rule, quotient rule, and chain rule cold. Know your trig derivatives (the "co" functions always get a negative). For integrals, reverse those rules and always write $+C$ on indefinite integrals. u-substitution is the chain rule running backwards.
+  </p>
+  <p style="margin-top:12px;">
+    Applications tie it all together: related rates use implicit differentiation with respect to time; optimization finds critical points and checks endpoints; curve sketching uses $f'$ for increasing/decreasing and $f''$ for concavity. For area, integrate top minus bottom. For volume, disk method slices perpendicular to the axis, shell method wraps parallel.
+  </p>
+  <p style="margin-top:16px;font-size:17px;">
+    <strong>You've seen all of this before. You know this material. Trust the prep and go get it on Thursday. 💪</strong>
+  </p>
+</div>
+
+</div><!-- end content -->
+</body>
+</html>

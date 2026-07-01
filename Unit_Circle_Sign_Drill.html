@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Drill | 40 in 6</title>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<style>
+  :root, [data-theme="dark"] {
+    --bg: #1c1220; --surface: #271a2c; --surface2: #322238; --border: #4a3652;
+    --p900: #f0e6f2; --p800: #d8c4dc; --text: #f0e6f2; --text-muted: #b4a0ba;
+    --bronze: #c17817; --emerald: #1f9d6b; --teal: #2a9d8f; --brick: #b0402f;
+    --pos-bg: #17332a; --neg-bg: #3a1d1a;
+    --hero-bg: #241830; --card-bg: #271a2c;
+  }
+  [data-theme="light"] {
+    --bg: #f4eef6; --surface: #ffffff; --surface2: #ece0f0; --border: #d8c4dc;
+    --p900: #2a1830; --p800: #3a2440; --text: #2a1830; --text-muted: #6a4e72;
+    --bronze: #a8620f; --emerald: #157a52; --teal: #1f7a70; --brick: #a8402f;
+    --pos-bg: #d8f0e6; --neg-bg: #f8e0dc;
+    --hero-bg: #ece0f0; --card-bg: #ffffff;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background:var(--bg); color:var(--text); font-family:'Libre Baskerville',Georgia,serif; min-height:100vh; transition:background .3s,color .3s; overflow-x:hidden; }
+  .katex { color:var(--bronze); font-size:1.3em; }
+  .theme-toggle { position:fixed; top:14px; right:14px; z-index:999; width:40px; height:40px; border-radius:50%; background:var(--surface); border:1px solid var(--border); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; }
+
+  .wrap { max-width:640px; margin:0 auto; padding:20px 20px 60px; min-height:100vh; display:flex; flex-direction:column; }
+
+  /* ── START SCREEN ── */
+  .start-screen { flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; }
+  .start-tag { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:3px; color:var(--teal); text-transform:uppercase; margin-bottom:10px; }
+  .start-screen h1 { font-family:'Abril Fatface',serif; font-size:38px; font-weight:400; margin-bottom:10px; color:var(--p900); }
+  .start-screen h1 em { font-style:normal; color:var(--bronze); }
+  .start-sub { color:var(--text-muted); font-style:italic; font-size:14px; margin-bottom:28px; }
+  .goal-box { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:24px; font-size:14px; line-height:1.7; text-align:left; }
+  .goal-box .label { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--teal); margin-bottom:6px; }
+  .goal-box strong { color:var(--bronze); }
+  .astc-row { display:flex; gap:8px; justify-content:center; margin:20px 0 28px; flex-wrap:wrap; }
+  .astc-chip { font-family:'Fira Code',monospace; font-size:11px; background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:6px 14px; color:var(--text-muted); }
+  .astc-chip b { color:var(--bronze); }
+  .start-btn { font-family:'Fira Code',monospace; font-size:14px; letter-spacing:2px; text-transform:uppercase; background:var(--emerald); color:#fff; border:none; border-radius:12px; padding:18px 36px; cursor:pointer; font-weight:600; transition:transform .15s, box-shadow .15s; box-shadow:0 4px 16px rgba(31,157,107,.3); }
+  .start-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(31,157,107,.4); }
+  .keys-note { margin-top:18px; font-family:'Fira Code',monospace; font-size:11px; color:var(--text-muted); }
+  .keys-note kbd { background:var(--surface2); border:1px solid var(--border); border-radius:4px; padding:2px 7px; font-family:'Fira Code',monospace; }
+
+  /* ── QUIZ SCREEN ── */
+  .quiz-screen { flex:1; display:none; flex-direction:column; }
+  .quiz-screen.active { display:flex; }
+  .hud { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-family:'Fira Code',monospace; font-size:12px; }
+  .hud-item { color:var(--text-muted); }
+  .hud-timer { color:var(--bronze); font-weight:600; font-size:16px; }
+  .hud-timer.urgent { color:var(--brick); animation:pulse 1s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.5;} }
+  .progress-bar { height:6px; background:var(--surface2); border-radius:6px; overflow:hidden; margin-bottom:30px; }
+  .progress-fill { height:100%; background:var(--teal); width:0%; transition:width .2s; }
+
+  .question-card { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px 0; }
+  .q-label { font-family:'Fira Code',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .q-expr { font-size:32px; margin-bottom:8px; min-height:60px; display:flex; align-items:center; }
+  .q-quadrant-hint { font-family:'Fira Code',monospace; font-size:11px; color:var(--surface2); }
+
+  .answer-row { display:flex; gap:14px; margin-top:20px; }
+  .ans-btn { flex:1; font-family:'Fira Code',monospace; font-size:16px; letter-spacing:1px; font-weight:600; text-transform:uppercase; border-radius:14px; padding:26px 10px; cursor:pointer; border:2px solid transparent; transition:transform .1s; }
+  .ans-btn:active { transform:scale(.96); }
+  .ans-pos { background:var(--pos-bg); color:var(--emerald); border-color:var(--emerald); }
+  .ans-neg { background:var(--neg-bg); color:var(--brick); border-color:var(--brick); }
+  .flash-correct { animation:flashGreen .25s; }
+  .flash-wrong { animation:flashRed .25s; }
+  @keyframes flashGreen { 0%{background:var(--emerald); color:#fff;} }
+  @keyframes flashRed { 0%{background:var(--brick); color:#fff;} }
+
+  /* ── RESULTS SCREEN ── */
+  .results-screen { flex:1; display:none; flex-direction:column; justify-content:center; }
+  .results-screen.active { display:flex; }
+  .results-hero { text-align:center; margin-bottom:24px; }
+  .results-hero .big-score { font-family:'Abril Fatface',serif; font-size:56px; color:var(--bronze); }
+  .results-hero .score-sub { font-family:'Fira Code',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); margin-top:4px; }
+  .verdict { text-align:center; font-size:15px; margin-bottom:24px; padding:14px; border-radius:10px; }
+  .verdict.pass { background:var(--pos-bg); color:var(--emerald); border:1px solid var(--emerald); }
+  .verdict.fail { background:var(--neg-bg); color:var(--brick); border:1px solid var(--brick); }
+  .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px; }
+  .stat-box { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center; }
+  .stat-box .n { font-family:'Abril Fatface',serif; font-size:24px; color:var(--p900); }
+  .stat-box .l { font-family:'Fira Code',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); margin-top:2px; }
+
+  .missed-section { margin-bottom:24px; }
+  .missed-section h3 { font-family:'Abril Fatface',serif; font-size:18px; color:var(--brick); margin-bottom:10px; font-weight:400; }
+  .missed-item { display:flex; justify-content:space-between; align-items:center; background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--brick); border-radius:8px; padding:10px 14px; margin-bottom:6px; font-size:13px; }
+  .missed-item .m-expr { font-size:15px; }
+  .missed-item .m-answer { font-family:'Fira Code',monospace; font-size:11px; }
+  .m-answer.pos-txt { color:var(--emerald); }
+  .m-answer.neg-txt { color:var(--brick); }
+  .no-missed { text-align:center; color:var(--emerald); font-size:14px; padding:16px; background:var(--pos-bg); border-radius:10px; }
+
+  .results-btns { display:flex; gap:12px; }
+  .retry-btn, .review-btn { flex:1; font-family:'Fira Code',monospace; font-size:13px; letter-spacing:1px; text-transform:uppercase; border-radius:10px; padding:14px; cursor:pointer; border:1px solid var(--border); background:var(--surface2); color:var(--text); font-weight:600; }
+  .retry-btn { background:var(--emerald); color:#fff; border-color:var(--emerald); }
+
+  @media(max-width:480px) { .start-screen h1{font-size:30px;} .q-expr{font-size:26px;} .ans-btn{padding:22px 8px; font-size:14px;} .results-hero .big-score{font-size:44px;} }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+
+<div class="wrap">
+
+  <!-- ═══ START SCREEN ═══ -->
+  <div class="start-screen" id="startScreen">
+    <div class="start-tag">Unit Circle · Sign Drill</div>
+    <h1>40 Signs. <em>6 Minutes.</em></h1>
+    <div class="start-sub">Positive or negative. No values, no calculation. Pure quadrant recognition.</div>
+
+    <div class="goal-box">
+      <div class="label">🎯 Target</div>
+      <strong>9 seconds per question, average.</strong> Tap the quadrant, apply ASTC, answer. If you're pausing to calculate a value, you're doing it wrong — this drill only tests sign.
+    </div>
+
+    <div class="astc-row">
+      <span class="astc-chip"><b>QI</b> All +</span>
+      <span class="astc-chip"><b>QII</b> Sin +</span>
+      <span class="astc-chip"><b>QIII</b> Tan +</span>
+      <span class="astc-chip"><b>QIV</b> Cos +</span>
+    </div>
+
+    <button class="start-btn" onclick="startQuiz()">Start Drill</button>
+    <div class="keys-note">Keyboard: <kbd>←</kbd> negative &nbsp; <kbd>→</kbd> positive &nbsp; <kbd>Space</kbd> to start</div>
+  </div>
+
+  <!-- ═══ QUIZ SCREEN ═══ -->
+  <div class="quiz-screen" id="quizScreen">
+    <div class="hud">
+      <div class="hud-item" id="hudProgress">Q 1 / 40</div>
+      <div class="hud-timer" id="hudTimer">6:00</div>
+      <div class="hud-item" id="hudCorrect">✓ 0</div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div class="question-card">
+      <div class="q-label">What is the sign of</div>
+      <div class="q-expr" id="qExpr"></div>
+    </div>
+
+    <div class="answer-row">
+      <button class="ans-btn ans-neg" id="negBtn" onclick="answer(false)">Negative</button>
+      <button class="ans-btn ans-pos" id="posBtn" onclick="answer(true)">Positive</button>
+    </div>
+  </div>
+
+  <!-- ═══ RESULTS SCREEN ═══ -->
+  <div class="results-screen" id="resultsScreen">
+    <div class="results-hero">
+      <div class="big-score" id="finalScore">0/40</div>
+      <div class="score-sub" id="finalTime">in 0:00</div>
+    </div>
+    <div class="verdict" id="verdictBox"></div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="n" id="statAccuracy">0%</div><div class="l">Accuracy</div></div>
+      <div class="stat-box"><div class="n" id="statAvg">0.0s</div><div class="l">Avg / Question</div></div>
+    </div>
+    <div class="missed-section" id="missedSection">
+      <h3>Review Misses</h3>
+      <div id="missedList"></div>
+    </div>
+    <div class="results-btns">
+      <button class="retry-btn" onclick="startQuiz()">Retry Drill</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ══════════ QUESTION BANK ══════════
+// 12 quadrant angles (radians) × 6 functions (sin,cos,tan,csc,sec,cot) = 72 combos
+const ANGLES = [
+  {deg:'30°',  rad:'\\frac{\\pi}{6}',  quad:1},
+  {deg:'45°',  rad:'\\frac{\\pi}{4}',  quad:1},
+  {deg:'60°',  rad:'\\frac{\\pi}{3}',  quad:1},
+  {deg:'120°', rad:'\\frac{2\\pi}{3}', quad:2},
+  {deg:'135°', rad:'\\frac{3\\pi}{4}', quad:2},
+  {deg:'150°', rad:'\\frac{5\\pi}{6}', quad:2},
+  {deg:'210°', rad:'\\frac{7\\pi}{6}', quad:3},
+  {deg:'225°', rad:'\\frac{5\\pi}{4}', quad:3},
+  {deg:'240°', rad:'\\frac{4\\pi}{3}', quad:3},
+  {deg:'300°', rad:'\\frac{5\\pi}{3}', quad:4},
+  {deg:'315°', rad:'\\frac{7\\pi}{4}', quad:4},
+  {deg:'330°', rad:'\\frac{11\\pi}{6}',quad:4},
+];
+const FUNCS = ['sin','cos','tan','csc','sec','cot'];
+// ASTC: which functions are positive in each quadrant (1-indexed)
+const POS_IN_QUAD = {
+  1: ['sin','cos','tan','csc','sec','cot'],
+  2: ['sin','csc'],
+  3: ['tan','cot'],
+  4: ['cos','sec'],
+};
+
+let questions = [];
+let current = 0;
+let correctCount = 0;
+let missed = [];
+let questionStartTimes = [];
+let timerInterval = null;
+let secondsLeft = 360; // 6 minutes
+let quizActive = false;
+
+function buildQuestionBank() {
+  let pool = [];
+  ANGLES.forEach(a => {
+    FUNCS.forEach(f => {
+      pool.push({angle:a, func:f, isPositive: POS_IN_QUAD[a.quad].includes(f)});
+    });
+  });
+  // shuffle
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool.slice(0, 40);
+}
+
+function startQuiz() {
+  questions = buildQuestionBank();
+  current = 0;
+  correctCount = 0;
+  missed = [];
+  questionStartTimes = [];
+  secondsLeft = 360;
+  quizActive = true;
+
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('resultsScreen').classList.remove('active');
+  document.getElementById('quizScreen').classList.add('active');
+
+  clearInterval(timerInterval);
+  timerInterval = setInterval(tickTimer, 1000);
+  updateTimerDisplay();
+  renderQuestion();
+}
+
+function tickTimer() {
+  secondsLeft--;
+  updateTimerDisplay();
+  if (secondsLeft <= 0) {
+    endQuiz();
+  }
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(secondsLeft / 60);
+  const s = secondsLeft % 60;
+  const el = document.getElementById('hudTimer');
+  el.textContent = `${m}:${s.toString().padStart(2,'0')}`;
+  el.classList.toggle('urgent', secondsLeft <= 30);
+}
+
+function renderQuestion() {
+  if (current >= questions.length) { endQuiz(); return; }
+  const q = questions[current];
+  document.getElementById('hudProgress').textContent = `Q ${current+1} / 40`;
+  document.getElementById('hudCorrect').textContent = `✓ ${correctCount}`;
+  document.getElementById('progressFill').style.width = `${(current/40)*100}%`;
+  document.getElementById('qExpr').innerHTML = `\\(${q.func}\\left(${q.angle.rad}\\right)\\)`;
+  if (window.katex) {
+    try {
+      katex.render(`${q.func}\\left(${q.angle.rad}\\right)`, document.getElementById('qExpr'), {throwOnError:false});
+    } catch(e) {}
+  }
+  questionStartTimes[current] = Date.now();
+}
+
+function answer(userSaidPositive) {
+  if (!quizActive || current >= questions.length) return;
+  const q = questions[current];
+  const correct = (userSaidPositive === q.isPositive);
+  const btn = userSaidPositive ? document.getElementById('posBtn') : document.getElementById('negBtn');
+
+  if (correct) {
+    correctCount++;
+    btn.classList.add('flash-correct');
+  } else {
+    missed.push(q);
+    btn.classList.add('flash-wrong');
+  }
+  setTimeout(() => {
+    btn.classList.remove('flash-correct', 'flash-wrong');
+    current++;
+    renderQuestion();
+  }, 120);
+}
+
+function endQuiz() {
+  quizActive = false;
+  clearInterval(timerInterval);
+  document.getElementById('quizScreen').classList.remove('active');
+  document.getElementById('resultsScreen').classList.add('active');
+
+  const answered = current;
+  const totalTimeUsed = 360 - secondsLeft;
+  const mins = Math.floor(totalTimeUsed / 60);
+  const secs = totalTimeUsed % 60;
+
+  document.getElementById('finalScore').textContent = `${correctCount}/40`;
+  document.getElementById('finalTime').textContent = `in ${mins}:${secs.toString().padStart(2,'0')}`;
+
+  const accuracy = answered > 0 ? Math.round((correctCount/answered)*100) : 0;
+  document.getElementById('statAccuracy').textContent = `${accuracy}%`;
+  const avgPerQ = answered > 0 ? (totalTimeUsed/answered).toFixed(1) : '0.0';
+  document.getElementById('statAvg').textContent = `${avgPerQ}s`;
+
+  const verdictBox = document.getElementById('verdictBox');
+  const under6 = totalTimeUsed <= 360 && answered === 40;
+  if (correctCount === 40 && under6) {
+    verdictBox.className = 'verdict pass';
+    verdictBox.textContent = '🎯 Perfect run, under 6 minutes. Exam-ready.';
+  } else if (correctCount >= 36 && under6) {
+    verdictBox.className = 'verdict pass';
+    verdictBox.textContent = `✓ Strong run. ${40-correctCount} miss${40-correctCount===1?'':'es'} to review below.`;
+  } else if (answered < 40) {
+    verdictBox.className = 'verdict fail';
+    verdictBox.textContent = `⏱ Time ran out at Q${answered}. Drill the ASTC recognition speed, then retry.`;
+  } else {
+    verdictBox.className = 'verdict fail';
+    verdictBox.textContent = `Retry needed — ${40-correctCount} misses. Review below before the next attempt.`;
+  }
+
+  const missedList = document.getElementById('missedList');
+  const missedSection = document.getElementById('missedSection');
+  if (missed.length === 0) {
+    missedSection.querySelector('h3').style.display = 'none';
+    missedList.innerHTML = '<div class="no-missed">No misses. Every sign correct.</div>';
+  } else {
+    missedSection.querySelector('h3').style.display = 'block';
+    missedList.innerHTML = missed.map(q => {
+      const posTxt = q.isPositive ? 'POSITIVE' : 'NEGATIVE';
+      const cls = q.isPositive ? 'pos-txt' : 'neg-txt';
+      return `<div class="missed-item"><span class="m-expr">${q.func}(${q.angle.deg})</span><span class="m-answer ${cls}">${posTxt}</span></div>`;
+    }).join('');
+  }
+}
+
+// keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  if (quizActive) {
+    if (e.key === 'ArrowRight') answer(true);
+    if (e.key === 'ArrowLeft') answer(false);
+  } else if (document.getElementById('startScreen').style.display !== 'none' && e.code === 'Space') {
+    e.preventDefault();
+    startQuiz();
+  }
+});
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = '☀️';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '🌙';
+  }
+}
+</script>
+</body>
+</html>
